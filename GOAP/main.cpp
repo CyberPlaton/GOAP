@@ -30,6 +30,9 @@ bool App::OnUserCreate()
 	SetLayerCustomRenderFunction(0, std::bind(&App::DrawUI, this));
 
 
+	TestingAction* ta = new TestingAction("some_action.json");
+
+
 	for (int i = 0; i < 100; i++)
 	{
 		new GameObject("GameObject_" + std::to_string(i));

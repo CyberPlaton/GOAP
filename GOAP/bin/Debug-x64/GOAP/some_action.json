@@ -1,0 +1,17 @@
+{
+  "Name" : "TestingAction",
+  "AgentTag": "Some_Name_Of_Agent",
+  "TargetTag": "Others_Thing_Name",
+  "Cost": 1,
+  "Duration": 2,
+  "Preconditions": {
+    "0": [ "some_cond_1", 1 ],
+    "1": [ "some_cond_2", 2 ],
+    "2": [ "some_cond_3", 1 ]
+  },
+  "Effects": {
+    "0": [ "some_effect_1", -1 ],
+    "1": [ "some_effect_2", 1 ],
+    "2": [ "some_effect_3", 4 ]
+  }
+}

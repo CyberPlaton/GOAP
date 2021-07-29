@@ -20,7 +20,6 @@ public:
 
 	void add(GameObject* go);
 
-
 	GameObject* getGO(const std::string& tag);
 
 

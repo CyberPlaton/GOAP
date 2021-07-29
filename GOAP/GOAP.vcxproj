@@ -99,6 +99,8 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Action.h" />
+    <ClInclude Include="Agent.h" />
     <ClInclude Include="common\include\imgui-master\examples\imgui_impl_glfw.h" />
     <ClInclude Include="common\include\imgui-master\examples\imgui_impl_opengl3.h" />
     <ClInclude Include="common\include\imgui-master\imconfig.h" />
@@ -108,7 +110,13 @@
     <ClInclude Include="common\include\imgui-master\imstb_textedit.h" />
     <ClInclude Include="common\include\imgui-master\imstb_truetype.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GOAPInterface.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="Navigator.h" />
+    <ClInclude Include="Planner.h" />
+    <ClInclude Include="TestingAction.h" />
+    <ClInclude Include="Timer.h" />
+    <ClInclude Include="WorldState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
