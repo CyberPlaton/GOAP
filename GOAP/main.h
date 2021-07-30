@@ -29,6 +29,8 @@
 /*
 * GOAP
 */
+#include "ComponentSystem.h"
+#include "GameObject.h"
 #include "GOAPInterface.h"
 
 

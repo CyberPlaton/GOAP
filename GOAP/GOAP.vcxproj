@@ -95,7 +95,9 @@
     <ClCompile Include="common\include\imgui-master\imgui_draw.cpp" />
     <ClCompile Include="common\include\imgui-master\imgui_tables.cpp" />
     <ClCompile Include="common\include\imgui-master\imgui_widgets.cpp" />
+    <ClCompile Include="ComponentSystem.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameWorld.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -109,7 +111,9 @@
     <ClInclude Include="common\include\imgui-master\imstb_rectpack.h" />
     <ClInclude Include="common\include\imgui-master\imstb_textedit.h" />
     <ClInclude Include="common\include\imgui-master\imstb_truetype.h" />
+    <ClInclude Include="ComponentSystem.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameWorld.h" />
     <ClInclude Include="GOAPInterface.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="Navigator.h" />

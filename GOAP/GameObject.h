@@ -3,6 +3,8 @@
 #include <vector>
 #include <string>
 
+#include "ComponentSystem.h"
+
 
 static std::hash<std::string> hasher;
 class GameObject;
@@ -46,8 +48,37 @@ public:
 	}
 
 
+	void AddComponent(Component* c)
+	{
+		components.push_back(c);
+	}
+
+
+	void RemoveComponent(Component* c)
+	{
+		auto it = std::find(components.begin(), components.end(), c);
+
+		if (it != components.end())
+		{
+			components.erase(it);
+		}
+	}
+
+	Component* getComponent(const std::string& name)
+	{
+		for (auto& cmp : components)
+		{
+			if (cmp->name.compare(name) == 0)
+			{
+				return cmp;
+			}
+		}
+	}
 
 
 	std::string tag;
 	size_t hash;
+
+
+	std::vector<Component*> components;
 };
