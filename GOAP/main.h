@@ -57,4 +57,6 @@ private:
 
 private:
 
+	void _onImGui();
+	void _handleInput();
 };

@@ -66,11 +66,13 @@ public:
 
 
 		// Get type name.
-		type = typeid(this).name();
+		type = "Component";
 
 
 		// Store self in storage.
 		ComponentStorage::get()->add(this);
+
+		return true;
 	}
 
 	std::string type;
@@ -89,6 +91,7 @@ public:
 	{
 		init();
 		this->name = name;
+		type = "Transform";
 	}
 
 
