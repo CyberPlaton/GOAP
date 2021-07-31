@@ -16,6 +16,8 @@
 */
 #define OLC_PGE_APPLICATION
 #include "olcPixelGameEngine.h"
+#define OLC_PGEX_TRANSFORMEDVIEW
+#include "olcPGEX_TransformedView.h"
 #define OLC_PGEX_DEAR_IMGUI_IMPLEMENTATION
 #include "common/include/imgui_impl_pge.h"
 
@@ -51,6 +53,7 @@ public:
 
 private:
 
+	olc::TileTransformedView tv;
 	olc::imgui::PGE_ImGUI pge_imgui;
 	int m_GameLayer;
 

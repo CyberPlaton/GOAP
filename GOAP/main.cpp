@@ -20,17 +20,35 @@ void App::DrawUI(void)
 
 bool App::OnUserUpdate(float fElapsedTime)
 {
+	Clear(olc::BLACK);
+
 	_handleInput();
 
 
 
 	// Application rendering.
-	for (int x = 0; x < ScreenWidth(); x++)
-		for (int y = 0; y < ScreenHeight(); y++)
-			Draw(x, y, olc::Pixel(rand() % 256, rand() % 256, rand() % 256));
+	olc::vi2d topleft = tv.GetTopLeftTile().max({ 0, 0 });
+	olc::vi2d bottomright = tv.GetBottomRightTile().min({32, 32});
+	olc::vi2d tile;
+
+	// Draw Grid.
+	for (tile.y = topleft.y; tile.y < bottomright.y; tile.y++)
+	{
+		for (tile.x = topleft.x; tile.x < bottomright.x; tile.x++)
+		{
+			tv.DrawLine(tile, tile + olc::vf2d(0.0f, 1.0f), olc::WHITE);
+			tv.DrawLine(tile, tile + olc::vf2d(1.0f, 0.0f), olc::WHITE);
+		}
+	}
 
 
+	tv.FillRectDecal(olc::vi2d(1, 1), olc::vi2d(4, 3), olc::GREY);
 
+	tv.FillRectDecal(olc::vi2d(5, 3), olc::vi2d(8, 8), olc::GREY);
+
+	tv.FillRectDecal(olc::vf2d(1, 1), olc::vf2d(1, 1), olc::DARK_GREEN);
+
+	tv.FillRectDecal(olc::vf2d(2, 1), olc::vf2d(1, 1), olc::DARK_RED);
 
 	// For Rendering IMGUI.
 	_onImGui();
@@ -46,12 +64,7 @@ bool App::OnUserCreate()
 	SetLayerCustomRenderFunction(0, std::bind(&App::DrawUI, this));
 
 
-
-	for (int i = 0; i < 50; i++)
-	{
-		GameObject* g = new GameObject("GameObject_" + std::to_string(i));
-		g->AddComponent(new TransformCmp("Transform"));
-	}
+	tv = olc::TileTransformedView({ ScreenWidth(), ScreenHeight() }, {32, 32});
 
 
 
@@ -153,4 +166,10 @@ void App::_handleInput()
 		gameobjects_window = (gameobjects_window == false) ? true : false;
 	}
 
+
+	if (GetMouse(1).bPressed) tv.StartPan(GetMousePos());
+	if (GetMouse(1).bHeld) tv.UpdatePan(GetMousePos());
+	if (GetMouse(1).bReleased) tv.EndPan(GetMousePos());
+	if (GetMouseWheel() > 0) tv.ZoomAtScreenPos(2.0f, GetMousePos());
+	if (GetMouseWheel() < 0) tv.ZoomAtScreenPos(0.5f, GetMousePos());
 }

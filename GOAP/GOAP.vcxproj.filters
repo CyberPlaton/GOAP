@@ -116,5 +116,8 @@
     <ClInclude Include="GameWorld.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Inventory.h">
+      <Filter>Source Files\GOAP</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

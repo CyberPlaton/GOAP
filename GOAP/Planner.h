@@ -41,7 +41,10 @@ class Planner
 {
 public:
 
-	std::queue<Action*> plan(std::vector<Action*> actions, std::map<std::string, int> goals, WorldStates* beliefs)
+	/*
+	* If no path is found, returns an empty action queue.
+	*/
+	std::queue<Action*> plan(std::vector<Action*> actions, std::map<int, std::string> goals, WorldStates* beliefs)
 	{
 		std::queue<Action*> retActions;
 
@@ -117,7 +120,7 @@ public:
 
 private:
 
-	bool _buildGraph(Node* parent, std::vector<Node*> leaves, std::vector<Action*> usableActions, std::map<std::string, int > goal)
+	bool _buildGraph(Node* parent, std::vector<Node*> leaves, std::vector<Action*> usableActions, std::map<int, std::string > goal)
 	{
 		bool foundpath = false;
 
@@ -168,11 +171,11 @@ private:
 	}
 
 
-	bool _goalAchieved(std::map<std::string, int> goal, std::map<std::string, int> state)
+	bool _goalAchieved(std::map<int, std::string> goal, std::map<std::string, int> state)
 	{
 		for (auto& g : goal)
 		{
-			if (!state.contains(g.first))
+			if (!state.contains(g.second))
 			{
 				return false;
 			}

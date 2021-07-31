@@ -115,6 +115,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameWorld.h" />
     <ClInclude Include="GOAPInterface.h" />
+    <ClInclude Include="Inventory.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="Navigator.h" />
     <ClInclude Include="Planner.h" />
