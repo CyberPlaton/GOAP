@@ -38,12 +38,6 @@ private:
 
 			building->AddComponent(new TransformCmp(building->tag + "_Transform"));
 
-			//int xpos, ypos;
-			//xpos = in.at("Position")[0].get<int>();
-			//ypos = in.at("Position")[1].get<int>();
-
-
-			cout << "[BUILDING] Setting Parent Position: " << xpos << ", " << ypos << endl;
 			building->setPosition(xpos, ypos);
 			 
 
@@ -64,7 +58,6 @@ private:
 				int obj_xpos = e.at("Position")[0].get<int>();
 				int obj_ypos = e.at("Position")[1].get<int>();
 
-				cout << "[BUILDING] Setting Child Position: " << xpos + obj_xpos << ", " << ypos + obj_ypos << endl;
 				obj->setPosition(xpos + obj_xpos, ypos + obj_ypos); // Set the relative position.
 			}
 

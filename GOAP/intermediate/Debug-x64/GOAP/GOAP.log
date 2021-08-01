@@ -34,22 +34,22 @@ C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\Timer.h(60,16): warning C4244: 
           ]
 C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\Agent.h(172,58): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\Agent.h(172,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\GameObjectCreator.h(50,129): warning C4244: 'argument': conversion from 'ValueType' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\GameObjectCreator.h(44,129): warning C4244: 'argument': conversion from 'ValueType' to 'float', possible loss of data
           with
           [
               ValueType=int
           ]
-C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\GameObjectCreator.h(50,101): warning C4244: 'argument': conversion from 'ValueType' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\GameObjectCreator.h(44,101): warning C4244: 'argument': conversion from 'ValueType' to 'float', possible loss of data
           with
           [
               ValueType=int
           ]
-C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\GameObjectCreator.h(86,131): warning C4244: 'argument': conversion from 'ValueType' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\GameObjectCreator.h(79,131): warning C4244: 'argument': conversion from 'ValueType' to 'float', possible loss of data
           with
           [
               ValueType=int
           ]
-C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\GameObjectCreator.h(86,103): warning C4244: 'argument': conversion from 'ValueType' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\GameObjectCreator.h(79,103): warning C4244: 'argument': conversion from 'ValueType' to 'float', possible loss of data
           with
           [
               ValueType=int
