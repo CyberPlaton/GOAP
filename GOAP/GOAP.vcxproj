@@ -113,6 +113,7 @@
     <ClInclude Include="common\include\imgui-master\imstb_truetype.h" />
     <ClInclude Include="ComponentSystem.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameObjectCreator.h" />
     <ClInclude Include="GameWorld.h" />
     <ClInclude Include="GOAPInterface.h" />
     <ClInclude Include="Inventory.h" />

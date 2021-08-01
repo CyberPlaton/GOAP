@@ -5,6 +5,8 @@
 
 #include "ComponentSystem.h"
 
+#include "nlohmann/json.hpp"
+
 
 static std::hash<std::string> hasher;
 class GameObject;
@@ -76,9 +78,38 @@ public:
 	}
 
 
+
+
+	void setPosition(int x, int y)
+	{
+		Component* cmp = this->getComponent(this->tag + "_Transform");
+
+		if (cmp != nullptr)
+		{
+			TransformCmp* t = static_cast<TransformCmp*>(cmp);
+
+			t->xpos = x;
+			t->ypos = y;
+		}
+	}
+
+
+	/*
+	* Change tag and hash for gameobject. 
+	* Those should automatically be adjusted in GOStorage,
+	* as there ar just the pointers to objects.
+	*/
+	void setTag(const std::string& tag)
+	{
+		this->tag = tag;
+		this->hash = hasher(this->tag);
+	}
+
+
 	std::string tag;
 	size_t hash;
 
 
 	std::vector<Component*> components;
+
 };

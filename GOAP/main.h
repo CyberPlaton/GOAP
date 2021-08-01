@@ -34,7 +34,7 @@
 #include "ComponentSystem.h"
 #include "GameObject.h"
 #include "GOAPInterface.h"
-
+#include "GameObjectCreator.h"
 
 
 class App : public olc::PixelGameEngine

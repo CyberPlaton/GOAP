@@ -33,9 +33,10 @@ struct SubGoal
 class Agent : public GameObject
 {
 public:
+	Agent(const std::string& tag) : GameObject(tag){}
+
 	virtual ~Agent()
 	{
-
 	}
 
 

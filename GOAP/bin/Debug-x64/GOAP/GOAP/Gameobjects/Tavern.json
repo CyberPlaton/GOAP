@@ -1,0 +1,27 @@
+{
+  "GameObjectType": "Building",
+  "Name": "Tavern",
+  "Role": "TODO",
+  "Position": [ 1, 1 ],
+  "Width": 4,
+  "Height": 4,
+
+  "Layout": {
+    "0": {
+      "Name": "Doorway",
+      "Position": [ 2, 4 ]
+    },
+    "1": {
+      "Name": "Bed",
+      "Position": [ 0, 0 ]
+    },
+    "2": {
+      "Name": "Table",
+      "Position": [ 0, 3 ]
+    },
+    "3": {
+      "Name": "Tavern_Counter",
+      "Position": [ 3, 0 ]
+    }
+  }
+}

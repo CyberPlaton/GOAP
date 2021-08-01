@@ -99,3 +99,27 @@ public:
 	float xpos;
 	float ypos;
 };
+
+
+
+class RendererableCmp : public Component
+{
+public:
+	RendererableCmp(const std::string& name, float width, float height, const std::string& color):
+		width(width), height(height), color(color)
+	{
+		init();
+		this->name = name;
+		this->type = "Renderable";
+	}
+
+
+	/*
+	* Specify the dimension of it.
+	* Where to draw is derived from transform.
+	*/
+	float width = 0.0f;
+	float height = 0.0f;
+
+	std::string color = "none";
+};

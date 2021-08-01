@@ -1,0 +1,8 @@
+{
+  "GameObjectType": "Furniture",
+  "Name": "Table",
+  "Role": "TODO",
+  "Position": [ 0, 0 ],
+  "Width": 1,
+  "Height": 1
+}

@@ -42,13 +42,20 @@ bool App::OnUserUpdate(float fElapsedTime)
 	}
 
 
-	tv.FillRectDecal(olc::vi2d(1, 1), olc::vi2d(4, 3), olc::GREY);
+	//Agent* npc = new Agent("Innkeeper_Walter"); // Create agent.
+	//npc->init("TODO.json"); // Get all available action for agent.
+	//npc->awake(); // Initialize to work in the engine.
 
-	tv.FillRectDecal(olc::vi2d(5, 3), olc::vi2d(8, 8), olc::GREY);
 
-	tv.FillRectDecal(olc::vf2d(1, 1), olc::vf2d(1, 1), olc::DARK_GREEN);
+	//tv.FillRectDecal(olc::vi2d(1, 1), olc::vi2d(4, 3), olc::GREY);
 
-	tv.FillRectDecal(olc::vf2d(2, 1), olc::vf2d(1, 1), olc::DARK_RED);
+	//tv.FillRectDecal(olc::vi2d(5, 3), olc::vi2d(8, 8), olc::GREY);
+
+	//tv.FillRectDecal(olc::vf2d(1, 1), olc::vf2d(1, 1), olc::DARK_GREEN);
+
+	//tv.FillRectDecal(olc::vf2d(2, 1), olc::vf2d(1, 1), olc::DARK_RED);
+
+
 
 	// For Rendering IMGUI.
 	_onImGui();
@@ -65,6 +72,14 @@ bool App::OnUserCreate()
 
 
 	tv = olc::TileTransformedView({ ScreenWidth(), ScreenHeight() }, {32, 32});
+
+
+
+
+
+	GameObjectCreator creator;
+
+	GameObject* tavern = creator.create("GOAP/Gameobjects/Tavern.json");
 
 
 
@@ -133,13 +148,13 @@ void App::_onImGui()
 				{
 					if (ImGui::TreeNode(cmp->name.c_str()))
 					{
-						if (cmp->type.compare("Transform") == 0)
+						if (cmp->type.find("Transform") == 0)
 						{
-							float v[2];
+							int v[2];
 							v[0] = static_cast<TransformCmp*>(cmp)->xpos;
 							v[1] = static_cast<TransformCmp*>(cmp)->ypos;
 
-							ImGui::SliderFloat2("Position", v, -100.0f, 100.0f, "%.1f", 1.0f);
+							ImGui::SliderInt2("Position", v, -100, 100);
 
 							static_cast<TransformCmp*>(cmp)->xpos = v[0];
 							static_cast<TransformCmp*>(cmp)->ypos = v[1];
