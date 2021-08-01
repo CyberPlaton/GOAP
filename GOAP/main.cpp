@@ -129,6 +129,7 @@ bool App::OnUserCreate()
 	house = creator.create("GOAP/Gameobjects/House.json", 22, 16);
 
 
+
 	return true;
 }
 
@@ -200,7 +201,8 @@ void App::_onImGui()
 		for (auto& go : GameObjectStorage::get()->getStorage())
 		{
 			// Show GO
-			bool ret = ImGui::CollapsingHeader(go->tag.c_str());
+			std::string tag_name = go->getTag() + " \"" + go->getName() +"\"";
+			bool ret = ImGui::CollapsingHeader(tag_name.c_str());
 
 			// Check whether we are hovering over the current displayed GO.
 			if (ImGui::IsItemHovered())

@@ -34,7 +34,7 @@ private:
 
 		if (type.compare("Building") == 0)
 		{
-			GameObject* building = new GameObject(in.at("Name").get<std::string>());
+			GameObject* building = new GameObject("Building", in.at("Name").get<std::string>());
 
 			building->AddComponent(new TransformCmp(building->tag + "_Transform"));
 
@@ -66,11 +66,17 @@ private:
 		}
 		else if (type.compare("NPC") == 0)
 		{
+			Agent* npc = new Agent("NPC", in.at("Name").get<std::string>());
 			
+			// An NPC is initialized at some position,
+			// he can have some objects in his inventory and
+			// he can possess some objects (In order to possess them, they MUST be created first).
+
+			return npc;
 		}
 		else if (type.compare("Furniture") == 0)
 		{
-			GameObject* furniture = new GameObject(in.at("Name").get<std::string>());
+			GameObject* furniture = new GameObject("Furniture", in.at("Name").get<std::string>());
 
 			furniture->AddComponent(new TransformCmp(furniture->tag + "_Transform"));
 			

@@ -42,7 +42,14 @@ private:
 class GameObject
 {
 public:
-	GameObject(const std::string& tag)
+	/*
+	* Construct a gameobject.
+	* 
+	* A Tag is the string identifier and is unique for each gameobject.
+	* A Name is the user defined "special" name, e.g. the name for an NPC,
+	* and it can be duplicate.
+	*/
+	GameObject(const std::string& tag, const std::string& name) : name(name)
 	{
 		this->tag = "GO_" + std::to_string(++g_GameObjectCount) + "_" + tag;
 
@@ -122,7 +129,11 @@ public:
 		this->hash = hasher(this->tag);
 	}
 
+	std::string getTag() { return tag; }
+	std::string getName() { return name; }
 
+
+	std::string name;
 	std::string tag;
 	size_t hash;
 
