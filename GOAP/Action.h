@@ -68,8 +68,8 @@ public:
 	void awake()
 	{
 
-		target = GameObjectStorage::get()->getGO(target_tag);
-		this_agent = GameObjectStorage::get()->getGO(this_agent_tag);
+		target = GameObjectStorage::get()->getGOByTag(target_tag);
+		this_agent = GameObjectStorage::get()->getGOByTag(this_agent_tag);
 	}
 
 

@@ -40,6 +40,12 @@ public:
 	}
 
 
+	std::vector<GameObject*> getItems()
+	{
+		return inventory;
+	}
+
+
 private:
 
 	std::vector<GameObject*> inventory;

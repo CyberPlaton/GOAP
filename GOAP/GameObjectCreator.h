@@ -10,14 +10,14 @@ class GameObjectCreator
 public:
 	GameObjectCreator(){}
 
-	GameObject* create(const std::string& filepath, int xpos, int ypos) { return _createFromJson(filepath, xpos, ypos); }
+	GameObject* create(const std::string& filepath, const std::string& name, int xpos, int ypos) { return _createFromJson(filepath, name, xpos, ypos); }
 
 
 
 
 private:
 
-	GameObject* _createFromJson(const std::string& json_filepath, int xpos, int ypos)
+	GameObject* _createFromJson(const std::string& json_filepath, const std::string& name, int xpos, int ypos)
 	{
 		using namespace std;
 		using namespace nlohmann;
@@ -34,7 +34,7 @@ private:
 
 		if (type.compare("Building") == 0)
 		{
-			GameObject* building = new GameObject("Building", in.at("Name").get<std::string>());
+			GameObject* building = new GameObject("Building", name);
 
 			building->AddComponent(new TransformCmp(building->tag + "_Transform"));
 
@@ -52,7 +52,11 @@ private:
 			for (auto& e : in.at("Layout"))
 			{
 				std::string jsonpath = "GOAP/Gameobjects/" + e.at("Name").get<std::string>() + ".json";
-				GameObject* obj = create(jsonpath, 0, 0); // Create children without specific position.
+
+				// Specify the name for the child.
+				std::string child_name = name + "_" + e.at("Name").get<std::string>();
+
+				GameObject* obj = create(jsonpath, child_name, 0, 0); // Create children without specific position.
 
 				// Children Objects do have position entry.
 				int obj_xpos = e.at("Position")[0].get<int>();
@@ -66,17 +70,45 @@ private:
 		}
 		else if (type.compare("NPC") == 0)
 		{
-			Agent* npc = new Agent("NPC", in.at("Name").get<std::string>());
-			
+			Agent* npc = new Agent("NPC", name);
+			npc->awake();
+
+			npc->AddComponent(new TransformCmp(npc->tag + "_Transform"));
+
+			npc->setPosition(xpos, ypos);
+
+			npc->AddComponent(new RendererableCmp(npc->tag + "_Renderable", 0.8f, 0.8f, "green"));
+
+
 			// An NPC is initialized at some position,
 			// he can have some objects in his inventory and
 			// he can possess some objects (In order to possess them, they MUST be created first).
+
+			for (auto& e : in.at("Ownership"))
+			{
+				GameObject* owned_thing = GameObjectStorage::get()->getGOByName(e.at("Name").get<std::string>());
+			
+
+				if(!owned_thing)
+				{
+					cout << "[OWNERSHIP] Object not found:  " << e.at("Name").get<std::string>() << endl;
+				}
+				else
+				{
+					cout << "[OWNERSHIP] Object found:  \"" << e.at("Name").get<std::string>() << "\"";
+					cout << ", \"" << name << "\" now owns it!" << endl;
+
+					npc->agentOwnedObjects.push_back(owned_thing);
+				}
+			}
+
+
 
 			return npc;
 		}
 		else if (type.compare("Furniture") == 0)
 		{
-			GameObject* furniture = new GameObject("Furniture", in.at("Name").get<std::string>());
+			GameObject* furniture = new GameObject("Furniture", name);
 
 			furniture->AddComponent(new TransformCmp(furniture->tag + "_Transform"));
 			

@@ -34,13 +34,26 @@ void GameObjectStorage::add(GameObject* go)
 }
 
 
-GameObject* GameObjectStorage::getGO(const std::string& tag)
+GameObject* GameObjectStorage::getGOByTag(const std::string& tag)
 {
 	size_t tag_hash = hasher(tag);
 
 	for (auto& go : m_GameObjects)
 	{
 		if (tag_hash == go->hash) return go;
+	}
+
+	return nullptr;
+}
+
+GameObject* GameObjectStorage::getGOByName(const std::string& name)
+{
+	for (auto& go : m_GameObjects)
+	{
+		if (go->getName().find(name) != std::string::npos)
+		{
+			return go;
+		}
 	}
 
 	return nullptr;

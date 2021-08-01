@@ -24,7 +24,8 @@ public:
 
 	void add(GameObject* go);
 
-	GameObject* getGO(const std::string& tag);
+	GameObject* getGOByTag(const std::string& tag);
+	GameObject* getGOByName(const std::string& name);
 
 
 private:
@@ -121,7 +122,7 @@ public:
 	/*
 	* Change tag and hash for gameobject. 
 	* Those should automatically be adjusted in GOStorage,
-	* as there ar just the pointers to objects.
+	* as there are just the pointers to objects.
 	*/
 	void setTag(const std::string& tag)
 	{
@@ -142,3 +143,6 @@ public:
 
 	static unsigned long long g_GameObjectCount;
 };
+
+
+

@@ -33,7 +33,9 @@ struct SubGoal
 class Agent : public GameObject
 {
 public:
-	Agent(const std::string& tag, const std::string& name) : GameObject(tag, name) {}
+	Agent(const std::string& tag, const std::string& name) : GameObject(tag, name)
+	{
+	}
 
 	virtual ~Agent()
 	{
@@ -157,7 +159,7 @@ public:
 				// Get the target gameobject if we dont have a valid one.
 				if (currentAction->target == nullptr && currentAction->target_tag.compare("") != 0)
 				{
-					currentAction->target = GameObjectStorage::get()->getGO(currentAction->target_tag);
+					currentAction->target = GameObjectStorage::get()->getGOByTag(currentAction->target_tag);
 				}
 
 				// Have we got a valid target?
@@ -193,8 +195,6 @@ public:
 	}
 
 
-private:
-
 	std::map<std::string, std::string> actionDefinitions;
 	std::vector<Action*> availableActions;
 	std::map<int, SubGoal*> goals;
@@ -214,6 +214,7 @@ private:
 	HRTimer* timer = nullptr;
 
 	Inventory* agentInventory = nullptr;
+	std::vector<GameObject*> agentOwnedObjects;
 
 	Navigator* navigator = nullptr;
 

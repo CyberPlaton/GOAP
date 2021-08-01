@@ -76,6 +76,7 @@ bool App::OnUserUpdate(float fElapsedTime)
 
 			if (rc->color.compare("grey") == 0) color = olc::GREY;
 			else if (rc->color.compare("dark_grey") == 0) color = olc::DARK_GREY;
+			else if (rc->color.compare("green") == 0) color = olc::DARK_GREEN;
 
 
 			if (rc->render)
@@ -121,14 +122,15 @@ bool App::OnUserCreate()
 
 	GameObjectCreator creator;
 
-	GameObject* tavern = creator.create("GOAP/Gameobjects/Tavern.json", 3, 5);
-	GameObject* shop = creator.create("GOAP/Gameobjects/Shop.json", 13, 5);
-	GameObject* house = creator.create("GOAP/Gameobjects/House.json", 21, 2);
-	house = creator.create("GOAP/Gameobjects/House.json", 25, 3);
-	house = creator.create("GOAP/Gameobjects/House.json", 28, 8);
-	house = creator.create("GOAP/Gameobjects/House.json", 22, 16);
+	GameObject* tavern = creator.create("GOAP/Gameobjects/Tavern.json", "Village Tavern", 3, 5);
+	GameObject* shop = creator.create("GOAP/Gameobjects/Shop.json", "Filthy Shop", 13, 5);
+	GameObject* house = creator.create("GOAP/Gameobjects/House.json", "Johns House", 21, 2);
+	house = creator.create("GOAP/Gameobjects/House.json", "Asmons House", 25, 3);
+	house = creator.create("GOAP/Gameobjects/House.json", "Walters House", 28, 8);
+	house = creator.create("GOAP/Gameobjects/House.json", "Marthas House", 22, 16);
 
 
+	GameObject* npc = creator.create("GOAP/Gameobjects/Innkeeper.json", "Innkeeper Simon", 0, 0);
 
 	return true;
 }
@@ -213,6 +215,22 @@ void App::_onImGui()
 			// Show the components of Selected GO.
 			if (ret)
 			{
+				// If GO is an NPC, show ownership and inventory.
+				if(go->getTag().find("NPC") != std::string::npos)
+				{
+					Agent* npc = static_cast<Agent*>(go);
+
+					if (ImGui::TreeNode("Ownership"))
+					{
+						for (auto& item : npc->agentOwnedObjects)
+						{
+							ImGui::BulletText(item->getName().c_str());
+						}
+
+						ImGui::TreePop();
+					}
+				}
+
 
 				// Show CMPs
 				for (auto& cmp : go->components)
@@ -274,7 +292,7 @@ void App::_handleInput()
 		if (GetMouse(1).bPressed) tv.StartPan(GetMousePos());
 		if (GetMouse(1).bHeld) tv.UpdatePan(GetMousePos());
 		if (GetMouse(1).bReleased) tv.EndPan(GetMousePos());
-		if (GetMouseWheel() > 0) tv.ZoomAtScreenPos(1.5f, GetMousePos());
-		if (GetMouseWheel() < 0) tv.ZoomAtScreenPos(0.75f, GetMousePos());
+		if (GetMouseWheel() > 0) tv.ZoomAtScreenPos(2.0f, GetMousePos());
+		if (GetMouseWheel() < 0) tv.ZoomAtScreenPos(0.5f, GetMousePos());
 	}
 }

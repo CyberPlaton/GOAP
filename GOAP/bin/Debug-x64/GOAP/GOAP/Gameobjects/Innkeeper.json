@@ -1,10 +1,11 @@
 {
   "GameObjectType": "NPC",
-  "Name": "Walter",
   "Role": "TODO",
   "Inventory": {
   },
   "Ownership": {
-    "1": "Tavern"
+    "0": {
+      "Name" : "Village Tavern"
+    }
   }
 }
