@@ -24,7 +24,7 @@ public:
 	/*
 	* Each comonent adds itself on creation.
 	*/
-	void add(Component* c);
+	void add(Component* c, const std::string& type);
 
 	/*
 	* Each component removes itself on destr.
@@ -34,7 +34,21 @@ public:
 	/*
 	* Iteratable for a set of components of same type.
 	*/
-	std::vector<Component*>& getAllOfType(const std::string& type);
+	template < class T >
+	std::vector<T*> getAllOfType(const std::string& type)
+	{
+		if (componentMap.contains(type))
+		{
+			std::vector<T*> r;
+
+			for (auto& c : componentMap.at(type))
+			{
+				r.push_back(static_cast<T*>(c));
+			}
+
+			return r;
+		}
+	}
 
 private:
 
@@ -59,23 +73,21 @@ public:
 	virtual ~Component(){}
 
 
-	bool init()
+	bool init(const std::string& type)
 	{
 		// Assign a numerical id to self.
 		id = ++g_ComponentID;
 
 
-		// Get type name.
-		type = "Component";
-
-
 		// Store self in storage.
-		ComponentStorage::get()->add(this);
+		ComponentStorage::get()->add(this, type);
 
 		return true;
 	}
 
-	std::string type;
+
+	virtual std::string getType() = 0;
+
 	unsigned long long id;
 	std::string name;
 };
@@ -89,9 +101,10 @@ class TransformCmp : public Component
 public:
 	TransformCmp(const std::string& name) :xpos(0), ypos(0)
 	{
-		init();
 		this->name = name;
 		type = "Transform";
+
+		init(type);
 	}
 
 
@@ -101,6 +114,9 @@ public:
 		this->ypos = y;
 	}
 
+	std::string getType() override { return this->type; }
+
+	std::string type;
 	int xpos;
 	int ypos;
 };
@@ -113,16 +129,21 @@ public:
 	RendererableCmp(const std::string& name, float width, float height, const std::string& color):
 		width(width), height(height), color(color)
 	{
-		init();
 		this->name = name;
-		this->type = "Renderable";
+		type = "Renderable";
+
+		init(type);
 	}
 
+
+	std::string getType() override { return this->type; }
 
 	/*
 	* Specify the dimension of it.
 	* Where to draw is derived from transform.
 	*/
+	std::string type;
+
 	float width = 0.0f;
 	float height = 0.0f;
 

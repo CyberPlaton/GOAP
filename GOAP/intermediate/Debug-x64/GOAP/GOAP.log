@@ -1,6 +1,5 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(498,5): warning MSB8004: Intermediate Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Intermediate Directory.
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(499,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
-  GameObject.cpp
   main.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': macro redefinition
 C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\common\include\GLFW\glfw3.h(123): message : see previous definition of 'APIENTRY'
@@ -55,16 +54,15 @@ C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\GameObjectCreator.h(91,103): wa
           [
               ValueType=int
           ]
-C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\main.cpp(75,44): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\main.cpp(82,44): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\main.cpp(75,34): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\main.cpp(82,34): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\main.cpp(158,62): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  Generating Code...
+C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\main.cpp(179,62): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   GOAP.vcxproj -> C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\bin\Debug-x64\GOAP\GOAP.exe

@@ -1,0 +1,23 @@
+{
+  "GameObjectType": "Building",
+  "Name": "House",
+  "Role": "TODO",
+  "Position": [ 1, 8 ],
+  "Width": 2,
+  "Height": 2,
+
+  "Layout": {
+    "0": {
+      "Name": "Doorway",
+      "Position": [ 1, -1 ]
+    },
+    "1": {
+      "Name": "Bed",
+      "Position": [ 0, 0 ]
+    },
+    "2": {
+      "Name": "Table",
+      "Position": [ 0, 1 ]
+    }
+  }
+}

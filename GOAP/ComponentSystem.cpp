@@ -23,25 +23,25 @@ void ComponentStorage::del()
 
 
 
-void ComponentStorage::add(Component* c)
+void ComponentStorage::add(Component* c, const std::string& type)
 {
-	if (componentMap.contains(c->type))
+	if (componentMap.contains(type))
 	{
-		componentMap.at(c->type).push_back(c);
+		componentMap.at(type).push_back(c);
 	}
 	else
 	{
 		std::vector<Component*> vec; vec.push_back(c);
-		componentMap.emplace(std::make_pair(c->type, vec));
+		componentMap.emplace(std::make_pair(type, vec));
 	}
 }
 
 
 void ComponentStorage::remove(Component* c)
 {
-	if (componentMap.contains(c->type))
+	if (componentMap.contains(c->getType()))
 	{
-		std::vector<Component*>& vec = componentMap.at(c->type);
+		std::vector<Component*>& vec = componentMap.at(c->getType());
 		
 		auto it = std::find(vec.begin(), vec.end(), c);
 		
@@ -53,13 +53,5 @@ void ComponentStorage::remove(Component* c)
 	else
 	{
 		delete c; // Maybe unsafe.
-	}
-}
-
-std::vector<Component*>& ComponentStorage::getAllOfType(const std::string& type)
-{
-	if (componentMap.contains(type))
-	{
-		return componentMap.at(type);
 	}
 }

@@ -8,7 +8,10 @@
 static bool imgui_demo_window = false;
 static bool gameobjects_window = true;
 
-
+/*
+* Helper, maybe GUI related vars.
+*/
+static GameObject* selected_gameobject = nullptr;
 
 
 void App::DrawUI(void)
@@ -57,6 +60,8 @@ bool App::OnUserUpdate(float fElapsedTime)
 
 
 
+
+
 	for (auto& go : GameObjectStorage::get()->getStorage())
 	{
 		olc::Pixel color;
@@ -67,14 +72,26 @@ bool App::OnUserUpdate(float fElapsedTime)
 			TransformCmp* tr = static_cast<TransformCmp*> (go->getComponent("Transform"));
 			RendererableCmp* rc = static_cast<RendererableCmp*> (go->getComponent("Renderable"));
 
+
 			if (rc->color.compare("grey") == 0) color = olc::GREY;
 			else if (rc->color.compare("dark_grey") == 0) color = olc::DARK_GREY;
+
 
 			if (rc->render)
 			{
 				tv.FillRectDecal(olc::vf2d(tr->xpos, tr->ypos), olc::vf2d(rc->width, rc->height), color);
 			}
 		}
+	}
+
+
+	if (selected_gameobject)
+	{
+		TransformCmp* tr = static_cast<TransformCmp*> (selected_gameobject->getComponent("Transform"));
+		RendererableCmp* rc = static_cast<RendererableCmp*> (selected_gameobject->getComponent("Renderable"));
+
+		olc::vf2d p = { tr->xpos + rc->width / 2.0f - 0.3f, tr->ypos + rc->height / 2.0f};
+		tv.DrawStringDecal(p, selected_gameobject->tag, olc::RED, olc::vf2d(0.5f, 0.5f));
 	}
 
 
@@ -104,6 +121,8 @@ bool App::OnUserCreate()
 	GameObjectCreator creator;
 
 	GameObject* tavern = creator.create("GOAP/Gameobjects/Tavern.json");
+	GameObject* house = creator.create("GOAP/Gameobjects/House.json");
+
 
 	return true;
 }
@@ -122,6 +141,8 @@ int main()
 void App::_onImGui()
 {
 	using namespace std;
+
+	selected_gameobject = nullptr;
 
 	SetDrawTarget((uint8_t)m_GameLayer);
 
@@ -163,14 +184,24 @@ void App::_onImGui()
 		for (auto& go : GameObjectStorage::get()->getStorage())
 		{
 			// Show GO
-			if (ImGui::CollapsingHeader(go->tag.c_str()))
+			bool ret = ImGui::CollapsingHeader(go->tag.c_str());
+
+			// Check whether we are hovering over the current displayed GO.
+			if (ImGui::IsItemHovered())
 			{
+				selected_gameobject = go;
+			}
+
+			// Show the components of Selected GO.
+			if (ret)
+			{
+
 				// Show CMPs
 				for (auto& cmp : go->components)
 				{
 					if (ImGui::TreeNode(cmp->name.c_str()))
 					{
-						if (cmp->type.find("Transform") != std::string::npos)
+						if (cmp->getType().find("Transform") != std::string::npos)
 						{
 							int v[2];
 							v[0] = static_cast<TransformCmp*>(cmp)->xpos;
@@ -184,7 +215,7 @@ void App::_onImGui()
 						}
 
 
-						if (cmp->type.find("Renderable") != std::string::npos)
+						if (cmp->getType().find("Renderable") != std::string::npos)
 						{
 							RendererableCmp* rc = static_cast<RendererableCmp*>(cmp);
 
@@ -210,6 +241,8 @@ void App::_onImGui()
 
 void App::_handleInput()
 {
+	using namespace std;
+
 	if (GetKey(olc::Key::TAB).bPressed)
 	{
 		imgui_demo_window = (imgui_demo_window == false) ? true : false;

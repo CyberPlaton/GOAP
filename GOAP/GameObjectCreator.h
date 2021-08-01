@@ -80,13 +80,7 @@ private:
 
 			furniture->AddComponent(new TransformCmp(furniture->tag + "_Transform"));
 			
-			/*
-			int xpos, ypos;
-			xpos = in.at("Position")[0].get<int>();
-			ypos = in.at("Position")[1].get<int>();
-
-			furniture->setPosition(xpos, ypos);
-			*/
+			// Position of the furniture is defined from the parent gameobject, e.g. a house.
 
 			furniture->AddComponent(new RendererableCmp(furniture->tag + "_Renderable", in.at("Width").get<int>(), in.at("Height").get<int>(), "dark_grey"));
 

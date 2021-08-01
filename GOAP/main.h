@@ -57,7 +57,6 @@ private:
 	olc::imgui::PGE_ImGUI pge_imgui;
 	int m_GameLayer;
 
-
 private:
 
 	void _onImGui();
