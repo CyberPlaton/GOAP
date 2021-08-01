@@ -130,7 +130,7 @@ bool App::OnUserCreate()
 	house = creator.create("GOAP/Gameobjects/House.json", "Marthas House", 22, 16);
 
 
-	GameObject* npc = creator.create("GOAP/Gameobjects/Innkeeper.json", "Innkeeper Simon", 0, 0);
+	GameObject* npc = creator.create("GOAP/Gameobjects/Innkeeper.json", "Innkeeper John", 0, 0);
 
 	return true;
 }
@@ -197,7 +197,7 @@ void App::_onImGui()
 	// GAMEOBJECTS WINDOW
 	int go_count = GameObjectStorage::get()->getStorage().size();
 	ImGui::SetNextWindowPos(ImVec2(1.0f, 1.0f), ImGuiCond_FirstUseEver);
-	ImGui::SetNextWindowSize(ImVec2(500.0f, 250.0f), ImGuiCond_FirstUseEver);
+	ImGui::SetNextWindowSize(ImVec2(250.0f, 750.0f), ImGuiCond_FirstUseEver);
 	if (ImGui::Begin(std::string("GameObjects #" + std::to_string(go_count)).c_str(), &gameobjects_window))
 	{
 		for (auto& go : GameObjectStorage::get()->getStorage())
@@ -223,6 +223,16 @@ void App::_onImGui()
 					if (ImGui::TreeNode("Ownership"))
 					{
 						for (auto& item : npc->agentOwnedObjects)
+						{
+							ImGui::BulletText(item->getName().c_str());
+						}
+
+						ImGui::TreePop();
+					}
+
+					if (ImGui::TreeNode("Inventory"))
+					{
+						for (auto& item : npc->agentInventory->getItems())
 						{
 							ImGui::BulletText(item->getName().c_str());
 						}

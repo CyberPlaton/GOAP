@@ -5,7 +5,10 @@
   },
   "Ownership": {
     "0": {
-      "Name" : "Village Tavern"
+      "Name": "Village Tavern"
+    },
+    "1": {
+      "Name": "Johns House"
     }
   }
 }
