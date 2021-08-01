@@ -10,14 +10,14 @@ class GameObjectCreator
 public:
 	GameObjectCreator(){}
 
-	GameObject* create(const std::string& filepath) { return _createFromJson(filepath); }
+	GameObject* create(const std::string& filepath, int xpos, int ypos) { return _createFromJson(filepath, xpos, ypos); }
 
 
 
 
 private:
 
-	GameObject* _createFromJson(const std::string& json_filepath)
+	GameObject* _createFromJson(const std::string& json_filepath, int xpos, int ypos)
 	{
 		using namespace std;
 		using namespace nlohmann;
@@ -38,9 +38,9 @@ private:
 
 			building->AddComponent(new TransformCmp(building->tag + "_Transform"));
 
-			int xpos, ypos;
-			xpos = in.at("Position")[0].get<int>();
-			ypos = in.at("Position")[1].get<int>();
+			//int xpos, ypos;
+			//xpos = in.at("Position")[0].get<int>();
+			//ypos = in.at("Position")[1].get<int>();
 
 
 			cout << "[BUILDING] Setting Parent Position: " << xpos << ", " << ypos << endl;
@@ -58,8 +58,9 @@ private:
 			for (auto& e : in.at("Layout"))
 			{
 				std::string jsonpath = "GOAP/Gameobjects/" + e.at("Name").get<std::string>() + ".json";
-				GameObject* obj = create(jsonpath);
+				GameObject* obj = create(jsonpath, 0, 0); // Create children without specific position.
 
+				// Children Objects do have position entry.
 				int obj_xpos = e.at("Position")[0].get<int>();
 				int obj_ypos = e.at("Position")[1].get<int>();
 

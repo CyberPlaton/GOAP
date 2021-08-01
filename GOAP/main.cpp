@@ -7,6 +7,7 @@
 */
 static bool imgui_demo_window = false;
 static bool gameobjects_window = true;
+static bool imgui_has_focus = false;
 
 /*
 * Helper, maybe GUI related vars.
@@ -39,8 +40,8 @@ bool App::OnUserUpdate(float fElapsedTime)
 	{
 		for (tile.x = topleft.x; tile.x < bottomright.x; tile.x++)
 		{
-			tv.DrawLine(tile, tile + olc::vf2d(0.0f, 1.0f), olc::WHITE);
-			tv.DrawLine(tile, tile + olc::vf2d(1.0f, 0.0f), olc::WHITE);
+			tv.DrawLine(tile, tile + olc::vf2d(0.0f, 1.0f), olc::VERY_DARK_GREY);
+			tv.DrawLine(tile, tile + olc::vf2d(1.0f, 0.0f), olc::VERY_DARK_GREY);
 		}
 	}
 
@@ -120,8 +121,12 @@ bool App::OnUserCreate()
 
 	GameObjectCreator creator;
 
-	GameObject* tavern = creator.create("GOAP/Gameobjects/Tavern.json");
-	GameObject* house = creator.create("GOAP/Gameobjects/House.json");
+	GameObject* tavern = creator.create("GOAP/Gameobjects/Tavern.json", 3, 5);
+	GameObject* shop = creator.create("GOAP/Gameobjects/Shop.json", 13, 5);
+	GameObject* house = creator.create("GOAP/Gameobjects/House.json", 21, 2);
+	house = creator.create("GOAP/Gameobjects/House.json", 25, 3);
+	house = creator.create("GOAP/Gameobjects/House.json", 28, 8);
+	house = creator.create("GOAP/Gameobjects/House.json", 22, 16);
 
 
 	return true;
@@ -145,6 +150,17 @@ void App::_onImGui()
 	selected_gameobject = nullptr;
 
 	SetDrawTarget((uint8_t)m_GameLayer);
+
+	// CHECK WHETHER IMGUI IS FOCUSED
+	if (ImGui::IsAnyItemFocused() || ImGui::IsAnyItemHovered() || ImGui::IsAnyItemActive() || ImGui::IsWindowHovered(ImGuiHoveredFlags_AnyWindow))
+	{
+		imgui_has_focus = true;
+	}
+	else
+	{
+		imgui_has_focus = false;
+	}
+
 
 	// DEMO
 	if (imgui_demo_window)
@@ -243,16 +259,20 @@ void App::_handleInput()
 {
 	using namespace std;
 
-	if (GetKey(olc::Key::TAB).bPressed)
+	// Do not allow capturing input to imgui and app at same time.
+	if (!imgui_has_focus)
 	{
-		imgui_demo_window = (imgui_demo_window == false) ? true : false;
-		gameobjects_window = (gameobjects_window == false) ? true : false;
+		if (GetKey(olc::Key::TAB).bPressed)
+		{
+			imgui_demo_window = (imgui_demo_window == false) ? true : false;
+			gameobjects_window = (gameobjects_window == false) ? true : false;
+		}
+
+
+		if (GetMouse(1).bPressed) tv.StartPan(GetMousePos());
+		if (GetMouse(1).bHeld) tv.UpdatePan(GetMousePos());
+		if (GetMouse(1).bReleased) tv.EndPan(GetMousePos());
+		if (GetMouseWheel() > 0) tv.ZoomAtScreenPos(1.5f, GetMousePos());
+		if (GetMouseWheel() < 0) tv.ZoomAtScreenPos(0.75f, GetMousePos());
 	}
-
-
-	if (GetMouse(1).bPressed) tv.StartPan(GetMousePos());
-	if (GetMouse(1).bHeld) tv.UpdatePan(GetMousePos());
-	if (GetMouse(1).bReleased) tv.EndPan(GetMousePos());
-	if (GetMouseWheel() > 0) tv.ZoomAtScreenPos(2.0f, GetMousePos());
-	if (GetMouseWheel() < 0) tv.ZoomAtScreenPos(0.5f, GetMousePos());
 }

@@ -1,7 +1,7 @@
 #include "GameObject.h"
 
 GameObjectStorage* GameObjectStorage::g_GameObjectStorage = nullptr;
-
+unsigned long long GameObject::g_GameObjectCount = 0;
 
 
 GameObjectStorage* GameObjectStorage::get()

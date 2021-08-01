@@ -42,9 +42,11 @@ private:
 class GameObject
 {
 public:
-	GameObject(const std::string& tag) : tag(tag)
+	GameObject(const std::string& tag)
 	{
-		hash = hasher(tag);
+		this->tag = "GO_" + std::to_string(++g_GameObjectCount) + "_" + tag;
+
+		hash = hasher(this->tag);
 
 		GameObjectStorage::get()->add(this);
 	}
@@ -127,4 +129,5 @@ public:
 
 	std::vector<Component*> components;
 
+	static unsigned long long g_GameObjectCount;
 };

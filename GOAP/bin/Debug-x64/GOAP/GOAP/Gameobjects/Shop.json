@@ -1,0 +1,22 @@
+{
+  "GameObjectType": "Building",
+  "Name": "Shop",
+  "Role": "TODO",
+  "Width": 6,
+  "Height": 5,
+
+  "Layout": {
+    "0": {
+      "Name": "Counter",
+      "Position": [ 2, 2 ]
+    },
+    "1": {
+      "Name": "Bed",
+      "Position": [ 5, 0 ]
+    },
+    "2": {
+      "Name": "Doorway",
+      "Position": [ 1, 5 ]
+    }
+  }
+}

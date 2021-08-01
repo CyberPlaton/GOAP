@@ -2,14 +2,13 @@
   "GameObjectType": "Building",
   "Name": "Tavern",
   "Role": "TODO",
-  "Position": [ 1, 1 ],
-  "Width": 4,
-  "Height": 4,
+  "Width": 8,
+  "Height": 9,
 
   "Layout": {
     "0": {
       "Name": "Doorway",
-      "Position": [ 2, 4 ]
+      "Position": [ 5, 9 ]
     },
     "1": {
       "Name": "Bed",
@@ -17,11 +16,35 @@
     },
     "2": {
       "Name": "Table",
-      "Position": [ 0, 3 ]
+      "Position": [ 1, 5 ]
     },
     "3": {
-      "Name": "Tavern_Counter",
-      "Position": [ 3, 0 ]
+      "Name": "Table",
+      "Position": [ 1, 7 ]
+    },
+    "4": {
+      "Name": "Table",
+      "Position": [ 3, 3 ]
+    },
+    "5": {
+      "Name": "Table",
+      "Position": [ 3, 5 ]
+    },
+    "6": {
+      "Name": "Table",
+      "Position": [ 3, 7 ]
+    },
+    "7": {
+      "Name": "Table",
+      "Position": [ 5, 3 ]
+    },
+    "8": {
+      "Name": "Table",
+      "Position": [ 5, 5 ]
+    },
+    "9": {
+      "Name": "Counter",
+      "Position": [ 1, 3 ]
     }
   }
 }
