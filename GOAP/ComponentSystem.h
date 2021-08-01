@@ -87,7 +87,7 @@ public:
 class TransformCmp : public Component
 {
 public:
-	TransformCmp(const std::string& name) :xpos(0.0f), ypos(0.0f)
+	TransformCmp(const std::string& name) :xpos(0), ypos(0)
 	{
 		init();
 		this->name = name;
@@ -95,9 +95,14 @@ public:
 	}
 
 
+	void setPosition(int x, int y)
+	{
+		this->xpos = x;
+		this->ypos = y;
+	}
 
-	float xpos;
-	float ypos;
+	int xpos;
+	int ypos;
 };
 
 
@@ -122,4 +127,6 @@ public:
 	float height = 0.0f;
 
 	std::string color = "none";
+
+	bool render = true;
 };

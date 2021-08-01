@@ -70,26 +70,41 @@ public:
 	{
 		for (auto& cmp : components)
 		{
-			if (cmp->name.compare(name) == 0)
+			// Search for component adjusted to own name.
+			if (cmp->name.compare(tag + "_" + name) == 0)
 			{
 				return cmp;
 			}
 		}
+
+		return nullptr;
 	}
 
+
+	bool hasComponent(const std::string& name)
+	{
+		for (auto& cmp : components)
+		{
+			// Search for component adjusted to own name.
+			if (cmp->name.compare(tag + "_" + name) == 0)
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
 
 
 
 	void setPosition(int x, int y)
 	{
-		Component* cmp = this->getComponent(this->tag + "_Transform");
+		Component* cmp = this->getComponent("Transform");
 
 		if (cmp != nullptr)
 		{
 			TransformCmp* t = static_cast<TransformCmp*>(cmp);
-
-			t->xpos = x;
-			t->ypos = y;
+			t->setPosition(x, y);
 		}
 	}
 

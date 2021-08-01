@@ -1,10 +1,13 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(498,5): warning MSB8004: Intermediate Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Intermediate Directory.
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(499,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+  GameObject.cpp
   main.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': macro redefinition
 C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\common\include\GLFW\glfw3.h(123): message : see previous definition of 'APIENTRY'
-C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\GameObject.h(91,14): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\GameObject.h(92,14): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\Navigator.h(38,1): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\Navigator.h(43,1): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\Navigator.h(48,1): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\Navigator.h(53,1): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
 C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\Action.h(39,32): warning C4244: '=': conversion from 'ValueType' to 'float', possible loss of data
           with
           [
@@ -30,30 +33,38 @@ C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\Timer.h(60,16): warning C4244: 
           [
               _Rep=__int64
           ]
-C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\GameObjectCreator.h(47,129): warning C4244: 'argument': conversion from 'ValueType' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\Agent.h(172,58): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\Agent.h(172,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\GameObjectCreator.h(50,129): warning C4244: 'argument': conversion from 'ValueType' to 'float', possible loss of data
           with
           [
               ValueType=int
           ]
-C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\GameObjectCreator.h(47,101): warning C4244: 'argument': conversion from 'ValueType' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\GameObjectCreator.h(50,101): warning C4244: 'argument': conversion from 'ValueType' to 'float', possible loss of data
           with
           [
               ValueType=int
           ]
-C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\GameObjectCreator.h(85,131): warning C4244: 'argument': conversion from 'ValueType' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\GameObjectCreator.h(91,131): warning C4244: 'argument': conversion from 'ValueType' to 'float', possible loss of data
           with
           [
               ValueType=int
           ]
-C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\GameObjectCreator.h(85,103): warning C4244: 'argument': conversion from 'ValueType' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\GameObjectCreator.h(91,103): warning C4244: 'argument': conversion from 'ValueType' to 'float', possible loss of data
           with
           [
               ValueType=int
           ]
-C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\main.cpp(136,62): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\main.cpp(154,46): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\main.cpp(155,46): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\main.cpp(159,51): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\main.cpp(160,51): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\GameObject.h(78): warning C4715: 'GameObject::getComponent': not all control paths return a value
+C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\main.cpp(75,44): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\main.cpp(75,34): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\main.cpp(158,62): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Generating Code...
   GOAP.vcxproj -> C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\bin\Debug-x64\GOAP\GOAP.exe

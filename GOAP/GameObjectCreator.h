@@ -42,7 +42,10 @@ private:
 			xpos = in.at("Position")[0].get<int>();
 			ypos = in.at("Position")[1].get<int>();
 
+
+			cout << "[BUILDING] Setting Parent Position: " << xpos << ", " << ypos << endl;
 			building->setPosition(xpos, ypos);
+			 
 
 			building->AddComponent(new RendererableCmp(building->tag + "_Renderable", in.at("Width").get<int>(), in.at("Height").get<int>(), "grey"));
 
@@ -60,6 +63,7 @@ private:
 				int obj_xpos = e.at("Position")[0].get<int>();
 				int obj_ypos = e.at("Position")[1].get<int>();
 
+				cout << "[BUILDING] Setting Child Position: " << xpos + obj_xpos << ", " << ypos + obj_ypos << endl;
 				obj->setPosition(xpos + obj_xpos, ypos + obj_ypos); // Set the relative position.
 			}
 
@@ -75,12 +79,14 @@ private:
 			GameObject* furniture = new GameObject(in.at("Name").get<std::string>());
 
 			furniture->AddComponent(new TransformCmp(furniture->tag + "_Transform"));
-
+			
+			/*
 			int xpos, ypos;
 			xpos = in.at("Position")[0].get<int>();
 			ypos = in.at("Position")[1].get<int>();
 
 			furniture->setPosition(xpos, ypos);
+			*/
 
 			furniture->AddComponent(new RendererableCmp(furniture->tag + "_Renderable", in.at("Width").get<int>(), in.at("Height").get<int>(), "dark_grey"));
 

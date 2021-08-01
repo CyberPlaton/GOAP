@@ -57,6 +57,28 @@ bool App::OnUserUpdate(float fElapsedTime)
 
 
 
+	for (auto& go : GameObjectStorage::get()->getStorage())
+	{
+		olc::Pixel color;
+
+		// Just to get color string and to render it then we need O(n*n), which is baad.
+		if (go->hasComponent("Renderable"))
+		{
+			TransformCmp* tr = static_cast<TransformCmp*> (go->getComponent("Transform"));
+			RendererableCmp* rc = static_cast<RendererableCmp*> (go->getComponent("Renderable"));
+
+			if (rc->color.compare("grey") == 0) color = olc::GREY;
+			else if (rc->color.compare("dark_grey") == 0) color = olc::DARK_GREY;
+
+			if (rc->render)
+			{
+				tv.FillRectDecal(olc::vf2d(tr->xpos, tr->ypos), olc::vf2d(rc->width, rc->height), color);
+			}
+		}
+	}
+
+
+
 	// For Rendering IMGUI.
 	_onImGui();
 	
@@ -66,6 +88,8 @@ bool App::OnUserUpdate(float fElapsedTime)
 
 bool App::OnUserCreate()
 {
+	using namespace std;
+
 	m_GameLayer = CreateLayer();
 	EnableLayer(m_GameLayer, true);
 	SetLayerCustomRenderFunction(0, std::bind(&App::DrawUI, this));
@@ -80,8 +104,6 @@ bool App::OnUserCreate()
 	GameObjectCreator creator;
 
 	GameObject* tavern = creator.create("GOAP/Gameobjects/Tavern.json");
-
-
 
 	return true;
 }
@@ -148,16 +170,29 @@ void App::_onImGui()
 				{
 					if (ImGui::TreeNode(cmp->name.c_str()))
 					{
-						if (cmp->type.find("Transform") == 0)
+						if (cmp->type.find("Transform") != std::string::npos)
 						{
 							int v[2];
 							v[0] = static_cast<TransformCmp*>(cmp)->xpos;
 							v[1] = static_cast<TransformCmp*>(cmp)->ypos;
 
-							ImGui::SliderInt2("Position", v, -100, 100);
+							if (ImGui::SliderInt2("Position", v, -32, 32))
+							{
+								static_cast<TransformCmp*>(cmp)->xpos = v[0];
+								static_cast<TransformCmp*>(cmp)->ypos = v[1];
+							}
+						}
 
-							static_cast<TransformCmp*>(cmp)->xpos = v[0];
-							static_cast<TransformCmp*>(cmp)->ypos = v[1];
+
+						if (cmp->type.find("Renderable") != std::string::npos)
+						{
+							RendererableCmp* rc = static_cast<RendererableCmp*>(cmp);
+
+							ImGui::Text(rc->color.c_str());
+
+							ImGui::SameLine();
+
+							ImGui::Checkbox("Render", &rc->render);
 						}
 
 						ImGui::TreePop();
