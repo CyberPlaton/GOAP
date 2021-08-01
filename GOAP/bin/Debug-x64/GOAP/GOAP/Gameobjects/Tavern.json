@@ -11,38 +11,34 @@
       "Position": [ 5, 9 ]
     },
     "1": {
-      "Name": "Bed",
-      "Position": [ 0, 0 ]
-    },
-    "2": {
       "Name": "Table",
       "Position": [ 1, 5 ]
     },
-    "3": {
+    "2": {
       "Name": "Table",
       "Position": [ 1, 7 ]
     },
-    "4": {
+    "3": {
       "Name": "Table",
       "Position": [ 3, 3 ]
     },
-    "5": {
+    "4": {
       "Name": "Table",
       "Position": [ 3, 5 ]
     },
-    "6": {
+    "5": {
       "Name": "Table",
       "Position": [ 3, 7 ]
     },
-    "7": {
+    "6": {
       "Name": "Table",
       "Position": [ 5, 3 ]
     },
-    "8": {
+    "7": {
       "Name": "Table",
       "Position": [ 5, 5 ]
     },
-    "9": {
+    "8": {
       "Name": "Counter",
       "Position": [ 1, 3 ]
     }

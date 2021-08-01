@@ -99,6 +99,28 @@ private:
 					cout << ", \"" << name << "\" now owns it!" << endl;
 
 					npc->agentOwnedObjects.push_back(owned_thing);
+
+					// Furthermore, ownership extends on all initial gameobjects inside the building,
+					// if owned_object is a building.
+					if (owned_thing->getTag().find("Building") != std::string::npos)
+					{
+						// Get all GOs, which are INSIDE it,
+						// we can easily get those by parent-child naming convention.
+						for (auto& go : GameObjectStorage::get()->getStorage())
+						{
+							// Dont pushback the buildings themselves a second time.
+							if (go->getName().compare(owned_thing->getName()) == 0) continue;
+
+
+							if (go->getName().find(owned_thing->getName()) != std::string::npos)
+							{
+								npc->agentOwnedObjects.push_back(go);
+
+								cout << "[OWNERSHIP] Object found:  \"" << go->getName() << "\"";
+								cout << ", \"" << name << "\" now owns it!" << endl;
+							}
+						}
+					}
 				}
 			}
 
