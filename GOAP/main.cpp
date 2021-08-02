@@ -8,6 +8,10 @@
 static bool imgui_demo_window = false;
 static bool gameobjects_window = true;
 static bool imgui_has_focus = false;
+static const char* selectable_agent_stats[] = { "Stats", "Agent Beliefs", "Goals", "Available Actions", "Action Queue"};
+static int show_agent_stats_at_index = -1;
+static Agent* agent_showing_stats = nullptr;
+static bool show_agent_stats_window = false;
 
 /*
 * Helper, maybe GUI related vars.
@@ -73,11 +77,7 @@ bool App::OnUserUpdate(float fElapsedTime)
 			TransformCmp* tr = static_cast<TransformCmp*> (go->getComponent("Transform"));
 			RendererableCmp* rc = static_cast<RendererableCmp*> (go->getComponent("Renderable"));
 
-
-			if (rc->color.compare("grey") == 0) color = olc::GREY;
-			else if (rc->color.compare("dark_grey") == 0) color = olc::DARK_GREY;
-			else if (rc->color.compare("green") == 0) color = olc::DARK_GREEN;
-
+			color = _getColorFromString(rc->color);
 
 			if (rc->render)
 			{
@@ -130,7 +130,7 @@ bool App::OnUserCreate()
 	house = creator.create("GOAP/Gameobjects/House.json", "Marthas House", 22, 16);
 
 
-	GameObject* npc = creator.create("GOAP/Gameobjects/Innkeeper.json", "Innkeeper John", 0, 0);
+	GameObject* npc = creator.create("GOAP/Gameobjects/Innkeeper.json", "John", 0, 0);
 
 	return true;
 }
@@ -150,9 +150,10 @@ void App::_onImGui()
 {
 	using namespace std;
 
+	SetDrawTarget((uint8_t)m_GameLayer);
+
 	selected_gameobject = nullptr;
 
-	SetDrawTarget((uint8_t)m_GameLayer);
 
 	// CHECK WHETHER IMGUI IS FOCUSED
 	if (ImGui::IsAnyItemFocused() || ImGui::IsAnyItemHovered() || ImGui::IsAnyItemActive() || ImGui::IsWindowHovered(ImGuiHoveredFlags_AnyWindow))
@@ -196,8 +197,8 @@ void App::_onImGui()
 
 	// GAMEOBJECTS WINDOW
 	int go_count = GameObjectStorage::get()->getStorage().size();
-	ImGui::SetNextWindowPos(ImVec2(1.0f, 1.0f), ImGuiCond_FirstUseEver);
-	ImGui::SetNextWindowSize(ImVec2(250.0f, 750.0f), ImGuiCond_FirstUseEver);
+	ImGui::SetNextWindowPos(ImVec2(1.0f, 5.0f), ImGuiCond_Appearing);
+	ImGui::SetNextWindowSize(ImVec2(350.0f, 750.0f), ImGuiCond_Appearing);
 	if (ImGui::Begin(std::string("GameObjects #" + std::to_string(go_count)).c_str(), &gameobjects_window))
 	{
 		for (auto& go : GameObjectStorage::get()->getStorage())
@@ -215,10 +216,42 @@ void App::_onImGui()
 			// Show the components of Selected GO.
 			if (ret)
 			{
+				Agent* npc = static_cast<Agent*>(go);
+
+
 				// If GO is an NPC, show ownership and inventory.
 				if(go->getTag().find("NPC") != std::string::npos)
 				{
-					Agent* npc = static_cast<Agent*>(go);
+					// Allow opening NPC related popups.
+					if (ImGui::Button("Statistics"))
+					{
+						ImGui::OpenPopup("npc_stats_popup");
+					}
+					if (ImGui::BeginPopup("npc_stats_popup"))
+					{
+						ImGui::Text("Statistics Windows");
+						ImGui::Separator();
+
+						// Show possible stats and stuff windows for NPC.
+						for (int i = 0; i < IM_ARRAYSIZE(selectable_agent_stats); i++)
+						{
+							if (ImGui::Selectable(selectable_agent_stats[i]))
+							{
+								show_agent_stats_at_index = i;
+
+								// Save the agent for which to show stats.
+								agent_showing_stats = npc;
+
+								// Open the window.
+								show_agent_stats_window = true;
+
+								break;
+							}
+						}
+
+						ImGui::EndPopup();
+					}
+
 
 					if (ImGui::TreeNode("Ownership"))
 					{
@@ -281,7 +314,114 @@ void App::_onImGui()
 		}
 	}
 	ImGui::End();
+
+
+	/*
+	* Currently the implementation allows only one of the stats windows to be active.
+	*/
+	if (agent_showing_stats != nullptr)
+	{
+		if (show_agent_stats_window)
+		{
+			ImGui::SetNextWindowSize(ImVec2(400.0f, 250.0f), ImGuiCond_Appearing);
+			ImGui::SetNextWindowPos(ImVec2(350.0f, 5.0f), ImGuiCond_Appearing);
+			switch (show_agent_stats_at_index)
+			{
+			case 0:
+				_imguiAgentStatsWindow();
+				break;
+
+			case 1:
+				_imguiAgentBeliefsWindow();
+				break;
+
+			case 2:
+				_imguiAgentGoalsWindow();
+				break;
+
+			case 3:
+				_imguiAgentAvailableActionsWindow();
+				break;
+
+			case 4:
+				_imguiAgentActionQueueWindow();
+				break;
+
+			default:	// Show nothing.
+				break;
+			}
+		}
+	}
 }
+
+
+
+
+void App::_imguiAgentStatsWindow()
+{
+	if (ImGui::Begin(selectable_agent_stats[show_agent_stats_at_index], &show_agent_stats_window))
+	{
+		ImGui::Text("Stats");
+		if (ImGui::IsItemHovered())
+			ImGui::SetTooltip("Here we show the stats of an NPC like the race, agility or strength, health points etc");
+	}
+
+	ImGui::End();
+}
+
+void App::_imguiAgentBeliefsWindow()
+{
+	if (ImGui::Begin(selectable_agent_stats[show_agent_stats_at_index], &show_agent_stats_window))
+	{
+		ImGui::Text("Beliefs");
+		if (ImGui::IsItemHovered())
+			ImGui::SetTooltip("Here we show the agents local world state, so called beliefs, meaning how he perceives the world around self");
+	}
+
+	ImGui::End();
+}
+
+
+void App::_imguiAgentGoalsWindow()
+{
+	if (ImGui::Begin(selectable_agent_stats[show_agent_stats_at_index], &show_agent_stats_window))
+	{
+		ImGui::Text("Goals");
+		if (ImGui::IsItemHovered())
+			ImGui::SetTooltip("Here we show the goals of the agent in a comprehensive way");
+	}
+
+	ImGui::End();
+}
+
+
+void App::_imguiAgentAvailableActionsWindow()
+{
+	if (ImGui::Begin(selectable_agent_stats[show_agent_stats_at_index], &show_agent_stats_window))
+	{
+		ImGui::Text("Available Actions");
+		if (ImGui::IsItemHovered())
+			ImGui::SetTooltip("Here we show all actions available for execution for this agent");
+	}
+
+	ImGui::End();
+}
+
+
+void App::_imguiAgentActionQueueWindow()
+{
+	if (ImGui::Begin(selectable_agent_stats[show_agent_stats_at_index], &show_agent_stats_window))
+	{
+		ImGui::Text("Action Queue");
+		if (ImGui::IsItemHovered())
+			ImGui::SetTooltip("Here we show the current queue of actions for the agent");
+	}
+
+	ImGui::End();
+}
+
+
+
 
 
 
@@ -306,3 +446,6 @@ void App::_handleInput()
 		if (GetMouseWheel() < 0) tv.ZoomAtScreenPos(0.5f, GetMousePos());
 	}
 }
+
+
+

@@ -61,4 +61,36 @@ private:
 
 	void _onImGui();
 	void _handleInput();
+
+
+
+	void _imguiAgentStatsWindow();
+	void _imguiAgentBeliefsWindow();
+	void _imguiAgentGoalsWindow();
+	void _imguiAgentAvailableActionsWindow();
+	void _imguiAgentActionQueueWindow();
+
+
+	olc::Pixel _getColorFromString(const std::string& c)
+	{
+		if (c.compare("grey") == 0) return olc::GREY;
+		else if (c.compare("dark_grey") == 0)return olc::DARK_GREY;
+
+		else if (c.compare("green") == 0) return olc::GREEN;
+		else if (c.compare("dark_green") == 0) return olc::DARK_GREEN;
+
+		else if (c.compare("blue") == 0) return olc::BLUE;
+		else if (c.compare("dark_blue") == 0) return olc::DARK_BLUE;
+
+		else if (c.compare("red") == 0) return olc::RED;
+		else if (c.compare("dark_red") == 0) return olc::DARK_RED;
+
+		else if (c.compare("yellow") == 0) return olc::YELLOW;
+		else if (c.compare("dark_yellow") == 0) return olc::DARK_YELLOW;
+
+		else if (c.compare("magenta") == 0) return olc::MAGENTA;
+		else if (c.compare("dark_magenta") == 0) return olc::DARK_MAGENTA;
+		
+		else return olc::WHITE;
+	}
 };
