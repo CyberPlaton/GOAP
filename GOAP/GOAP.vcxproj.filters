@@ -19,6 +19,9 @@
     <Filter Include="Source Files\GOAP">
       <UniqueIdentifier>{dac35a04-5ab9-4736-ad63-7a0458d433b3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Actions">
+      <UniqueIdentifier>{fe90e92e-2d86-4923-b948-b14023af0f0f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -127,6 +130,12 @@
     </ClInclude>
     <ClInclude Include="DaySchedule.h">
       <Filter>Source Files\GOAP</Filter>
+    </ClInclude>
+    <ClInclude Include="Sleep.h">
+      <Filter>Source Files\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="ColorConsole.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

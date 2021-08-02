@@ -15,6 +15,9 @@
 #include "GameWorldTime.h"
 #include "DaySchedule.h"
 
+// Actions
+#include "Sleep.h"
+
 
 struct SubGoal
 {
@@ -72,7 +75,6 @@ public:
 		for (auto& e : in.at("Entries"))
 		{
 			ScheduleEntry* entry = new ScheduleEntry(e.at("ActivityName").get<std::string>(),
-													e.at("TargetTag").get<std::string>(),
 													e.at("StartTime").get<double>(),
 													e.at("EndTime").get<double>());
 
@@ -109,6 +111,61 @@ public:
 
 			actionDefinitions.emplace(std::make_pair(name, path));
 		}
+
+		// Actually create the action and fill them in for the agent.
+		for (auto& a : actionDefinitions)
+		{
+			// Get the Needed action.
+			if (a.first.compare("Sleep") == 0)
+			{
+				ASleep* action = new ASleep();
+				if (!action->init(a.second)) // Get Definition.
+				{
+					continue; // Do not append the action, just ignore it.
+				}
+
+
+				/*
+				* As the definition for objects are defined agent agnostic, but each agent needs
+				* to access the defined target which are available for him specifically,
+				* we get the target from here.
+				*/
+
+				GameObject* target = nullptr;
+
+				// Search for target in owned objects:
+				for (auto& owned_thing : this->agentOwnedObjects)
+				{
+					if (owned_thing->getName().find(action->target_name) != std::string::npos)
+					{
+						target = owned_thing;
+						break;
+					}
+				}
+
+				
+				// Too try search for target in the world environment.
+				if (!target)
+				{
+					target = GameObjectStorage::get()->getGOByName(action->target_name);
+				}
+				
+
+				if (!target) continue;
+
+
+				if (!action->postInit(this, target)) // Specify the gameobjects.
+				{
+					continue;
+				}
+
+				action->awake();			// First life sign. Initialize needed structures.
+
+				availableActions.push_back(action); // Store action as available.
+			}
+		}
+
+		return true;
 	}
 
 
@@ -140,9 +197,6 @@ public:
 		}
 
 
-
-
-
 		// Check whether agent has something to do.
 		if (currentAction != nullptr && currentAction->running)
 		{
@@ -166,46 +220,10 @@ public:
 					invoked = true;
 				}
 			}
-
-		}
-
-		// Check whether agent is idle.
-		if (planner == nullptr || actionQueue.size() == 0)
-		{
-
-			planner = new Planner();
-
-			// Goals are already sorted from most important to least important.
-			for (auto& sg : goals)
-			{
-				actionQueue = planner->plan(availableActions, sg.second->goals, agentBeliefs);
-
-				if (actionQueue.size() > 0)
-				{
-					currentGoal = sg.second;
-					break;
-				}
-			}
 		}
 
 
-		// Check whether we ran out of things to do.
-		if (actionQueue.size() > 0)
-		{
-			if (currentGoal->removable)
-			{
-				goals = _goalsSubset(goals, currentGoal); // Remove current goal as fulfilled.
-			}
-
-			if (planner)
-			{
-				delete planner;
-				planner = nullptr;
-			}
-		}
-
-
-		// Check whether we have things to do.
+		// Check whether we have things to do, but havent started yet.
 		if (actionQueue.size() > 0)
 		{
 			currentAction = actionQueue.front();
@@ -216,9 +234,9 @@ public:
 			{
 
 				// Get the target gameobject if we dont have a valid one.
-				if (currentAction->target == nullptr && currentAction->target_tag.compare("") != 0)
+				if (currentAction->target == nullptr && currentAction->target_name.compare("") != 0)
 				{
-					currentAction->target = GameObjectStorage::get()->getGOByTag(currentAction->target_tag);
+					currentAction->target = GameObjectStorage::get()->getGOByTag(currentAction->target_name);
 				}
 
 				// Have we got a valid target?
@@ -243,6 +261,44 @@ public:
 				}
 			}
 		}
+
+
+		// Check whether agent is idle.
+		if (planner == nullptr || actionQueue.size() == 0)
+		{
+
+			planner = new Planner();
+
+			// Goals are already sorted from most important to least important.
+			for (auto& sg : goals)
+			{
+				actionQueue = planner->plan(availableActions, sg.second->goals, agentBeliefs);
+
+				if (actionQueue.size() > 0)
+				{
+					currentGoal = sg.second;
+					return; // We got a new Goal. So just return and wait for reiteration.
+				}
+			}
+		}
+
+
+		// Check whether we ran out of things to do and need a new plan.
+		// This implies that our previous goal was achieved.
+		if (actionQueue.size() > 0)
+		{
+			if (currentGoal->removable)
+			{
+				goals = _goalsSubset(goals, currentGoal); // Remove current goal as fulfilled.
+			}
+
+			if (planner)
+			{
+				delete planner;
+				planner = nullptr;
+			}
+		}
+
 	}
 
 

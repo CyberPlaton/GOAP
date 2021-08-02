@@ -1,0 +1,11 @@
+{
+  "Name" : "Sleep",
+  "Cost": 1,
+  "Duration": 1,
+  "TargetTag": "Bed",
+  "Preconditions": {
+  },
+  "Effects": {
+    "0": [ "Sleep", 1 ]
+  }
+}

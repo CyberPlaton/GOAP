@@ -116,7 +116,6 @@ bool App::OnUserCreate()
 	tv = olc::TileTransformedView({ ScreenWidth(), ScreenHeight() }, {32, 32});
 
 
-
 	Agent::addRoleDefinitionPath("Innkeeper", "GOAP/Schedules/schedule_innkeeper.json");
 
 
@@ -131,7 +130,13 @@ bool App::OnUserCreate()
 
 
 	GameObject* npc = creator.create("GOAP/Gameobjects/Innkeeper.json", "John", 0, 0);
-	static_cast<Agent*>(npc)->assignRole("Innkeeper");
+
+	// Initialization
+	static_cast<Agent*>(npc)->awake(); // Initialize inner workings
+	static_cast<Agent*>(npc)->init("GOAP/available_actions.json"); // Initialize available actions.
+	static_cast<Agent*>(npc)->assignRole("Innkeeper"); // Assign a role to the npc.
+	
+
 
 	return true;
 }
@@ -380,7 +385,7 @@ void App::_imguiAgentScheduleWindow()
 	{
 		ImGui::Text("Role: ");
 		if (ImGui::IsItemHovered())
-			ImGui::SetTooltip("Here we show the stats of an NPC like the race, agility or strength, health points etc");
+			ImGui::SetTooltip("The role of an agent defines his daily schedule");
 
 		ImGui::SameLine();
 		ImGui::Text(agent_showing_stats->agentRole.c_str());
@@ -398,7 +403,7 @@ void App::_imguiAgentScheduleWindow()
 
 			ImGui::Text("Activity: ");
 			if (ImGui::IsItemHovered())
-				ImGui::SetTooltip("Here we show the stats of an NPC like the race, agility or strength, health points etc");
+				ImGui::SetTooltip("The name of the activity");
 
 			ImGui::SameLine();
 			ImGui::Text(schedule_entry->name.c_str());
@@ -406,16 +411,16 @@ void App::_imguiAgentScheduleWindow()
 
 			ImGui::Text("Target: ");
 			if (ImGui::IsItemHovered())
-				ImGui::SetTooltip("Here we show the stats of an NPC like the race, agility or strength, health points etc");
+				ImGui::SetTooltip("Tag of the Gameobject where the activity takes place");
 
 			ImGui::SameLine();
-			ImGui::Text(schedule_entry->targetTag.c_str());
+			ImGui::Text("TODO");
 
 
 
 			ImGui::Text("Start: ");
 			if (ImGui::IsItemHovered())
-				ImGui::SetTooltip("Here we show the stats of an NPC like the race, agility or strength, health points etc");
+				ImGui::SetTooltip("When the activity will start");
 
 			ImGui::SameLine();
 			ImGui::Text(std::to_string(schedule_entry->start).c_str());
@@ -424,7 +429,7 @@ void App::_imguiAgentScheduleWindow()
 
 			ImGui::Text("End: ");
 			if (ImGui::IsItemHovered())
-				ImGui::SetTooltip("Here we show the stats of an NPC like the race, agility or strength, health points etc");
+				ImGui::SetTooltip("When the activity will end");
 
 			ImGui::SameLine();
 			ImGui::Text(std::to_string(schedule_entry->end).c_str());
@@ -475,11 +480,6 @@ void App::_imguiAgentGoalsWindow()
 
 		for (auto& g : agent_showing_stats->goals)
 		{
-			/*
-			* Goal: \"Sleep\"
-			* Priority: 1
-			* 
-			*/
 
 			ImGui::Text("Goal Definition with ");
 			ImGui::SameLine();

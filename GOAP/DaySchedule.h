@@ -6,17 +6,15 @@
 
 struct ScheduleEntry
 {
-	ScheduleEntry(const std::string& name, const std::string& target, double start, double end)
+	ScheduleEntry(const std::string& name, double start, double end)
 	{
 		this->name = name;
-		this->targetTag = target;
 		this->start = start;
 		this->end = end;
 	}
 
 
 	std::string name;
-	std::string targetTag;
 	double start;
 	double end;
 };
@@ -27,9 +25,9 @@ public:
 	DaySchedule(const std::string& name):name(name){}
 
 
-	void addEntry(const std::string& name, const std::string target, double start, double end)
+	void addEntry(const std::string& name, double start, double end)
 	{
-		schedule.push_back(new ScheduleEntry(name, target, start, end));
+		schedule.push_back(new ScheduleEntry(name, start, end));
 	}
 
 	void addEntry(ScheduleEntry* e)

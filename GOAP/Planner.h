@@ -120,7 +120,7 @@ public:
 
 private:
 
-	bool _buildGraph(Node* parent, std::vector<Node*> leaves, std::vector<Action*> usableActions, std::map<int, std::string > goal)
+	bool _buildGraph(Node* parent, std::vector<Node*>& leaves, std::vector<Action*> usableActions, std::map<int, std::string > goal)
 	{
 		bool foundpath = false;
 

@@ -46,6 +46,22 @@ GameObject* GameObjectStorage::getGOByTag(const std::string& tag)
 	return nullptr;
 }
 
+
+GameObject* GameObjectStorage::findAnyGOByTag(const std::string& tag)
+{
+	for (auto& go : m_GameObjects)
+	{
+		if (go->getTag().find(tag) != std::string::npos)
+		{
+			return go;
+		}
+	}
+
+	return nullptr;
+}
+
+
+
 GameObject* GameObjectStorage::getGOByName(const std::string& name)
 {
 	for (auto& go : m_GameObjects)

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "ColorConsole.h"
 #include "Agent.h"
 
 #include "nlohmann/json.hpp"
@@ -66,6 +67,17 @@ private:
 			}
 
 
+			cout << color(colors::YELLOW);
+			cout << "[BUILDING] NEW BUILDING: ";
+			cout << "Tag \"";
+			cout << color(colors::GREEN);
+			cout << building->getTag() << "\"";
+
+			cout << color(colors::YELLOW);
+			cout << "Name ";
+			cout << color(colors::GREEN);
+			cout << building->getName() << "\"" << white << endl;
+
 			return building;
 		}
 		else if (type.compare("NPC") == 0)
@@ -125,6 +137,16 @@ private:
 			}
 
 
+			cout << color(colors::YELLOW);
+			cout << "[NPC] NEW NPC: ";
+			cout << "Tag \"";
+			cout << color(colors::GREEN);
+			cout << npc->getTag() << "\"";
+
+			cout << color(colors::YELLOW);
+			cout << "Name ";
+			cout << color(colors::GREEN);
+			cout << npc->getName() << "\"" << white << endl;
 
 			return npc;
 		}
@@ -137,6 +159,20 @@ private:
 			// Position of the furniture is defined from the parent gameobject, e.g. a house.
 
 			furniture->AddComponent(new RendererableCmp(furniture->tag + "_Renderable", in.at("Width").get<int>(), in.at("Height").get<int>(), "dark_grey"));
+
+
+
+			cout << color(colors::YELLOW);
+			cout << "[FURNITURE] NEW FURNITURE: ";
+			cout << "Tag \"";
+			cout << color(colors::GREEN);
+			cout << furniture->getTag() << "\"";
+
+			cout << color(colors::YELLOW);
+			cout << "Name ";
+			cout << color(colors::GREEN);
+			cout << furniture->getName() << "\"" << white << endl;
+
 
 			return furniture;
 		}

@@ -1,0 +1,5 @@
+{
+  "Actions": {
+    "0": ["Sleep", "GOAP/Actions/action_sleep.json"]
+  }
+}

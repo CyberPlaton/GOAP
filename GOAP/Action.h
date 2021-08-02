@@ -31,9 +31,10 @@ public:
 		
 		action_name = in.at("Name").get<std::string>();
 
+
 		// Get the target and agent tags.
-		target_tag = in.at("TargetTag").get<std::string>();
-		this_agent_tag = in.at("AgentTag").get<std::string>();
+		target_name = in.at("TargetTag").get<std::string>();
+		
 
 		// Get cost, duration etc.
 		cost = in.at("Cost").get<int>();
@@ -62,14 +63,19 @@ public:
 
 
 	/*
+	* Initialize after the main init.
+	* Here must be set the agent for this action, as well as the target object,
+	* otherwise the action will not work and probably throw an exception.
+	*/
+	virtual bool postInit(GameObject*, GameObject*) = 0;
+
+	/*
 	* Called on initialization of the application,
 	* just before the scene is starting.
 	*/
-	void awake()
+	virtual void awake()
 	{
 
-		target = GameObjectStorage::get()->getGOByTag(target_tag);
-		this_agent = GameObjectStorage::get()->getGOByTag(this_agent_tag);
 	}
 
 
@@ -131,7 +137,7 @@ public:
 	std::string action_name;
 	float cost = 0.0f;
 	GameObject* target = nullptr; // Representing where the action is taking place.
-	std::string target_tag;
+	std::string target_name;
 	float duration = 0.0f; // How long the action needs to be performed.
 
 	
@@ -143,5 +149,5 @@ public:
 	bool running = false;
 
 	GameObject* this_agent = nullptr;
-	std::string this_agent_tag;
+	std::string this_agent_name;
 };

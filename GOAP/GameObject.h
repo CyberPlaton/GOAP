@@ -25,6 +25,7 @@ public:
 	void add(GameObject* go);
 
 	GameObject* getGOByTag(const std::string& tag);
+	GameObject* findAnyGOByTag(const std::string& tag);
 	GameObject* getGOByName(const std::string& name);
 
 
