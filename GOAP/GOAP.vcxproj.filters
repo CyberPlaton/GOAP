@@ -122,5 +122,11 @@
     <ClInclude Include="GameObjectCreator.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="GameWorldTime.h">
+      <Filter>Source Files\GOAP</Filter>
+    </ClInclude>
+    <ClInclude Include="DaySchedule.h">
+      <Filter>Source Files\GOAP</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -69,6 +69,7 @@ private:
 	void _imguiAgentGoalsWindow();
 	void _imguiAgentAvailableActionsWindow();
 	void _imguiAgentActionQueueWindow();
+	void _imguiAgentScheduleWindow();
 
 
 	olc::Pixel _getColorFromString(const std::string& c)

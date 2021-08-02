@@ -8,7 +8,7 @@
 static bool imgui_demo_window = false;
 static bool gameobjects_window = true;
 static bool imgui_has_focus = false;
-static const char* selectable_agent_stats[] = { "Stats", "Agent Beliefs", "Goals", "Available Actions", "Action Queue"};
+static const char* selectable_agent_stats[] = { "Stats", "Agent Beliefs", "Goals", "Available Actions", "Action Queue", "Agent Schedule"};
 static int show_agent_stats_at_index = -1;
 static Agent* agent_showing_stats = nullptr;
 static bool show_agent_stats_window = false;
@@ -28,16 +28,30 @@ void App::DrawUI(void)
 
 bool App::OnUserUpdate(float fElapsedTime)
 {
+	using namespace std;
+
 	Clear(olc::BLACK);
 
-	_handleInput();
+	_handleInput(); // Handle the users input.
+	GameWorldTime::get()->update(); // Update Game World Time.
 
+	// Update all relevant gameobjects.
+	for (auto& go : GameObjectStorage::get()->getStorage())
+	{
+		if (go->getTag().find("NPC") != std::string::npos)
+		{
+			Agent* npc = static_cast<Agent*>(go);
+
+			npc->update();
+		}
+	}
 
 
 	// Application rendering.
 	olc::vi2d topleft = tv.GetTopLeftTile().max({ 0, 0 });
 	olc::vi2d bottomright = tv.GetBottomRightTile().min({32, 32});
 	olc::vi2d tile;
+
 
 	// Draw Grid.
 	for (tile.y = topleft.y; tile.y < bottomright.y; tile.y++)
@@ -48,21 +62,6 @@ bool App::OnUserUpdate(float fElapsedTime)
 			tv.DrawLine(tile, tile + olc::vf2d(1.0f, 0.0f), olc::VERY_DARK_GREY);
 		}
 	}
-
-
-	//Agent* npc = new Agent("Innkeeper_Walter"); // Create agent.
-	//npc->init("TODO.json"); // Get all available action for agent.
-	//npc->awake(); // Initialize to work in the engine.
-
-
-	//tv.FillRectDecal(olc::vi2d(1, 1), olc::vi2d(4, 3), olc::GREY);
-
-	//tv.FillRectDecal(olc::vi2d(5, 3), olc::vi2d(8, 8), olc::GREY);
-
-	//tv.FillRectDecal(olc::vf2d(1, 1), olc::vf2d(1, 1), olc::DARK_GREEN);
-
-	//tv.FillRectDecal(olc::vf2d(2, 1), olc::vf2d(1, 1), olc::DARK_RED);
-
 
 
 
@@ -118,6 +117,7 @@ bool App::OnUserCreate()
 
 
 
+	Agent::addRoleDefinitionPath("Innkeeper", "GOAP/Schedules/schedule_innkeeper.json");
 
 
 	GameObjectCreator creator;
@@ -131,6 +131,7 @@ bool App::OnUserCreate()
 
 
 	GameObject* npc = creator.create("GOAP/Gameobjects/Innkeeper.json", "John", 0, 0);
+	static_cast<Agent*>(npc)->assignRole("Innkeeper");
 
 	return true;
 }
@@ -165,6 +166,20 @@ void App::_onImGui()
 		imgui_has_focus = false;
 	}
 
+	// DISPLAY GAMEWORLD TIME
+	double daytime = GameWorldTime::get()->getDaytime();
+	double day = GameWorldTime::get()->getDay();
+	double week = GameWorldTime::get()->getWeek();
+	double month = GameWorldTime::get()->getMonth();
+	double year = GameWorldTime::get()->getYear();
+
+	std::string worldtime = "TIME:" + std::to_string(daytime);
+	worldtime += " D: " + std::to_string(day);
+	worldtime += " W: " + std::to_string(week);
+	worldtime += " M: " + std::to_string(month);
+	worldtime += " Y: " + std::to_string(year);
+
+	DrawStringDecal(olc::vf2d(ScreenWidth() / 2.0f - ScreenWidth() / 4.0f, 5.0f), worldtime, olc::RED, olc::vf2d(0.5f, 0.5f));
 
 	// DEMO
 	if (imgui_demo_window)
@@ -347,6 +362,10 @@ void App::_onImGui()
 				_imguiAgentActionQueueWindow();
 				break;
 
+			case 5:
+				_imguiAgentScheduleWindow();
+				break;
+
 			default:	// Show nothing.
 				break;
 			}
@@ -355,7 +374,67 @@ void App::_onImGui()
 }
 
 
+void App::_imguiAgentScheduleWindow()
+{
+	if (ImGui::Begin(selectable_agent_stats[show_agent_stats_at_index], &show_agent_stats_window))
+	{
+		ImGui::Text("Role: ");
+		if (ImGui::IsItemHovered())
+			ImGui::SetTooltip("Here we show the stats of an NPC like the race, agility or strength, health points etc");
 
+		ImGui::SameLine();
+		ImGui::Text(agent_showing_stats->agentRole.c_str());
+		ImGui::Separator();
+
+		for (auto& schedule_entry : agent_showing_stats->daySchedule->schedule)
+		{
+			/*
+			* Role: \"Beggar\"
+			* Activity: \"Sleep\"
+			* Target: \"Bed\"
+			* Start: 11.30
+			* End: 7.30
+			*/
+
+			ImGui::Text("Activity: ");
+			if (ImGui::IsItemHovered())
+				ImGui::SetTooltip("Here we show the stats of an NPC like the race, agility or strength, health points etc");
+
+			ImGui::SameLine();
+			ImGui::Text(schedule_entry->name.c_str());
+
+
+			ImGui::Text("Target: ");
+			if (ImGui::IsItemHovered())
+				ImGui::SetTooltip("Here we show the stats of an NPC like the race, agility or strength, health points etc");
+
+			ImGui::SameLine();
+			ImGui::Text(schedule_entry->targetTag.c_str());
+
+
+
+			ImGui::Text("Start: ");
+			if (ImGui::IsItemHovered())
+				ImGui::SetTooltip("Here we show the stats of an NPC like the race, agility or strength, health points etc");
+
+			ImGui::SameLine();
+			ImGui::Text(std::to_string(schedule_entry->start).c_str());
+
+
+
+			ImGui::Text("End: ");
+			if (ImGui::IsItemHovered())
+				ImGui::SetTooltip("Here we show the stats of an NPC like the race, agility or strength, health points etc");
+
+			ImGui::SameLine();
+			ImGui::Text(std::to_string(schedule_entry->end).c_str());
+
+			ImGui::Separator();
+		}
+	}
+
+	ImGui::End();
+}
 
 void App::_imguiAgentStatsWindow()
 {
@@ -364,6 +443,7 @@ void App::_imguiAgentStatsWindow()
 		ImGui::Text("Stats");
 		if (ImGui::IsItemHovered())
 			ImGui::SetTooltip("Here we show the stats of an NPC like the race, agility or strength, health points etc");
+	
 	}
 
 	ImGui::End();
@@ -376,6 +456,7 @@ void App::_imguiAgentBeliefsWindow()
 		ImGui::Text("Beliefs");
 		if (ImGui::IsItemHovered())
 			ImGui::SetTooltip("Here we show the agents local world state, so called beliefs, meaning how he perceives the world around self");
+	
 	}
 
 	ImGui::End();
@@ -389,6 +470,37 @@ void App::_imguiAgentGoalsWindow()
 		ImGui::Text("Goals");
 		if (ImGui::IsItemHovered())
 			ImGui::SetTooltip("Here we show the goals of the agent in a comprehensive way");
+		ImGui::Separator();
+
+
+		for (auto& g : agent_showing_stats->goals)
+		{
+			/*
+			* Goal: \"Sleep\"
+			* Priority: 1
+			* 
+			*/
+
+			ImGui::Text("Goal Definition with ");
+			ImGui::SameLine();
+			ImGui::Text("Priority: ");
+			ImGui::SameLine();
+			ImGui::Text(std::to_string(g.first).c_str());
+
+			for (auto& sg : g.second->goals)
+			{
+				ImGui::TextColored(ImVec4(0.1f, 1.0f, 0.1f, 1.0f), "Subgoal: ");
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(1.0f, 0.1f, 0.1f, 1.0f), sg.second.c_str());
+
+				ImGui::TextColored(ImVec4(0.1f, 1.0f, 0.1f, 1.0f), "Priority: ");
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(1.0f, 0.1f, 0.1f, 1.0f), std::to_string(sg.first).c_str());
+			}
+
+		
+			ImGui::Separator();
+		}
 	}
 
 	ImGui::End();
