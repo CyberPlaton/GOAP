@@ -116,6 +116,8 @@ bool App::OnUserCreate()
 	tv = olc::TileTransformedView({ ScreenWidth(), ScreenHeight() }, {32, 32});
 
 
+	GameWorldTime::get()->setTimeSpeed(0.001);
+
 	Agent::addRoleDefinitionPath("Innkeeper", "GOAP/Schedules/schedule_innkeeper.json");
 
 

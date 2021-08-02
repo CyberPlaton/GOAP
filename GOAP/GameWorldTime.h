@@ -12,7 +12,12 @@ public:
 
 	void setTimeSpeed(double s)
 	{
-		timeSpeed = s;
+		this->timeSpeed = s;
+	}
+
+	double getTimeSpeed()
+	{
+		return this->timeSpeed;
 	}
 
 	void update()
@@ -94,7 +99,7 @@ private:
 	static GameWorldTime* g_GameWorldTime;
 
 
-	double timeSpeed = 0.01;
+	double timeSpeed;
 
 	double daytime = 0.0;
 

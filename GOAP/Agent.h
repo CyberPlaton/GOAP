@@ -26,6 +26,19 @@ struct SubGoal
 		goals.emplace(std::make_pair(value, key));
 	}
 
+	/*
+	* Returns the name of the first subgoal.
+	* Note that some goals could have more than one subgoal.
+	*/
+	std::string getName()
+	{
+		for (auto& it : goals)
+		{
+			return it.second;
+		}
+	}
+
+
 	// NOTE: The smaller the number, the higher the priority!
 	std::map<int, std::string> goals;
 	bool removable = true;
@@ -189,11 +202,7 @@ public:
 		// Check for daytime goal transition.
 		if (_adjustGoalToDaytime())
 		{
-			// New Goal!
-			delete currentAction;
 			currentAction = nullptr;
-
-
 		}
 
 
@@ -220,6 +229,10 @@ public:
 					invoked = true;
 				}
 			}
+			else // Destination not reached, update the navigator.
+			{
+				navigator->update(GameWorldTime::get()->getTimeSpeed() + walking_speed);
+			}
 		}
 
 
@@ -227,7 +240,6 @@ public:
 		if (actionQueue.size() > 0)
 		{
 			currentAction = actionQueue.front();
-			actionQueue.pop();
 
 			// Try executing the action.
 			if (currentAction->perform())
@@ -249,6 +261,10 @@ public:
 
 					// Set next waypoint destination for agent.
 					navigator->setDestination(transform->xpos, transform->ypos);
+
+
+					actionQueue.pop();
+					return;
 				}
 			}
 			else
@@ -264,7 +280,7 @@ public:
 
 
 		// Check whether agent is idle.
-		if (planner == nullptr || actionQueue.size() == 0)
+		if (planner == nullptr || actionQueue.size() == 0 && currentAction == nullptr)
 		{
 
 			planner = new Planner();
@@ -333,6 +349,7 @@ public:
 
 	Navigator* navigator = nullptr;
 
+	double walking_speed = 0.05;
 	
 	/*
 	* A role can be given at runtime and defines the daily schedule and behavior.
@@ -392,6 +409,17 @@ private:
 			// Is it time to pursue the roal goal?
 			if (start < daytime && end > daytime)
 			{
+				// Before changing, check whether we are currently executing the goal.
+				if (currentGoal)
+				{
+
+					std::string curr_goal_name = currentGoal->getName();
+					if (task->name.compare(curr_goal_name) == 0)
+					{
+						return false;
+					}
+				}
+
 				// Time to change goal.
 				// For now we do this apruptly.
 
