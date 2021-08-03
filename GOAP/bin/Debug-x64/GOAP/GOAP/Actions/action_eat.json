@@ -6,6 +6,6 @@
   "Preconditions": {
   },
   "Effects": {
-    "0": [ "Eat", 1 ]
+    "0": [ "hasEaten", 1 ]
   }
 }

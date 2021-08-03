@@ -6,6 +6,7 @@
 #include <queue>
 #include <tuple>
 
+#include "ColorConsole.h"
 
 #include "WorldState.h"
 #include "Planner.h"
@@ -249,6 +250,11 @@ public:
 
 	void completeAction()
 	{
+		using namespace std;
+
+		cout << color(colors::GREEN);
+		cout << "Action \""<< currentAction->action_name << "\" completed" << endl;
+
 		currentAction->running = false;
 		currentAction->postPerform();
 		invoked = false;
@@ -338,6 +344,43 @@ private:
 			// Is it time to pursue the roal goal?
 			if (start < time && end > time)
 			{
+				// Check whether the goal is already in goal map before adding it again.
+				for (auto& g : goals)
+				{
+					for (auto& sg : g.second->goals)
+					{
+						for (auto& aa : availableActions)
+						{
+							if (aa->action_name.compare(task->name) == 0)
+							{
+								return false;
+							}
+						}
+					}
+				}
+
+
+				// TESTING
+				// If it is time for new goal, we just append it to the map.
+				// We need to get the goal name of the task, in order for it to work
+				Action* action = nullptr;
+				for (auto& a : availableActions)
+				{
+					if (a->action_name.compare(task->name) == 0)
+					{
+						action = a;
+					}
+				}
+
+				int xxx = 1;
+				for (auto& e : action->effects)
+				{
+					SubGoal* new_goal = new SubGoal(e->key, e->value, true);
+					goals.emplace(std::make_pair(xxx++, new_goal)); // Add a new Goal.
+				}
+
+
+				/*
 				// Before changing, check whether we are currently executing the goal.
 				if (currentGoal)
 				{
@@ -352,10 +395,40 @@ private:
 				// Time to change goal.
 				// For now we do this apruptly.
 
+				if (currentAction != nullptr && currentAction->running)
+				{
+					if (!_wasCurrentGoalAchieved())
+					{
+						return false; // Try further to achieve goal.
+					}
+					else
+					{
+						completeAction(); // Else complete the current action as achieved, and get new goal from schedule.
+					}
+				}
+
 				goals.clear(); // Clear all previous goals.
 
-				SubGoal* new_goal = new SubGoal(task->name, 1, true);
-				goals.emplace(std::make_pair(1, new_goal)); // Add a new Goal.
+
+				// We need to get the goal name of the task, in order for it to work
+				Action* action = nullptr;
+				for (auto& a : availableActions)
+				{
+					if (a->action_name.compare(task->name) == 0)
+					{
+						action = a;
+					}
+				}
+
+				if (!action) return false;
+
+				int xxx = 1;
+				for (auto& e : action->effects)
+				{
+					SubGoal* new_goal = new SubGoal(e->key, e->value, true);
+					goals.emplace(std::make_pair(xxx++, new_goal)); // Add a new Goal.
+				}
+				*/
 				
 				return true;
 			}
@@ -368,5 +441,18 @@ private:
 
 
 	bool _initAction(Action* a);
+
+	bool _wasCurrentGoalAchieved()
+	{
+		for (auto& g : currentGoal->goals)
+		{
+			if (!agentBeliefs->getStates().contains(g.second))
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
 
 };

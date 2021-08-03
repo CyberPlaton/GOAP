@@ -6,6 +6,6 @@
   "Preconditions": {
   },
   "Effects": {
-    "0": [ "Sleep", 1 ]
+    "0": [ "hasSlept", 1 ]
   }
 }

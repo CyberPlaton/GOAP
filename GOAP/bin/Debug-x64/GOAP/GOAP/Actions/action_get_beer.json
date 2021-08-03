@@ -6,6 +6,6 @@
   "Preconditions": {
   },
   "Effects": {
-    "0": [ "Get Beer", 1 ]
+    "0": [ "hasBeer", 1 ]
   }
 }

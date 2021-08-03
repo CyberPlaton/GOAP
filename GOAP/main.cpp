@@ -1,5 +1,4 @@
 #include "main.h"
-#include "GameObject.h"
 
 
 /*
@@ -10,7 +9,7 @@ static bool gameobjects_window = true;
 static bool imgui_has_focus = false;
 static const char* selectable_agent_stats[] = { "Stats", "Agent Beliefs", "Goals", "Available Actions", "Action Queue", "Agent Schedule"};
 static int show_agent_stats_at_index = -1;
-static Agent* agent_showing_stats = nullptr;
+//static Agent* agent_showing_stats = nullptr;
 static bool show_agent_stats_window = false;
 
 /*
@@ -33,6 +32,8 @@ bool App::OnUserUpdate(float fElapsedTime)
 	Clear(olc::BLACK);
 
 	_handleInput(); // Handle the users input.
+	
+	/*
 	GameWorldTime::get()->update(); // Update Game World Time.
 
 	// Update all relevant gameobjects.
@@ -45,7 +46,7 @@ bool App::OnUserUpdate(float fElapsedTime)
 			npc->update();
 		}
 	}
-
+	*/
 
 	// Application rendering.
 	olc::vi2d topleft = tv.GetTopLeftTile().max({ 0, 0 });
@@ -118,7 +119,7 @@ bool App::OnUserCreate()
 
 	tv = olc::TileTransformedView({ ScreenWidth(), ScreenHeight() }, {32, 32});
 
-
+	/*
 	GameWorldTime::get()->setTimeSpeed(0.001);
 
 	Agent::addRoleDefinitionPath("Innkeeper", "GOAP/Schedules/schedule_innkeeper.json");
@@ -140,7 +141,7 @@ bool App::OnUserCreate()
 	static_cast<Agent*>(npc)->awake(); // Initialize inner workings
 	static_cast<Agent*>(npc)->init("GOAP/available_actions.json"); // Initialize available actions.
 	static_cast<Agent*>(npc)->assignRole("Innkeeper"); // Assign a role to the npc.
-	
+	*/
 
 
 	return true;
@@ -176,6 +177,7 @@ void App::_onImGui()
 		imgui_has_focus = false;
 	}
 
+	/*
 	// DISPLAY GAMEWORLD TIME
 	double day = GameWorldTime::get()->getDay();
 	double week = GameWorldTime::get()->getWeek();
@@ -189,6 +191,7 @@ void App::_onImGui()
 	worldtime += " Y: " + std::to_string(year);
 
 	DrawStringDecal(olc::vf2d(ScreenWidth() / 2.0f - ScreenWidth() / 4.0f, 5.0f), worldtime, olc::RED, olc::vf2d(0.5f, 0.5f));
+	*/
 
 	// DEMO
 	if (imgui_demo_window)
@@ -205,10 +208,11 @@ void App::_onImGui()
 
 			if (ImGui::BeginMenu("Time Speed"))
 			{
+				/*
 				float speed = GameWorldTime::get()->getTimeSpeed();
 				ImGui::SliderFloat("Timespeed", &speed, 0.0f, 2.0f, "%.3f", ImGuiSliderFlags_Logarithmic);
 				GameWorldTime::get()->setTimeSpeed(speed);
-
+				*/
 				ImGui::EndMenu();
 			}
 
@@ -240,8 +244,9 @@ void App::_onImGui()
 			// Show the components of Selected GO.
 			if (ret)
 			{
+				/*
 				Agent* npc = static_cast<Agent*>(go);
-
+				
 
 				// If GO is an NPC, show ownership and inventory.
 				if(go->getTag().find("NPC") != std::string::npos)
@@ -297,7 +302,7 @@ void App::_onImGui()
 						ImGui::TreePop();
 					}
 				}
-
+				*/
 
 				// Show CMPs
 				for (auto& cmp : go->components)
@@ -343,6 +348,7 @@ void App::_onImGui()
 	/*
 	* Currently the implementation allows only one of the stats windows to be active.
 	*/
+	/*
 	if (agent_showing_stats != nullptr)
 	{
 		if (show_agent_stats_window)
@@ -380,6 +386,7 @@ void App::_onImGui()
 			}
 		}
 	}
+	*/
 }
 
 
@@ -392,19 +399,12 @@ void App::_imguiAgentScheduleWindow()
 			ImGui::SetTooltip("The role of an agent defines his daily schedule");
 
 		ImGui::SameLine();
-		ImGui::Text(agent_showing_stats->agentRole.c_str());
+		//ImGui::Text(agent_showing_stats->agentRole.c_str());
 		ImGui::Separator();
 
+		/*
 		for (auto& schedule_entry : agent_showing_stats->daySchedule->schedule)
 		{
-			/*
-			* Role: \"Beggar\"
-			* Activity: \"Sleep\"
-			* Target: \"Bed\"
-			* Start: 11.30
-			* End: 7.30
-			*/
-
 			ImGui::Text("Activity: ");
 			if (ImGui::IsItemHovered())
 				ImGui::SetTooltip("The name of the activity");
@@ -440,6 +440,7 @@ void App::_imguiAgentScheduleWindow()
 
 			ImGui::Separator();
 		}
+		*/
 	}
 
 	ImGui::End();
@@ -481,7 +482,7 @@ void App::_imguiAgentGoalsWindow()
 			ImGui::SetTooltip("Here we show the goals of the agent in a comprehensive way");
 		ImGui::Separator();
 
-
+		/*
 		for (auto& g : agent_showing_stats->goals)
 		{
 
@@ -505,6 +506,7 @@ void App::_imguiAgentGoalsWindow()
 		
 			ImGui::Separator();
 		}
+		*/
 	}
 
 	ImGui::End();
@@ -518,6 +520,82 @@ void App::_imguiAgentAvailableActionsWindow()
 		ImGui::Text("Available Actions");
 		if (ImGui::IsItemHovered())
 			ImGui::SetTooltip("Here we show all actions available for execution for this agent");
+	
+		/*
+		for (auto& action : agent_showing_stats->availableActions)
+		{
+
+			ImGui::TextColored(ImVec4(0.1f, 1.0f, 0.1f, 1.0f), "Action: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1.0f, 0.1f, 0.1f, 1.0f), action->action_name.c_str());
+
+			ImGui::TextColored(ImVec4(0.1f, 1.0f, 0.1f, 1.0f), "Cost: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1.0f, 0.1f, 0.1f, 1.0f), std::to_string(action->cost).c_str());
+
+			ImGui::TextColored(ImVec4(0.1f, 1.0f, 0.1f, 1.0f), "Duration: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1.0f, 0.1f, 0.1f, 1.0f), std::to_string(action->duration).c_str());
+
+			ImGui::TextColored(ImVec4(0.1f, 1.0f, 0.1f, 1.0f), "Target: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1.0f, 0.1f, 0.1f, 1.0f), action->target_name.c_str());
+
+			ImGui::TextColored(ImVec4(0.1f, 1.0f, 0.1f, 1.0f), "Running: ");
+			ImGui::SameLine();
+			std::string running = action->running == true ? "true" : "false";
+			ImGui::TextColored(ImVec4(1.0f, 0.1f, 0.1f, 1.0f), running.c_str());
+
+			ImGui::Separator();
+
+
+			if (action->pre_conditions.size() == 0)
+			{
+				ImGui::TextColored(ImVec4(0.1f, 1.0f, 0.1f, 1.0f), "Condition: ");
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(1.0f, 0.1f, 0.1f, 1.0f), "None");
+			}
+			else
+			{
+				for (auto& cond : action->pre_conditions)
+				{
+
+					ImGui::TextColored(ImVec4(0.1f, 1.0f, 0.1f, 1.0f), "Condition: ");
+					ImGui::SameLine();
+					ImGui::TextColored(ImVec4(1.0f, 0.1f, 0.1f, 1.0f), cond->key.c_str());
+
+					ImGui::TextColored(ImVec4(0.1f, 1.0f, 0.1f, 1.0f), "Value: ");
+					ImGui::SameLine();
+					ImGui::TextColored(ImVec4(1.0f, 0.1f, 0.1f, 1.0f), std::to_string(cond->value).c_str());
+
+				}
+			}
+
+			if (action->effects.size() == 0)
+			{
+				ImGui::TextColored(ImVec4(0.1f, 1.0f, 0.1f, 1.0f), "Effect: ");
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(1.0f, 0.1f, 0.1f, 1.0f), "None");
+			}
+			else
+			{
+				for (auto& eff : action->effects)
+				{
+					ImGui::TextColored(ImVec4(0.1f, 1.0f, 0.1f, 1.0f), "Effect: ");
+					ImGui::SameLine();
+					ImGui::TextColored(ImVec4(1.0f, 0.1f, 0.1f, 1.0f), eff->key.c_str());
+
+					ImGui::TextColored(ImVec4(0.1f, 1.0f, 0.1f, 1.0f), "Value: ");
+					ImGui::SameLine();
+					ImGui::TextColored(ImVec4(1.0f, 0.1f, 0.1f, 1.0f), std::to_string(eff->value).c_str());
+
+				}
+			}
+
+			ImGui::Separator();
+			ImGui::Separator();
+		}
+		*/
 	}
 
 	ImGui::End();
