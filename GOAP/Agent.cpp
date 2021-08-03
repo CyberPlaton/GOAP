@@ -161,13 +161,13 @@ bool AEat::postPerform()
 
 bool AGetBeer::perform()
 {
-	this_agent->agentInventory->addItem(new GameObject("Alcohol", "Beer"));
-
 	return true;
 }
 
 bool AGetBeer::postPerform()
 {
+	this_agent->agentInventory->addItem(new GameObject("Alcohol", "Beer"));
+
 	return true;
 }
 

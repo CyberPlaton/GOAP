@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Timer.h"
+#include <tuple>
 
 class GameWorldTime
 {
@@ -23,15 +24,28 @@ public:
 	void update()
 	{
 		// Let daytime pass a bit.
-		daytime += timeSpeed;
+		internal_minute_counter += timeSpeed;
+
+		if (internal_minute_counter >= 1.0)
+		{
+			internal_minute_counter = 0.0;
+			minutes++;
+		}
 
 
-		if (daytime >= 24.00)
+		if (minutes >= 60.0)
+		{
+			hours++;
+			minutes = 0.0;
+		}
+
+
+		if (hours >= 24.00)
 		{
 			// Day elapsed.
 			day++;
 
-			daytime = 0.00;
+			hours = 0.00;
 		}
 
 		// Adjust counters.
@@ -65,8 +79,30 @@ public:
 
 	double getDaytime()
 	{
-		return daytime;
+		double time = stod(getDaytimeString());
+		return time;
 	}
+
+	std::string getDaytimeString()
+	{
+		int hour = hours;
+		int min = minutes;
+
+		// We want the time format as follows: "14.04".
+		std::string timestring = std::to_string(hour);
+
+		if (min < 10)
+		{
+			timestring += ".0" + std::to_string(min);
+		}
+		else
+		{
+			timestring += "." + std::to_string(min);
+		}
+
+		return timestring;
+	}
+
 
 	int getDay()
 	{
@@ -101,7 +137,10 @@ private:
 
 	double timeSpeed;
 
-	double daytime = 0.0;
+	double internal_minute_counter = 0.0;
+
+	int minutes = 0;
+	int hours = 0;
 
 	int day = 1;
 	int week = 1;

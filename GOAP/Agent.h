@@ -160,7 +160,7 @@ public:
 			}
 			else // Destination not reached, update the navigator.
 			{
-				navigator->update(GameWorldTime::get()->getTimeSpeed() + walking_speed);
+				navigator->update(walking_speed);
 			}
 		}
 
@@ -278,7 +278,7 @@ public:
 
 	Navigator* navigator = nullptr;
 
-	double walking_speed = 0.05;
+	double walking_speed = 0.1;
 	
 	/*
 	* A role can be given at runtime and defines the daily schedule and behavior.
@@ -327,7 +327,7 @@ private:
 	*/
 	bool _adjustGoalToDaytime()
 	{
-		double daytime = GameWorldTime::get()->getDaytime();
+		double time = GameWorldTime::get()->getDaytime();
 
 		for (auto& task : daySchedule->schedule)
 		{
@@ -336,7 +336,7 @@ private:
 			double end = task->end;
 
 			// Is it time to pursue the roal goal?
-			if (start < daytime && end > daytime)
+			if (start < time && end > time)
 			{
 				// Before changing, check whether we are currently executing the goal.
 				if (currentGoal)

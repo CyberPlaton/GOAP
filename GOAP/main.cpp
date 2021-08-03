@@ -177,13 +177,12 @@ void App::_onImGui()
 	}
 
 	// DISPLAY GAMEWORLD TIME
-	double daytime = GameWorldTime::get()->getDaytime();
 	double day = GameWorldTime::get()->getDay();
 	double week = GameWorldTime::get()->getWeek();
 	double month = GameWorldTime::get()->getMonth();
 	double year = GameWorldTime::get()->getYear();
 
-	std::string worldtime = "TIME:" + std::to_string(daytime);
+	std::string worldtime = "TIME:" + GameWorldTime::get()->getDaytimeString();
 	worldtime += " D: " + std::to_string(day);
 	worldtime += " W: " + std::to_string(week);
 	worldtime += " M: " + std::to_string(month);
@@ -222,7 +221,7 @@ void App::_onImGui()
 
 	// GAMEOBJECTS WINDOW
 	int go_count = GameObjectStorage::get()->getStorage().size();
-	ImGui::SetNextWindowPos(ImVec2(1.0f, 10.0f), ImGuiCond_Appearing);
+	ImGui::SetNextWindowPos(ImVec2(1.0f, 15.0f), ImGuiCond_Appearing);
 	ImGui::SetNextWindowSize(ImVec2(350.0f, 600.0f), ImGuiCond_Appearing);
 	if (ImGui::Begin("GameObjects", &gameobjects_window))
 	{
@@ -349,7 +348,7 @@ void App::_onImGui()
 		if (show_agent_stats_window)
 		{
 			ImGui::SetNextWindowSize(ImVec2(400.0f, 250.0f), ImGuiCond_Appearing);
-			ImGui::SetNextWindowPos(ImVec2(350.0f, 5.0f), ImGuiCond_Appearing);
+			ImGui::SetNextWindowPos(ImVec2(350.0f, 15.0f), ImGuiCond_Appearing);
 			switch (show_agent_stats_at_index)
 			{
 			case 0:

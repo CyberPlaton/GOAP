@@ -38,21 +38,22 @@ public:
 			{
 				internal_agent_positionx += dt;
 			}
+			else if (t->xpos > destx)
+			{
+				internal_agent_positionx -= dt;
+			}
+
 
 			if (t->ypos < desty)
 			{
 				internal_agent_positiony += dt;
 			}
-
-			if (t->xpos > destx)
-			{
-				internal_agent_positionx -= dt;
-			}
-
-			if (t->ypos > desty)
+			else if (t->ypos > desty)
 			{
 				internal_agent_positiony -= dt;
 			}
+
+
 
 			// Component update, if needed.
 			if (internal_agent_positionx > 1.0f)
@@ -60,18 +61,19 @@ public:
 				t->xpos += 1;
 				internal_agent_positionx = 0.0f;
 			}
-			else if (internal_agent_positionx < 0.0f)
+			else if (internal_agent_positionx < -1.0f)
 			{
 				t->xpos -= 1;
 				internal_agent_positionx = 0.0f;
 			}
+
 
 			if (internal_agent_positiony > 1.0f)
 			{
 				t->ypos += 1;
 				internal_agent_positiony = 0.0f;
 			}
-			else if (internal_agent_positiony < 0.0f)
+			else if (internal_agent_positiony < -1.0f)
 			{
 				t->ypos -= 1;
 				internal_agent_positiony = 0.0f;
