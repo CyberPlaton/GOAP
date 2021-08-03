@@ -10,6 +10,8 @@
 
 #include "nlohmann/json.hpp"
 
+class Agent;
+
 class Action
 {
 public:
@@ -67,7 +69,7 @@ public:
 	* Here must be set the agent for this action, as well as the target object,
 	* otherwise the action will not work and probably throw an exception.
 	*/
-	virtual bool postInit(GameObject*, GameObject*) = 0;
+	virtual bool postInit(Agent*, GameObject*) = 0;
 
 	/*
 	* Called on initialization of the application,
@@ -148,6 +150,7 @@ public:
 
 	bool running = false;
 
-	GameObject* this_agent = nullptr;
+	//GameObject* this_agent = nullptr;
 	std::string this_agent_name;
+	Agent* this_agent = nullptr;
 };

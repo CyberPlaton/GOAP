@@ -17,6 +17,8 @@
 
 // Actions
 #include "Sleep.h"
+#include "Eat.h"
+#include "GetBeer.h"
 
 
 struct SubGoal
@@ -106,80 +108,7 @@ public:
 	* Specify all available actions for an agent.
 	* Here we specify a filepath for a json file from which we derive the path of all actions.
 	*/
-	bool init(const std::string& filepath)
-	{
-		using namespace std;
-		using namespace nlohmann;
-
-		ifstream fin(filepath);
-		if (fin.is_open() == false) return false;
-
-		json in;
-		fin >> in;
-
-		for (auto& entry : in.at("Actions"))
-		{
-			std::string name = entry[0].get<std::string>();
-			std::string path = entry[1].get<std::string>();
-
-			actionDefinitions.emplace(std::make_pair(name, path));
-		}
-
-		// Actually create the action and fill them in for the agent.
-		for (auto& a : actionDefinitions)
-		{
-			// Get the Needed action.
-			if (a.first.compare("Sleep") == 0)
-			{
-				ASleep* action = new ASleep();
-				if (!action->init(a.second)) // Get Definition.
-				{
-					continue; // Do not append the action, just ignore it.
-				}
-
-
-				/*
-				* As the definition for objects are defined agent agnostic, but each agent needs
-				* to access the defined target which are available for him specifically,
-				* we get the target from here.
-				*/
-
-				GameObject* target = nullptr;
-
-				// Search for target in owned objects:
-				for (auto& owned_thing : this->agentOwnedObjects)
-				{
-					if (owned_thing->getName().find(action->target_name) != std::string::npos)
-					{
-						target = owned_thing;
-						break;
-					}
-				}
-
-				
-				// Too try search for target in the world environment.
-				if (!target)
-				{
-					target = GameObjectStorage::get()->getGOByName(action->target_name);
-				}
-				
-
-				if (!target) continue;
-
-
-				if (!action->postInit(this, target)) // Specify the gameobjects.
-				{
-					continue;
-				}
-
-				action->awake();			// First life sign. Initialize needed structures.
-
-				availableActions.push_back(action); // Store action as available.
-			}
-		}
-
-		return true;
-	}
+	bool init(const std::string& filepath);
 
 
 	/*
@@ -438,8 +367,6 @@ private:
 
 
 
+	bool _initAction(Action* a);
 
 };
-
-
-std::map<std::string, std::string> Agent::role_definitions_map;

@@ -55,7 +55,7 @@ private:
 				std::string jsonpath = "GOAP/Gameobjects/" + e.at("Name").get<std::string>() + ".json";
 
 				// Specify the name for the child.
-				std::string child_name = name + "_" + e.at("Name").get<std::string>();
+				std::string child_name = name + " " + e.at("Name").get<std::string>();
 
 				GameObject* obj = create(jsonpath, child_name, 0, 0); // Create children without specific position.
 

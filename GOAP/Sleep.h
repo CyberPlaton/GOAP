@@ -11,27 +11,12 @@ public:
 	}
 
 
-	bool postInit(GameObject* this_agent, GameObject* target)
-	{
-		this->target = target;
-		this->this_agent = this_agent;
-
-		this->target_name = target->name;
-		this->this_agent_name = this_agent->name;
-
-		return true;
-	}
+	bool postInit(Agent* this_agent, GameObject* target);
 
 
 	// Perform the action.
-	bool perform() override
-	{
-		return true;
-	}
+	bool perform() override;
 
 	// What happens after the action is successfully achieved.
-	bool postPerform()  override
-	{
-		return true;
-	}
+	bool postPerform()  override;
 };

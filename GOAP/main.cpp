@@ -91,8 +91,11 @@ bool App::OnUserUpdate(float fElapsedTime)
 		TransformCmp* tr = static_cast<TransformCmp*> (selected_gameobject->getComponent("Transform"));
 		RendererableCmp* rc = static_cast<RendererableCmp*> (selected_gameobject->getComponent("Renderable"));
 
-		olc::vf2d p = { tr->xpos + rc->width / 2.0f - 0.3f, tr->ypos + rc->height / 2.0f};
-		tv.DrawStringDecal(p, selected_gameobject->tag, olc::RED, olc::vf2d(0.5f, 0.5f));
+		if (tr != nullptr && rc != nullptr)
+		{
+			olc::vf2d p = { tr->xpos + rc->width / 2.0f - 0.3f, tr->ypos + rc->height / 2.0f };
+			tv.DrawStringDecal(p, selected_gameobject->tag, olc::RED, olc::vf2d(0.5f, 0.5f));
+		}
 	}
 
 
@@ -200,28 +203,28 @@ void App::_onImGui()
 	{
 		if (ImGui::BeginMenu("Menu"))
 		{
-			/*
-			if (ImGui::BeginMenu("New"))
+
+			if (ImGui::BeginMenu("Time Speed"))
 			{
-				if (ImGui::MenuItem("GameObject"))
-				{
-					creating_new_gameobject = true;
-				}
+				float speed = GameWorldTime::get()->getTimeSpeed();
+				ImGui::SliderFloat("Timespeed", &speed, 0.0f, 2.0f, "%.3f", ImGuiSliderFlags_Logarithmic);
+				GameWorldTime::get()->setTimeSpeed(speed);
+
 				ImGui::EndMenu();
 			}
-			*/
 
 			ImGui::EndMenu();
 		}
+
 		ImGui::EndMainMenuBar();
 	}
 
 
 	// GAMEOBJECTS WINDOW
 	int go_count = GameObjectStorage::get()->getStorage().size();
-	ImGui::SetNextWindowPos(ImVec2(1.0f, 5.0f), ImGuiCond_Appearing);
-	ImGui::SetNextWindowSize(ImVec2(350.0f, 750.0f), ImGuiCond_Appearing);
-	if (ImGui::Begin(std::string("GameObjects #" + std::to_string(go_count)).c_str(), &gameobjects_window))
+	ImGui::SetNextWindowPos(ImVec2(1.0f, 10.0f), ImGuiCond_Appearing);
+	ImGui::SetNextWindowSize(ImVec2(350.0f, 600.0f), ImGuiCond_Appearing);
+	if (ImGui::Begin("GameObjects", &gameobjects_window))
 	{
 		for (auto& go : GameObjectStorage::get()->getStorage())
 		{

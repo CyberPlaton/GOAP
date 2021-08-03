@@ -88,6 +88,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Agent.cpp" />
     <ClCompile Include="common\include\imgui-master\examples\imgui_impl_glfw.cpp" />
     <ClCompile Include="common\include\imgui-master\examples\imgui_impl_opengl3.cpp" />
     <ClCompile Include="common\include\imgui-master\imgui.cpp" />
@@ -98,6 +99,7 @@
     <ClCompile Include="ComponentSystem.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameWorld.cpp" />
+    <ClCompile Include="GameWorldTime.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -114,10 +116,12 @@
     <ClInclude Include="common\include\imgui-master\imstb_truetype.h" />
     <ClInclude Include="ComponentSystem.h" />
     <ClInclude Include="DaySchedule.h" />
+    <ClInclude Include="Eat.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectCreator.h" />
     <ClInclude Include="GameWorld.h" />
     <ClInclude Include="GameWorldTime.h" />
+    <ClInclude Include="GetBeer.h" />
     <ClInclude Include="GOAPInterface.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="main.h" />

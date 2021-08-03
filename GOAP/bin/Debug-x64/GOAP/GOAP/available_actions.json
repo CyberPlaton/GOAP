@@ -1,5 +1,7 @@
 {
   "Actions": {
-    "0": ["Sleep", "GOAP/Actions/action_sleep.json"]
+    "0": [ "Sleep", "GOAP/Actions/action_sleep.json" ],
+    "1": [ "Eat", "GOAP/Actions/action_eat.json" ],
+    "2": [ "Get Beer", "GOAP/Actions/action_get_beer.json" ]
   }
 }

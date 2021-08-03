@@ -1,0 +1,11 @@
+{
+  "Name" : "Get Beer",
+  "Cost": 1,
+  "Duration": 1,
+  "TargetTag": "Shop Counter",
+  "Preconditions": {
+  },
+  "Effects": {
+    "0": [ "Get Beer", 1 ]
+  }
+}
