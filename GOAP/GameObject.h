@@ -5,7 +5,7 @@
 
 #include "ComponentSystem.h"
 
-#include "nlohmann/json.hpp"
+#include "common/include/nlohmann/json.hpp"
 
 
 static std::hash<std::string> hasher;

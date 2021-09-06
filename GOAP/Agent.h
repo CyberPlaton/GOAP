@@ -119,7 +119,7 @@ public:
 	{
 		agentInventory = new Inventory();
 		agentBeliefs = new WorldStates();
-		timer = new HRTimer();
+		timer = new Timer();
 		navigator = new Navigator(this);
 	}
 
@@ -277,7 +277,7 @@ public:
 
 	WorldStates* agentBeliefs = nullptr;
 
-	HRTimer* timer = nullptr;
+	Timer* timer = nullptr;
 
 	Inventory* agentInventory = nullptr;
 	std::vector<GameObject*> agentOwnedObjects;

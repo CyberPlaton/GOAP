@@ -60,12 +60,12 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\common\include\imgui-master;C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\common\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\common\include\imgui-master\;C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\common\include;C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\GOAP\common\include\imgui-master;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\common\lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\common\lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -77,14 +77,14 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\common\include\imgui-master;C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\common\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\common\include\imgui-master\;C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\common\include;C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\GOAP\common\include\imgui-master;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\Bogdan Strohonov\Desktop\GOAP\GOAP\GOAP\common\lib\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\common\lib\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -99,6 +99,7 @@
     <ClCompile Include="common\include\imgui-master\imgui_draw.cpp" />
     <ClCompile Include="common\include\imgui-master\imgui_tables.cpp" />
     <ClCompile Include="common\include\imgui-master\imgui_widgets.cpp" />
+    <ClCompile Include="common\include\tinyxml2.cpp" />
     <ClCompile Include="Components.cpp" />
     <ClCompile Include="ComponentSystem.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -109,6 +110,7 @@
   <ItemGroup>
     <ClInclude Include="Action.h" />
     <ClInclude Include="Agent.h" />
+    <ClInclude Include="BTCommon.h" />
     <ClInclude Include="BTInterface.h" />
     <ClInclude Include="Any.h" />
     <ClInclude Include="BehaviorTree.h" />
@@ -126,6 +128,7 @@
     <ClInclude Include="common\include\imgui-master\imstb_rectpack.h" />
     <ClInclude Include="common\include\imgui-master\imstb_textedit.h" />
     <ClInclude Include="common\include\imgui-master\imstb_truetype.h" />
+    <ClInclude Include="common\include\tinyxml2.h" />
     <ClInclude Include="Components.h" />
     <ClInclude Include="ComponentSystem.h" />
     <ClInclude Include="DaySchedule.h" />

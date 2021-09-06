@@ -3,10 +3,10 @@
 #include <chrono>
 
 
-class HRTimer {
+class Timer {
 public:
-    HRTimer() {}
-    ~HRTimer() {}
+    Timer() {}
+    ~Timer() {}
 
 
     // Start counting time from this point.

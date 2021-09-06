@@ -1,11 +1,8 @@
 #pragma once
 
+#include "BTCommon.h"
 #include "BTNodes.h"
 #include "Any.h"
-
-#include <list>
-#include <map>
-#include <mutex>
 
 
 /*
@@ -16,20 +13,52 @@ class BTBlackboard
 {
 public:
 	BTBlackboard(std::string name) : m_Name(name) {}
+	
+	
+	~BTBlackboard()
+	{
+		/*
+		* Blackboard is responsible for freeing memory used by its data storage.
+		*/
+		while (!m_Data.empty())
+		{
+			m_Data.erase(m_Data.begin());
+		}
+
+		m_Data.clear();
+		m_Name.clear();
+		delete m_Mutex;
+	}
 
 	template < typename T >
 	void set(std::string name, T value, const std::string& type)
 	{
 		std::scoped_lock lock(*m_Mutex);
 
-		m_Data[name].setValue(value, type);
+		// Does the entry already exist
+		if (m_Data.find(name) != m_Data.end())
+		{
+			// Change entry
+			m_Data.at(name).set<T>(value, type);
+		}
+		else
+		{
+			// Create new entry
+			Any a(value, name);
+			m_Data.emplace(name, a);
+		}
+
 	}
 
 
 	/*
+	* Return entrydata with given name.
+	* 
+	* If the entry does not exist, nothing is returned, thus using it may
+	* cause undefined behavior.
 	*/
 	template < typename T >
-	T& getData(const std::string& name, const std::string& type)
+	T getData(const std::string& name)
 	{
 		std::scoped_lock lock(*m_Mutex);
 
@@ -38,17 +67,10 @@ public:
 		{
 			if (it.first.compare(name) == 0)
 			{
-				T& d = *new T();
-				if (it.second.getValue(type, d))
-				{
-					return d;
-				}
+				return it.second.as<T>();
 			}
 		}
-
-		return nullptr;
 	}
-
 
 
 private:
