@@ -421,6 +421,7 @@ public:
 
 			if (movementPoints.size() == 0)
 			{
+				// TODO
 				movementPoints = this->_getPathToDest(t->xpos, t->ypos, destx, desty, NavMesh::get()->getGraph());
 
 
@@ -439,43 +440,6 @@ public:
 
 				if (_updateWaypointMovement(dt, t) == false) return false;
 			}
-
-
-			/*
-			// Internal update.
-			if (t->xpos < destx)
-			{
-				// Check whether the next maptile would be walkable, else go to other direction.
-				if (NavMesh::get()->getNavMesh()[t->xpos + 1][t->ypos] == 0)
-				{
-					internal_agent_positionx += dt;
-				}
-			}
-
-			else if (t->xpos > destx)
-			{
-				if (NavMesh::get()->getNavMesh()[t->xpos - 1][t->ypos] == 0)
-				{
-					internal_agent_positionx -= dt;
-				}
-			}
-
-
-			if (t->ypos < desty)
-			{
-				if (NavMesh::get()->getNavMesh()[t->xpos][t->ypos + 1] == 0)
-				{
-					internal_agent_positiony += dt;
-				}
-			}
-			else if (t->ypos > desty)
-			{
-				if (NavMesh::get()->getNavMesh()[t->xpos][t->ypos - 1] == 0)
-				{
-					internal_agent_positiony -= dt;
-				}
-			}
-			*/
 
 
 			// Component update, if needed.
@@ -652,6 +616,7 @@ public:
 		}
 
 
+		std::vector<node> temp;
 
 		if (!path_found)
 		{
@@ -660,13 +625,32 @@ public:
 		else
 		{
 			// Reconstruct path.
-			// We only have to reversely append the closed_list elements to path.
-			//for (int i = closed_list.size() - 1; i >= 0; i--)
-			//{
-			//	path.push_back(closed_list[i]);
-			//}
+			node child_node = node(x, y); // Initial node.
+			temp.push_back(child_node);
 
-			path = closed_list;
+			while (true)
+			{
+				try
+				{
+					node parent_of_node = parent_map.at(child_node);
+
+					temp.push_back(parent_of_node);
+
+					child_node = parent_of_node;
+				}
+				catch (...)
+				{
+					break;
+				}
+			}
+
+			// Reverse path to be correct.
+			for (int i = temp.size() - 1; i >= 0; i--)
+			{
+				path.push_back(temp[i]);
+			}
+
+			//path = closed_list;
 		}
 
 
