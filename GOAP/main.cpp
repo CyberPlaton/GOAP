@@ -11,6 +11,8 @@ static const char* selectable_agent_stats[] = { "Stats", "Agent Beliefs", "Goals
 static int show_agent_stats_at_index = -1;
 //static Agent* agent_showing_stats = nullptr;
 static bool show_agent_stats_window = false;
+static bool show_nav_mesh = false;
+static bool show_nav_path = false;
 
 /*
 * Helper, maybe GUI related vars.
@@ -32,10 +34,14 @@ bool App::OnUserUpdate(float fElapsedTime)
 	Clear(olc::BLACK);
 
 	_handleInput(); // Handle the users input.
-	
-	/*
+		
 	GameWorldTime::get()->update(); // Update Game World Time.
 
+	dude_tree->update();
+
+
+
+	/*
 	// Update all relevant gameobjects.
 	for (auto& go : GameObjectStorage::get()->getStorage())
 	{
@@ -65,8 +71,6 @@ bool App::OnUserUpdate(float fElapsedTime)
 	}
 
 
-
-
 	for (auto& go : GameObjectStorage::get()->getStorage())
 	{
 		olc::Pixel color;
@@ -81,7 +85,7 @@ bool App::OnUserUpdate(float fElapsedTime)
 
 			if (rc->render)
 			{
-				tv.FillRectDecal(olc::vf2d(tr->xpos, tr->ypos), olc::vf2d(rc->width, rc->height), color);
+				tv.FillRect(olc::vf2d(tr->xpos, tr->ypos), olc::vf2d(rc->width, rc->height), color);
 			}
 		}
 	}
@@ -101,6 +105,103 @@ bool App::OnUserUpdate(float fElapsedTime)
 
 
 
+	for (auto& coll : ComponentStorage::get()->getAllOfType<CollisionBoxCmp>("CollisionBox")) // Update collision detection.
+	{
+		for (auto& go : GameObjectStorage::get()->getStorage())
+		{
+			if (coll->this_agent->getTag().compare(go->getTag()) == 0) continue;
+
+			if (coll->resolve(go))
+			{
+				TransformCmp* tr = static_cast<TransformCmp*>(coll->this_agent->getComponent("Transform"));
+				CollisionBoxCmp* c = static_cast<CollisionBoxCmp*>(coll->this_agent->getComponent("CollisionBox"));
+
+				tv.DrawRect(olc::vf2d(tr->xpos - 0.1f, tr->ypos - 0.1f), olc::vf2d(c->width + 0.1f, c->height + 0.1f), olc::DARK_RED);
+			}
+		}
+	}
+
+	/*
+	for (int i = 0; i < NavMesh::get()->getNavMesh().size(); i++)
+	{
+		for (int j = 0; j < NavMesh::get()->getNavMesh()[i].size(); j++)
+		{
+			if (NavMesh::get()->getNavMesh()[i][j] == 99)
+			{
+				tv.DrawCircle(olc::vf2d(i + 0.5f, j + 0.5f), 0.1f, olc::DARK_RED);
+			}
+			else
+			{
+				tv.DrawCircle(olc::vf2d(i + 0.5f, j + 0.5f), 0.1f, olc::DARK_GREEN);
+			}
+		}
+	}
+	*/
+
+	if (show_nav_mesh)
+	{
+		// Draw Nodes
+		std::vector<std::vector<int>> nodes = NavMesh::get()->getNavGraph();
+		Graph* graph = NavMesh::get()->getGraph();
+		for (int i = 0; i < nodes.size(); i++)
+		{
+			for (int j = 0; j < nodes[i].size(); j++)
+			{
+				if (nodes[i][j] == 1)
+				{
+					tv.DrawCircle(olc::vf2d(i + 0.5f, j + 0.5f), 0.1f, olc::WHITE);
+				}
+			}
+		}
+
+		// Draw Edges
+		for (auto& e : graph->edges)
+		{
+			float a, b, x, y;
+
+			a = edge_from_x(e);
+			b = edge_from_y(e);
+			x = edge_to_x(e);
+			y = edge_to_y(e);
+
+			tv.DrawLine(olc::vf2d(a + 0.5f, b + 0.5f), olc::vf2d(x + 0.5f, y + 0.5f), olc::YELLOW);
+		}
+	}
+
+
+	if (show_nav_path)
+	{
+		// Draw waypoints of selected entity,
+		// if it has one.
+		if (selected_gameobject)
+		{
+			if (selected_gameobject->hasComponent("Navigator"))
+			{
+				NavigatorCmp* nav = selected_gameobject->getComponent<NavigatorCmp>("Navigator");
+
+
+				for (int i = 0; i < nav->movementPoints.size(); i++)
+				{
+					if (i == 0)
+					{
+						// Draw source with special color.
+						tv.DrawCircle(olc::vf2d(node_x(nav->movementPoints[i]) + 0.5f, node_y(nav->movementPoints[i]) + 0.5f), 0.1f, olc::RED);
+						continue;
+					}
+
+					if (i + 1 == nav->movementPoints.size())
+					{
+						// Draw destination with special color.
+						tv.DrawCircle(olc::vf2d(node_x(nav->movementPoints[i]) + 0.5f, node_y(nav->movementPoints[i]) + 0.5f), 0.1f, olc::GREEN);
+						continue;
+					}
+
+					tv.DrawCircle(olc::vf2d(node_x(nav->movementPoints[i]) + 0.5f, node_y(nav->movementPoints[i]) + 0.5f), 0.1f, olc::MAGENTA);
+				}
+			}
+		}
+	}
+
 	// For Rendering IMGUI.
 	_onImGui();
 	
@@ -117,11 +218,13 @@ bool App::OnUserCreate()
 	SetLayerCustomRenderFunction(0, std::bind(&App::DrawUI, this));
 
 
+
 	tv = olc::TileTransformedView({ ScreenWidth(), ScreenHeight() }, {32, 32});
 
+	
+	GameWorldTime::get()->setTimeSpeed(0.1);
+	
 	/*
-	GameWorldTime::get()->setTimeSpeed(0.001);
-
 	Agent::addRoleDefinitionPath("Innkeeper", "GOAP/Schedules/schedule_innkeeper.json");
 
 
@@ -143,6 +246,44 @@ bool App::OnUserCreate()
 	static_cast<Agent*>(npc)->assignRole("Innkeeper"); // Assign a role to the npc.
 	*/
 
+
+	GameObject* agent = new GameObject("Agent", "Dude");
+	agent->AddComponent(new TransformCmp("Transform"));
+	agent->AddComponent(new RendererableCmp("Renderable", 1.0f, 1.0f, "green"));
+	agent->AddComponent(new CollisionBoxCmp("CollisionBox", 1.0f, 1.0f, agent));
+	static_cast<TransformCmp*>(agent->getComponent("Transform"))->xpos = 5;
+	static_cast<TransformCmp*>(agent->getComponent("Transform"))->ypos = 5;
+	agent->AddComponent(new NavigatorCmp("Navigator", agent));
+
+
+	BTFactory factory("Dude BT");
+
+	dude_tree = factory.add<BTSequence>("Sequence")
+								.add<BTMoveToRandomPosition>("Random Movement", agent)
+		.end()
+		.build();
+	
+
+
+	// Create some houses.
+	GameObject* small_house = new GameObject("Building", "Bakery");
+	small_house->AddComponent(new TransformCmp("Transform"));
+	small_house->AddComponent(new RendererableCmp("Renderable", 3.0f, 4.0f, "grey"));
+	small_house->AddComponent(new CollisionBoxCmp("CollisionBox", 3.0f, 4.0f, small_house));
+	static_cast<TransformCmp*>(small_house->getComponent("Transform"))->xpos = 14;
+	static_cast<TransformCmp*>(small_house->getComponent("Transform"))->ypos = 10;
+
+
+	GameObject* big_house = new GameObject("Building", "Tavern");
+	big_house->AddComponent(new TransformCmp("Transform"));
+	big_house->AddComponent(new RendererableCmp("Renderable", 8.0f, 7.0f, "grey"));
+	big_house->AddComponent(new CollisionBoxCmp("CollisionBox", 8.0f, 7.0f, big_house));
+	static_cast<TransformCmp*>(big_house->getComponent("Transform"))->xpos = 3;
+	static_cast<TransformCmp*>(big_house->getComponent("Transform"))->ypos = 6;
+
+
+	
+	NavMesh::get()->bake();
 
 	return true;
 }
@@ -177,7 +318,7 @@ void App::_onImGui()
 		imgui_has_focus = false;
 	}
 
-	/*
+	
 	// DISPLAY GAMEWORLD TIME
 	double day = GameWorldTime::get()->getDay();
 	double week = GameWorldTime::get()->getWeek();
@@ -191,7 +332,7 @@ void App::_onImGui()
 	worldtime += " Y: " + std::to_string(year);
 
 	DrawStringDecal(olc::vf2d(ScreenWidth() / 2.0f - ScreenWidth() / 4.0f, 5.0f), worldtime, olc::RED, olc::vf2d(0.5f, 0.5f));
-	*/
+	
 
 	// DEMO
 	if (imgui_demo_window)
@@ -208,11 +349,25 @@ void App::_onImGui()
 
 			if (ImGui::BeginMenu("Time Speed"))
 			{
-				/*
+				
 				float speed = GameWorldTime::get()->getTimeSpeed();
 				ImGui::SliderFloat("Timespeed", &speed, 0.0f, 2.0f, "%.3f", ImGuiSliderFlags_Logarithmic);
 				GameWorldTime::get()->setTimeSpeed(speed);
-				*/
+				
+				ImGui::EndMenu();
+			}
+
+			if (ImGui::BeginMenu("Navigator"))
+			{
+
+				if (ImGui::MenuItem("NavMesh"))
+				{
+					show_nav_mesh = (show_nav_mesh == true) ? false : true;
+				}
+				if (ImGui::MenuItem("MovePoints"))
+				{
+					show_nav_path = (show_nav_path == true) ? false : true;
+				}
 				ImGui::EndMenu();
 			}
 

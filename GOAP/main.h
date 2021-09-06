@@ -33,8 +33,15 @@
 */
 #include "ComponentSystem.h"
 #include "GameObject.h"
+#include "Components.h"
+#include "GameWorldTime.h"
+
+
 //#include "GOAPInterface.h"
 //#include "GameObjectCreator.h"
+
+#include "BTInterface.h"
+#include "BTMoveToRandomPosition.h"
 
 
 class App : public olc::PixelGameEngine
@@ -56,6 +63,8 @@ private:
 	olc::TileTransformedView tv;
 	olc::imgui::PGE_ImGUI pge_imgui;
 	int m_GameLayer;
+
+	BehaviorTree* dude_tree = nullptr;
 
 private:
 

@@ -1,0 +1,13 @@
+{
+  "Name" : "Eat",
+  "Cost": 1,
+  "Duration": 1,
+  "TargetTag": "Table",
+  "SearchForAlternative":true,
+  "AlternativeTargets":["Tavern", "Self"],
+  "Preconditions": {
+  },
+  "Effects": {
+    "0": [ "hasEaten", 1 ]
+  }
+}

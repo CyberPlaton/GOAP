@@ -82,7 +82,7 @@ public:
 		for (auto& cmp : components)
 		{
 			// Search for component adjusted to own name.
-			if (cmp->name.compare(tag + "_" + name) == 0)
+			if (cmp->name.compare(name) == 0)
 			{
 				return cmp;
 			}
@@ -92,12 +92,20 @@ public:
 	}
 
 
+	template < typename T >
+	T* getComponent(const std::string& name)
+	{
+		return static_cast<T*>(getComponent(name));
+	}
+
+
+
 	bool hasComponent(const std::string& name)
 	{
 		for (auto& cmp : components)
 		{
 			// Search for component adjusted to own name.
-			if (cmp->name.compare(tag + "_" + name) == 0)
+			if (cmp->name.compare(name) == 0)
 			{
 				return true;
 			}

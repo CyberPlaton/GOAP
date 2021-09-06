@@ -22,6 +22,12 @@
     <Filter Include="Source Files\Actions">
       <UniqueIdentifier>{fe90e92e-2d86-4923-b948-b14023af0f0f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\BT">
+      <UniqueIdentifier>{8bce21be-0134-4ba6-9897-537351297cbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BT\Nodes">
+      <UniqueIdentifier>{52e0d71c-566a-4b91-9830-567d7a58d5bd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -61,7 +67,19 @@
       <Filter>Source Files\GOAP</Filter>
     </ClCompile>
     <ClCompile Include="GameWorldTime.cpp">
-      <Filter>Source Files\GOAP</Filter>
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Any.cpp">
+      <Filter>Source Files\BT</Filter>
+    </ClCompile>
+    <ClCompile Include="BTBlackboard.cpp">
+      <Filter>Source Files\BT</Filter>
+    </ClCompile>
+    <ClCompile Include="BTNodes.cpp">
+      <Filter>Source Files\BT</Filter>
+    </ClCompile>
+    <ClCompile Include="Components.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -107,9 +125,6 @@
     <ClInclude Include="Agent.h">
       <Filter>Source Files\GOAP</Filter>
     </ClInclude>
-    <ClInclude Include="Navigator.h">
-      <Filter>Source Files\GOAP</Filter>
-    </ClInclude>
     <ClInclude Include="GOAPInterface.h">
       <Filter>Source Files\GOAP</Filter>
     </ClInclude>
@@ -131,9 +146,6 @@
     <ClInclude Include="GameObjectCreator.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameWorldTime.h">
-      <Filter>Source Files\GOAP</Filter>
-    </ClInclude>
     <ClInclude Include="DaySchedule.h">
       <Filter>Source Files\GOAP</Filter>
     </ClInclude>
@@ -148,6 +160,36 @@
     </ClInclude>
     <ClInclude Include="GetBeer.h">
       <Filter>Source Files\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="GameWorldTime.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BTInterface.h">
+      <Filter>Source Files\BT</Filter>
+    </ClInclude>
+    <ClInclude Include="Any.h">
+      <Filter>Source Files\BT</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviorTree.h">
+      <Filter>Source Files\BT</Filter>
+    </ClInclude>
+    <ClInclude Include="BTBlackboard.h">
+      <Filter>Source Files\BT</Filter>
+    </ClInclude>
+    <ClInclude Include="BTFactory.h">
+      <Filter>Source Files\BT</Filter>
+    </ClInclude>
+    <ClInclude Include="BTNode.h">
+      <Filter>Source Files\BT</Filter>
+    </ClInclude>
+    <ClInclude Include="BTNodes.h">
+      <Filter>Source Files\BT</Filter>
+    </ClInclude>
+    <ClInclude Include="BTMoveToRandomPosition.h">
+      <Filter>Source Files\BT\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="Components.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

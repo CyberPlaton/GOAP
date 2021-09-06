@@ -89,6 +89,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Agent.cpp" />
+    <ClCompile Include="Any.cpp" />
+    <ClCompile Include="BTBlackboard.cpp" />
+    <ClCompile Include="BTNodes.cpp" />
     <ClCompile Include="common\include\imgui-master\examples\imgui_impl_glfw.cpp" />
     <ClCompile Include="common\include\imgui-master\examples\imgui_impl_opengl3.cpp" />
     <ClCompile Include="common\include\imgui-master\imgui.cpp" />
@@ -96,6 +99,7 @@
     <ClCompile Include="common\include\imgui-master\imgui_draw.cpp" />
     <ClCompile Include="common\include\imgui-master\imgui_tables.cpp" />
     <ClCompile Include="common\include\imgui-master\imgui_widgets.cpp" />
+    <ClCompile Include="Components.cpp" />
     <ClCompile Include="ComponentSystem.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameWorld.cpp" />
@@ -105,6 +109,14 @@
   <ItemGroup>
     <ClInclude Include="Action.h" />
     <ClInclude Include="Agent.h" />
+    <ClInclude Include="BTInterface.h" />
+    <ClInclude Include="Any.h" />
+    <ClInclude Include="BehaviorTree.h" />
+    <ClInclude Include="BTBlackboard.h" />
+    <ClInclude Include="BTFactory.h" />
+    <ClInclude Include="BTMoveToRandomPosition.h" />
+    <ClInclude Include="BTNode.h" />
+    <ClInclude Include="BTNodes.h" />
     <ClInclude Include="ColorConsole.h" />
     <ClInclude Include="common\include\imgui-master\examples\imgui_impl_glfw.h" />
     <ClInclude Include="common\include\imgui-master\examples\imgui_impl_opengl3.h" />
@@ -114,6 +126,7 @@
     <ClInclude Include="common\include\imgui-master\imstb_rectpack.h" />
     <ClInclude Include="common\include\imgui-master\imstb_textedit.h" />
     <ClInclude Include="common\include\imgui-master\imstb_truetype.h" />
+    <ClInclude Include="Components.h" />
     <ClInclude Include="ComponentSystem.h" />
     <ClInclude Include="DaySchedule.h" />
     <ClInclude Include="Eat.h" />
@@ -125,7 +138,6 @@
     <ClInclude Include="GOAPInterface.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="main.h" />
-    <ClInclude Include="Navigator.h" />
     <ClInclude Include="Planner.h" />
     <ClInclude Include="Sleep.h" />
     <ClInclude Include="TestingAction.h" />
