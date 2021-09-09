@@ -37,22 +37,9 @@ bool App::OnUserUpdate(float fElapsedTime)
 		
 	GameWorldTime::get()->update(); // Update Game World Time.
 
-	dude_tree->update();
+	AI::get()->executeBehaviorTrees();
 
 
-
-	/*
-	// Update all relevant gameobjects.
-	for (auto& go : GameObjectStorage::get()->getStorage())
-	{
-		if (go->getTag().find("NPC") != std::string::npos)
-		{
-			Agent* npc = static_cast<Agent*>(go);
-
-			npc->update();
-		}
-	}
-	*/
 
 	// Application rendering.
 	olc::vi2d topleft = tv.GetTopLeftTile().max({ 0, 0 });
@@ -121,22 +108,6 @@ bool App::OnUserUpdate(float fElapsedTime)
 		}
 	}
 
-	/*
-	for (int i = 0; i < NavMesh::get()->getNavMesh().size(); i++)
-	{
-		for (int j = 0; j < NavMesh::get()->getNavMesh()[i].size(); j++)
-		{
-			if (NavMesh::get()->getNavMesh()[i][j] == 99)
-			{
-				tv.DrawCircle(olc::vf2d(i + 0.5f, j + 0.5f), 0.1f, olc::DARK_RED);
-			}
-			else
-			{
-				tv.DrawCircle(olc::vf2d(i + 0.5f, j + 0.5f), 0.1f, olc::DARK_GREEN);
-			}
-		}
-	}
-	*/
 
 	if (show_nav_mesh)
 	{
@@ -223,28 +194,6 @@ bool App::OnUserCreate()
 
 	
 	GameWorldTime::get()->setTimeSpeed(0.1);
-	
-	/*
-	Agent::addRoleDefinitionPath("Innkeeper", "GOAP/Schedules/schedule_innkeeper.json");
-
-
-	GameObjectCreator creator;
-
-	GameObject* tavern = creator.create("GOAP/Gameobjects/Tavern.json", "Village Tavern", 3, 5);
-	GameObject* shop = creator.create("GOAP/Gameobjects/Shop.json", "Filthy Shop", 13, 5);
-	GameObject* house = creator.create("GOAP/Gameobjects/House.json", "Johns House", 21, 2);
-	house = creator.create("GOAP/Gameobjects/House.json", "Asmons House", 25, 3);
-	house = creator.create("GOAP/Gameobjects/House.json", "Walters House", 28, 8);
-	house = creator.create("GOAP/Gameobjects/House.json", "Marthas House", 22, 16);
-
-
-	GameObject* npc = creator.create("GOAP/Gameobjects/Innkeeper.json", "John", 0, 0);
-
-	// Initialization
-	static_cast<Agent*>(npc)->awake(); // Initialize inner workings
-	static_cast<Agent*>(npc)->init("GOAP/available_actions.json"); // Initialize available actions.
-	static_cast<Agent*>(npc)->assignRole("Innkeeper"); // Assign a role to the npc.
-	*/
 
 
 	GameObject* agent = new GameObject("Agent", "Dude");
@@ -254,7 +203,7 @@ bool App::OnUserCreate()
 	static_cast<TransformCmp*>(agent->getComponent("Transform"))->xpos = 5;
 	static_cast<TransformCmp*>(agent->getComponent("Transform"))->ypos = 5;
 	agent->AddComponent(new NavigatorCmp("Navigator", agent));
-
+	
 
 	BTFactory factory("Dude BT");
 
@@ -263,6 +212,8 @@ bool App::OnUserCreate()
 		.end()
 		.build();
 	
+
+	AI::get()->addBehaviorTree(dude_tree);
 
 
 	// Create some houses.
@@ -281,6 +232,20 @@ bool App::OnUserCreate()
 	static_cast<TransformCmp*>(big_house->getComponent("Transform"))->xpos = 3;
 	static_cast<TransformCmp*>(big_house->getComponent("Transform"))->ypos = 6;
 
+
+	GameObject* another_house = new GameObject("Building", "Store");
+	another_house->AddComponent(new TransformCmp("Transform"));
+	another_house->AddComponent(new RendererableCmp("Renderable", 5.0f, 5.0f, "grey"));
+	another_house->AddComponent(new CollisionBoxCmp("CollisionBox", 5.0f, 5.0f, another_house));
+	static_cast<TransformCmp*>(another_house->getComponent("Transform"))->xpos = 16;
+	static_cast<TransformCmp*>(another_house->getComponent("Transform"))->ypos = 15;
+
+
+	GameObjectCreator creator;
+	for (int i = 0; i < 20; i++)
+	{
+		Agent* a = creator.createAgent("GOAP/Gameobjects/Villager.xml", "Villager_" + std::to_string(i), 0, 0);
+	}
 
 	
 	NavMesh::get()->bake();

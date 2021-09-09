@@ -6,10 +6,10 @@
 class WorldState
 {
 public:
-	WorldState(const std::string& key, int value):key(key), value(value) {}
+	WorldState(const std::string& key, double value) : key(key), value(value) {}
 
 	std::string key;
-	int value;
+	double value;
 };
 
 
@@ -17,6 +17,15 @@ public:
 class WorldStates
 {
 public:
+	WorldStates()
+	{
+
+	}
+
+	~WorldStates()
+	{
+		states.clear();
+	}
 
 
 	bool hasState(const std::string& key)
@@ -28,7 +37,7 @@ public:
 	/*
 	* Add Value to a state if it exists, else add new one.
 	*/
-	void modifyState(const std::string& key, int value)
+	void modifyState(const std::string& key, double value)
 	{
 		if (hasState(key))
 		{
@@ -59,7 +68,7 @@ public:
 	/*
 	* Set value of state directly to a value, or insert a new state.
 	*/
-	void setState(const std::string& key, int value)
+	void setState(const std::string& key, double value)
 	{
 		if (hasState(key))
 		{
@@ -72,12 +81,12 @@ public:
 	}
 
 
-	void addState(const std::string& key, int value)
+	void addState(const std::string& key, double value)
 	{
 		states.emplace(std::make_pair(key, value));
 	}
 
-	std::map<std::string, int> getStates()
+	std::map<std::string, double> getStates()
 	{
 		return states;
 	}
@@ -86,5 +95,5 @@ public:
 
 private:
 
-	std::map<std::string, int> states;
+	std::map<std::string, double> states;
 };

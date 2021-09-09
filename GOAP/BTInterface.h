@@ -4,3 +4,5 @@
 #include "BTBlackboard.h"
 #include "BehaviorTree.h"
 #include "BTFactory.h"
+
+#include "BTMoveToRandomPosition.h"

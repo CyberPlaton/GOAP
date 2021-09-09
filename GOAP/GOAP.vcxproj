@@ -88,9 +88,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Agent.cpp" />
+    <ClCompile Include="AI.cpp" />
     <ClCompile Include="Any.cpp" />
+    <ClCompile Include="BehaviorTreeDefinitions.cpp" />
     <ClCompile Include="BTBlackboard.cpp" />
+    <ClCompile Include="BTFactory.cpp" />
     <ClCompile Include="BTNodes.cpp" />
     <ClCompile Include="common\include\imgui-master\examples\imgui_impl_glfw.cpp" />
     <ClCompile Include="common\include\imgui-master\examples\imgui_impl_opengl3.cpp" />
@@ -108,8 +110,12 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Action.h" />
     <ClInclude Include="Agent.h" />
+    <ClInclude Include="AgentNeeds.h" />
+    <ClInclude Include="AgentRole.h" />
+    <ClInclude Include="AgentStats.h" />
+    <ClInclude Include="AI.h" />
+    <ClInclude Include="BehaviorTreeDefinitions.h" />
     <ClInclude Include="BTCommon.h" />
     <ClInclude Include="BTInterface.h" />
     <ClInclude Include="Any.h" />
@@ -138,12 +144,11 @@
     <ClInclude Include="GameWorld.h" />
     <ClInclude Include="GameWorldTime.h" />
     <ClInclude Include="GetBeer.h" />
-    <ClInclude Include="GOAPInterface.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="main.h" />
-    <ClInclude Include="Planner.h" />
+    <ClInclude Include="NeedsCmp.h" />
+    <ClInclude Include="OwnershipCmp.h" />
     <ClInclude Include="Sleep.h" />
-    <ClInclude Include="TestingAction.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="WorldState.h" />
   </ItemGroup>

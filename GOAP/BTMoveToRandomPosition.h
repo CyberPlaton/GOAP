@@ -2,8 +2,9 @@
 
 #include "ColorConsole.h"
 
-#include "BTNodes.h"
+#include "BTAction.h"
 #include "Components.h"
+#include "GameWorldTime.h"
 
 class BTMoveToRandomPosition : public BTAction
 {

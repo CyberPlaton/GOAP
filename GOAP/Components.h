@@ -421,7 +421,6 @@ public:
 
 			if (movementPoints.size() == 0)
 			{
-				// TODO
 				movementPoints = this->_getPathToDest(t->xpos, t->ypos, destx, desty, NavMesh::get()->getGraph());
 
 

@@ -28,6 +28,9 @@
     <Filter Include="Source Files\BT\Nodes">
       <UniqueIdentifier>{52e0d71c-566a-4b91-9830-567d7a58d5bd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GameObjects">
+      <UniqueIdentifier>{e1210521-3a71-420f-b66c-c94334fdc05b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -41,9 +44,6 @@
     </ClCompile>
     <ClCompile Include="GameWorld.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Agent.cpp">
-      <Filter>Source Files\GOAP</Filter>
     </ClCompile>
     <ClCompile Include="GameWorldTime.cpp">
       <Filter>Source Files</Filter>
@@ -84,6 +84,15 @@
     <ClCompile Include="common\include\imgui-master\examples\imgui_impl_opengl3.cpp">
       <Filter>Header Files\ImGui</Filter>
     </ClCompile>
+    <ClCompile Include="BTFactory.cpp">
+      <Filter>Source Files\BT</Filter>
+    </ClCompile>
+    <ClCompile Include="BehaviorTreeDefinitions.cpp">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="AI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -91,24 +100,6 @@
     </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Action.h">
-      <Filter>Source Files\GOAP</Filter>
-    </ClInclude>
-    <ClInclude Include="Planner.h">
-      <Filter>Source Files\GOAP</Filter>
-    </ClInclude>
-    <ClInclude Include="WorldState.h">
-      <Filter>Source Files\GOAP</Filter>
-    </ClInclude>
-    <ClInclude Include="Agent.h">
-      <Filter>Source Files\GOAP</Filter>
-    </ClInclude>
-    <ClInclude Include="GOAPInterface.h">
-      <Filter>Source Files\GOAP</Filter>
-    </ClInclude>
-    <ClInclude Include="TestingAction.h">
-      <Filter>Source Files\GOAP</Filter>
     </ClInclude>
     <ClInclude Include="Timer.h">
       <Filter>Source Files</Filter>
@@ -119,14 +110,8 @@
     <ClInclude Include="GameWorld.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Inventory.h">
-      <Filter>Source Files\GOAP</Filter>
-    </ClInclude>
     <ClInclude Include="GameObjectCreator.h">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DaySchedule.h">
-      <Filter>Source Files\GOAP</Filter>
     </ClInclude>
     <ClInclude Include="Sleep.h">
       <Filter>Source Files\Actions</Filter>
@@ -199,6 +184,39 @@
     </ClInclude>
     <ClInclude Include="common\include\imgui-master\examples\imgui_impl_opengl3.h">
       <Filter>Header Files\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="AgentStats.h">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="AgentNeeds.h">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="AgentRole.h">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviorTreeDefinitions.h">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="AI.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NeedsCmp.h">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="OwnershipCmp.h">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Agent.h">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventory.h">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="DaySchedule.h">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldState.h">
+      <Filter>Source Files\GameObjects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

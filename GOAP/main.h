@@ -34,11 +34,10 @@
 #include "ComponentSystem.h"
 #include "GameObject.h"
 #include "Components.h"
+#include "GameWorld.h"
 #include "GameWorldTime.h"
+#include "GameObjectCreator.h"
 
-
-//#include "GOAPInterface.h"
-//#include "GameObjectCreator.h"
 
 #include "BTInterface.h"
 #include "BTMoveToRandomPosition.h"
