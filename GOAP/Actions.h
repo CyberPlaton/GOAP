@@ -4,10 +4,11 @@
 
 #include <iostream>
 
+
 class ActionMoveToDestination : public ActionInstance
 {
 public:
-	ActionMoveToDestination(ActionDefinition* def, GameObject* pawn, int destx, int desty) : ActionInstance(def, pawn), destx(destx), desty(desty)
+	ActionMoveToDestination(ActionDefinition* def, GameObject* pawn, GameObject* smartObject = nullptr, int destx = -1, int desty = -1) : ActionInstance(def, pawn, smartObject), destx(destx), desty(desty)
 	{
 
 	}
@@ -17,11 +18,12 @@ public:
 
 	bool postPerform(double dt) override final
 	{
+		delete this;
 		return true;
 	}
 
 
-
+	bool destinationAssigned = false;
 	int destx, desty;
 };
 
@@ -30,20 +32,13 @@ public:
 class ActionSleep : public ActionInstance
 {
 public:
-	ActionSleep(ActionDefinition* def, GameObject* pawn) : ActionInstance(def, pawn)
+	ActionSleep(ActionDefinition* def, GameObject* pawn, GameObject* smartObject) : ActionInstance(def, pawn, smartObject)
 	{
 
 	}
 
 
-	bool perform(double dt) override final
-	{
-		using namespace std;
-
-		cout << "\"ActionSleep\" Action Completed for \"" << this->getPawn()->name << "\"" << endl;
-
-		return true;
-	}
+	bool perform(double dt) override final;
 
 	bool postPerform(double dt) override final
 	{
@@ -56,20 +51,32 @@ public:
 class ActionEat : public ActionInstance
 {
 public:
-	ActionEat(ActionDefinition* def, GameObject* pawn) : ActionInstance(def, pawn)
+	ActionEat(ActionDefinition* def, GameObject* pawn, GameObject* smartObject) : ActionInstance(def, pawn, smartObject)
 	{
 
 	}
 
 
-	bool perform(double dt) override final
+	bool perform(double dt) override final;
+
+	bool postPerform(double dt) override final
 	{
-		using namespace std;
-
-		cout << "\"ActionEat\" Action Completed for \"" << this->getPawn()->name << "\"" << endl;
-
 		return true;
 	}
+};
+
+
+
+class ActionDrink : public ActionInstance
+{
+public:
+	ActionDrink(ActionDefinition* def, GameObject* pawn, GameObject* smartObject) : ActionInstance(def, pawn, smartObject)
+	{
+
+	}
+
+
+	bool perform(double dt) override final;
 
 	bool postPerform(double dt) override final
 	{

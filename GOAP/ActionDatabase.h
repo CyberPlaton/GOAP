@@ -39,23 +39,32 @@ public:
 
 	ActionDefinition* getActionDefinition(ActionID id)
 	{
-		auto it = actionPrefabs.find(id);
-		if (it != actionPrefabs.end())
+		for (auto& a : actionPrefabs)
 		{
-			return actionPrefabs[id];
+			if (a.second->hash == hasher(id)) return a.second;
 		}
+
+		return nullptr;
 	}
 
 
 	template < typename ActionType, class... Args >
-	ActionType* constructAction(ActionID id, GameObject* pawn, Args... args)
+	ActionType* constructAction(ActionID id, GameObject* pawn, GameObject* smartObject, Args... args)
 	{
 		using namespace std;
 
 		ActionDefinition* def = nullptr;
 		def = getActionDefinition(id);
 
-		ActionType* action = new ActionType(def, pawn, args...);
+		if (!def) return nullptr;
+
+		cout << "Constructing Action \""<< def->id << "\"" << endl;
+		cout << "Target: " << def->targetTag << endl;
+		cout << "MinDur: " << def->minDuration << endl;
+		cout << "MaxDur: " << def->minDuration << endl;
+
+
+		ActionType* action = new ActionType(def, pawn, smartObject, args...);
 		if (action) return action;
 
 

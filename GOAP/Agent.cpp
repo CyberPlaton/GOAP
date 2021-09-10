@@ -25,8 +25,24 @@ void Agent::update(double dt)
 		SmartObject* smo = go->getComponent<SmartObject>("SmartObject");
 		std::string actionName = smo->getAssociatedAction(need);
 
-		ActionInstance* action = ActionDatabase::get()->constructAction<ActionInstance>(actionName, this);
-		actionStack.push(action);
+
+		ActionInstance* action = nullptr;
+		if (actionName.compare("ActionEat") == 0)
+		{
+			action = ActionDatabase::get()->constructAction<ActionEat>(actionName, this, go);
+			actionStack.push(action);
+		}
+		else if (actionName.compare("ActionSleep") == 0)
+		{
+			action = ActionDatabase::get()->constructAction<ActionSleep>(actionName, this, go);
+			actionStack.push(action);
+		}
+		else if (actionName.compare("ActionDrink") == 0)
+		{
+			action = ActionDatabase::get()->constructAction<ActionDrink>(actionName, this, go);
+			actionStack.push(action);
+		}
+
 
 		// Get the position of destination object
 		int x, y;
@@ -34,7 +50,7 @@ void Agent::update(double dt)
 		x = transf->xpos;
 		y = transf->ypos;
 
-		action = ActionDatabase::get()->constructAction<ActionMoveToDestination>(actionName, this, x, y);
+		action = ActionDatabase::get()->constructAction<ActionMoveToDestination>(actionName, this, go, x, y);
 		actionStack.push(action);
 
 		// return
@@ -67,26 +83,33 @@ void Agent::update(double dt)
 
 void Agent::scoreNeeds()
 {
+	using namespace std;
+
 	AgentNeedsCmp* needs = getComponent<AgentNeedsCmp>("AgentNeeds");
 
-	int r = rand() % 3;
+	double r = static_cast<double>(rand() % 5);
+
 
 	// Score sleep
-	needs->setSleep(needs->getSleep() + r);
+	needs->setSleep(needs->getSleep() + r * 1.3);
 
 	// Score hunger
-	r = rand() % 3,
-	needs->setHunger(needs->getHunger() + r);
+	needs->setHunger(needs->getHunger() + r * 0.3);
 
 	// Score thirst
-	r = rand() % 3;
-	needs->setThirst(needs->getThirst() + r);
+	needs->setThirst(needs->getThirst() + r * 0.7);
 
 
 	// Store scores
 	needsScoreMap["Sleep"] = needs->getSleep();
 	needsScoreMap["Hunger"] = needs->getHunger();
 	needsScoreMap["Thirst"] = needs->getThirst();
+
+
+	cout << "Needs of \""<< getName() << "\": " << endl;
+	cout << "\"Sleep\": " << needs->getSleep() << endl;
+	cout << "\"Hunger\": " << needs->getHunger() << endl;
+	cout << "\"Thirst\": " << needs->getThirst() << endl;
 }
 
 
@@ -94,7 +117,7 @@ std::string Agent::getNeedToBattle()
 {
 	// For now just return highest need.
 	double max = 0.0;
-	std::string need;
+	std::string need = "none";
 	for (auto& n : needsScoreMap)
 	{
 		if (n.second > max)
@@ -102,6 +125,12 @@ std::string Agent::getNeedToBattle()
 			need = n.first;
 			max = n.second;
 		}
+	}
+
+
+	if (need.compare("none") == 0)
+	{
+		return "Sleep";
 	}
 
 	return need;

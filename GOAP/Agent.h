@@ -18,6 +18,15 @@
 
 /*
 * An agent is an extended gameobject with game specific functionality.
+* 
+* It has following components by default:
+* Renderable,
+* Transform,
+* CollisionBox,
+* Stats,
+* Needs,
+* Role,
+* Navigator
 */
 class Agent : public GameObject
 {
@@ -28,9 +37,12 @@ public:
 		AddComponent(new AgentStatsCmp(name + "_Stats"));
 		AddComponent(new AgentNeedsCmp(name + "_Needs"));
 		//AddComponent(new AgentRoleCmp("Role", "None"));
+		AddComponent(new NavigatorCmp("Navigator", this));
+		AddComponent(new RendererableCmp("Renderable", 1.0f, 1.0f, "red"));
+		AddComponent(new TransformCmp("Transform"));
 	}
 
-	void update(double dt);
+	void update(double dt) override final;
 
 
 

@@ -1,0 +1,9 @@
+<SmartObject>
+	<Fulfillments>
+		<Need name="Thirst" amount="5.0"></Need>
+	</Fulfillments>
+
+	<AvailableActions>
+		<Action name="Thirst" aName ="ActionDrink"></Action>
+	</AvailableActions>
+</SmartObject>

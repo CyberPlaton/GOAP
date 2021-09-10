@@ -1,13 +1,11 @@
 <SmartObject>
 	<Fulfillments>
-		<Need name="Sleep" amount="1.0"></Need>
-		<Need name="Hunger" amount="9.0"></Need>
-		<Need name="Thirst" amount="8.0"></Need>
+		<Need name="Sleep" amount="2.0"></Need>
+		<Need name="Hunger" amount="5.0"></Need>
 	</Fulfillments>
 
 	<AvailableActions>
 		<Action name="Sleep" aName ="ActionSleep"></Action>
 		<Action name="Hunger" aName ="ActionEat"></Action>
-		<Action name="Thirst" aName ="ActionDrink"></Action>
 	</AvailableActions>
 </SmartObject>

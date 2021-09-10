@@ -81,6 +81,11 @@ public:
 	virtual GameObject* getPawn() = 0;
 
 	/*
+	*/
+	virtual GameObject* getSmartObject() = 0;
+
+
+	/*
 	* Get the id of the action.
 	*/
 	virtual ActionID getID() = 0;
@@ -110,7 +115,7 @@ public:
 class ActionInstance : public Action
 {
 public:
-	ActionInstance(ActionDefinition* def, GameObject* pawn) : pawn(pawn)
+	ActionInstance(ActionDefinition* def, GameObject* pawn, GameObject* smartObject) : pawn(pawn), smartObject(smartObject)
 	{
 		this->id = def->id;
 		this->minDuration = def->minDuration;
@@ -118,35 +123,42 @@ public:
 		this->targetTag = def->targetTag;
 	}
 
-	GameObject* getPawn() override
+	GameObject* getPawn() override final
 	{
 		return this->pawn;
 	}
 
-	ActionID getID() override
+	GameObject* getSmartObject() override final
+	{
+		return this->smartObject;
+	}
+
+	ActionID getID() override final
 	{
 		return this->id;
 	}
 
-	double getMinDuration() override
+	double getMinDuration() override final
 	{
 		return this->minDuration;
 	}
 
-	double getMaxDuration() override
+	double getMaxDuration() override final
 	{
 		return this->maxDuration;
 	}
 
-	virtual bool perform(double dt) override
+	
+	virtual bool perform(double dt)
 	{
 		return true;
 	}
 
-	virtual bool postPerform(double dt) override
+	virtual bool postPerform(double dt)
 	{
 		return true;
 	}
+	
 
 
 private:
@@ -155,4 +167,5 @@ private:
 	double maxDuration = 0.0;
 	GameObject* pawn = nullptr;
 	std::string targetTag;
+	GameObject* smartObject = nullptr;
 };

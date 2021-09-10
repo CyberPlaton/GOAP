@@ -403,20 +403,13 @@ public:
 		{
 			TransformCmp* t = static_cast<TransformCmp*>(cmp);
 
-			cout << "Destination: {" << destx << ", " << desty << "}" << endl;
-			cout << "Position: {" << t->xpos << ", " << t->ypos << "}" << endl;
-
 			// Is Target reached
 			if (t->xpos == destx && t->ypos == desty)
 			{
 				movementPoints.clear();
 				curr_mp_index = 0;
-				cout << "Destination reached" << endl;
 				return true;
 			}
-
-			cout << "Destination not reached" << endl;
-
 
 
 			if (movementPoints.size() == 0)
@@ -426,17 +419,13 @@ public:
 
 				if (movementPoints.size() > 0)
 				{
-					cout << "Path found" << endl;
 				}
 				else
 				{
-					cout << "Path NOT found" << endl;
 				}
 			}
 			else if (movementPoints.size() > 0)
 			{
-				cout << "Executing path movement" << endl;
-
 				if (_updateWaypointMovement(dt, t) == false) return false;
 			}
 

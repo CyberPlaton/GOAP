@@ -40,6 +40,14 @@ bool App::OnUserUpdate(float fElapsedTime)
 	AI::get()->executeBehaviorTrees();
 
 
+	// Update all agents.
+	for (auto& go : GameObjectStorage::get()->getStorage())
+	{
+		// Function does something if and only if the GameObject implements
+		// the update function.
+		go->update((float)GameWorldTime::get()->getTimeSpeed());
+	}
+
 
 	// Application rendering.
 	olc::vi2d topleft = tv.GetTopLeftTile().max({ 0, 0 });
@@ -244,14 +252,27 @@ bool App::OnUserCreate()
 	// Set up test smart object
 	GameObject* table = new GameObject("Furniture", "testing_table");
 	table->AddComponent(new TransformCmp("Transform"));
-	table->AddComponent(new RendererableCmp("Renderable", 1.0f, 1.0f, "grey"));
+	table->AddComponent(new RendererableCmp("Renderable", 1.0f, 1.0f, "yellow"));
 	table->AddComponent(new CollisionBoxCmp("CollisionBox", 1.0f, 1.0f, table));
-	static_cast<TransformCmp*>(table->getComponent("Transform"))->xpos = 1;
-	static_cast<TransformCmp*>(table->getComponent("Transform"))->ypos = 1;
+	static_cast<TransformCmp*>(table->getComponent("Transform"))->xpos = 28;
+	static_cast<TransformCmp*>(table->getComponent("Transform"))->ypos = 18;
 
 	SmartObject* smo = new SmartObject("SmartObject");
 	smo->loadDefinition("GOAP/Gameobjects/Table.xml");
 	table->AddComponent(smo);
+
+	GameObject* well = new GameObject("Furniture", "testing_well");
+	well->AddComponent(new TransformCmp("Transform"));
+	well->AddComponent(new RendererableCmp("Renderable", 1.0f, 1.0f, "yellow"));
+	well->AddComponent(new CollisionBoxCmp("CollisionBox", 1.0f, 1.0f, well));
+	static_cast<TransformCmp*>(well->getComponent("Transform"))->xpos = 2;
+	static_cast<TransformCmp*>(well->getComponent("Transform"))->ypos = 4;
+
+	SmartObject* smo2 = new SmartObject("SmartObject");
+	smo2->loadDefinition("GOAP/Gameobjects/Well.xml");
+	well->AddComponent(smo2);
+
+
 
 	/*
 	GameObjectCreator creator;
@@ -268,24 +289,6 @@ bool App::OnUserCreate()
 
 	ActionDatabase::get()->loadDefinitions("GOAP/Actions/ActionDatabase.xml");
 	ActionDefinition* def = ActionDatabase::get()->getActionDefinition("ActionSleep");
-
-	Action* a = ActionDatabase::get()->constructAction<ActionSleep>("ActionSleep", aiAgent);
-	a->perform(0.1);
-
-	a = ActionDatabase::get()->constructAction<ActionEat>("ActionEat", aiAgent);
-	a->perform(0.1);
-
-	a = ActionDatabase::get()->constructAction<ActionMoveToDestination>("ActionMoveToDestination", aiAgent, 25, 25);
-	a->perform(0.1);
-
-
-	aiAgent->update(0.1);
-	aiAgent->update(0.1);
-	aiAgent->update(0.1);
-	aiAgent->update(0.1);
-	aiAgent->update(0.1);
-
-
 
 	NavMesh::get()->bake();
 

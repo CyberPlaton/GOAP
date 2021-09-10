@@ -17,9 +17,54 @@ public:
 	/*
 	* Basic needs.
 	*/
-	void setHunger(double n) { hunger = n; };
-	void setThirst(double n) { thirst = n; };
-	void setSleep(double n) { sleep = n; };
+	void setHunger(double n)
+	{ 
+		if (n < 0.0)
+		{
+			hunger = 0.0;
+		}
+		else if (n > 100.0)
+		{
+			hunger = 100.0;
+		}
+		else
+		{
+			hunger = n;
+		}
+	};
+
+	void setThirst(double n)
+	{
+		if (n < 0.0)
+		{
+			thirst = 0.0;
+		}
+		else if (n > 100.0)
+		{
+			thirst = 100.0;
+		}
+		else
+		{
+			thirst = n;
+		}
+	};
+
+	void setSleep(double n)
+	{
+		if (n < 0.0)
+		{
+			sleep = 0.0;
+		}
+		else if (n > 100.0)
+		{
+			sleep = 100.0;
+		}
+		else
+		{
+			sleep = n;
+		}
+	};
+
 
 	double getHunger() { return hunger; };
 	double getThirst() { return thirst; };

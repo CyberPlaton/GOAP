@@ -145,6 +145,8 @@ public:
 	}
 
 
+	virtual void update(double dt) { return; }
+
 
 	void setPosition(int x, int y)
 	{
