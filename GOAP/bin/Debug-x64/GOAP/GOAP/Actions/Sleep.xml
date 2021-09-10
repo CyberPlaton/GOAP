@@ -1,0 +1,8 @@
+<Actions>
+	<Action>
+		<ID>Sleep</ID>
+		<MinDuration>5.0</MinDuration>
+		<MaxDuration>9.0</MaxDuration>
+		<TargetTag>bed</TargetTag>
+	</Action>
+</Actions>

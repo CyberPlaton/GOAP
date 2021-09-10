@@ -5,7 +5,7 @@
 #include "AgentNeeds.h"
 #include "AgentRole.h"
 #include "AgentStats.h"
-#include "NeedsCmp.h"
+#include "SmartObject.h"
 #include "OwnershipCmp.h"
 #include "BehaviorTreeDefinitions.h"
 #include "AI.h"

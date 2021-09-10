@@ -248,6 +248,19 @@ bool App::OnUserCreate()
 	}
 
 	
+	ActionDatabase::get()->loadDefinitions("GOAP/Actions/ActionDatabase.xml");
+	ActionDefinition* def = ActionDatabase::get()->getActionDefinition("Sleep");
+
+	Action* a = ActionDatabase::get()->constructAction<ActionSleep>("Sleep", agent);
+	a->perform(0.1);
+
+	a = ActionDatabase::get()->constructAction<ActionEat>("Eat", agent);
+	a->perform(0.1);
+
+	a = ActionDatabase::get()->constructAction<ActionMoveToDestination>("MoveToDestination", agent, 10, 10);
+	a->perform(0.1);
+
+
 	NavMesh::get()->bake();
 
 	return true;

@@ -88,6 +88,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ActionDatabase.cpp" />
+    <ClCompile Include="Agent.cpp" />
     <ClCompile Include="AI.cpp" />
     <ClCompile Include="Any.cpp" />
     <ClCompile Include="BehaviorTreeDefinitions.cpp" />
@@ -110,6 +112,9 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Action.h" />
+    <ClInclude Include="ActionDatabase.h" />
+    <ClInclude Include="Actions.h" />
     <ClInclude Include="Agent.h" />
     <ClInclude Include="AgentNeeds.h" />
     <ClInclude Include="AgentRole.h" />
@@ -138,17 +143,14 @@
     <ClInclude Include="Components.h" />
     <ClInclude Include="ComponentSystem.h" />
     <ClInclude Include="DaySchedule.h" />
-    <ClInclude Include="Eat.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectCreator.h" />
     <ClInclude Include="GameWorld.h" />
     <ClInclude Include="GameWorldTime.h" />
-    <ClInclude Include="GetBeer.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="main.h" />
-    <ClInclude Include="NeedsCmp.h" />
+    <ClInclude Include="SmartObject.h" />
     <ClInclude Include="OwnershipCmp.h" />
-    <ClInclude Include="Sleep.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="WorldState.h" />
   </ItemGroup>

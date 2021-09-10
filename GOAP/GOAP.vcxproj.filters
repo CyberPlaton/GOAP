@@ -93,6 +93,12 @@
     <ClCompile Include="AI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ActionDatabase.cpp">
+      <Filter>Source Files\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Agent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -113,17 +119,8 @@
     <ClInclude Include="GameObjectCreator.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Sleep.h">
-      <Filter>Source Files\Actions</Filter>
-    </ClInclude>
     <ClInclude Include="ColorConsole.h">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Eat.h">
-      <Filter>Source Files\Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="GetBeer.h">
-      <Filter>Source Files\Actions</Filter>
     </ClInclude>
     <ClInclude Include="GameWorldTime.h">
       <Filter>Source Files</Filter>
@@ -200,7 +197,7 @@
     <ClInclude Include="AI.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="NeedsCmp.h">
+    <ClInclude Include="SmartObject.h">
       <Filter>Source Files\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="OwnershipCmp.h">
@@ -217,6 +214,15 @@
     </ClInclude>
     <ClInclude Include="WorldState.h">
       <Filter>Source Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Action.h">
+      <Filter>Source Files\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionDatabase.h">
+      <Filter>Source Files\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions.h">
+      <Filter>Source Files\Actions</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
