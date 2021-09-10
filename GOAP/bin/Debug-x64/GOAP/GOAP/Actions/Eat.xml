@@ -1,8 +1,6 @@
-<Actions>
-	<Action>
-		<ID>Eat</ID>
-		<MinDuration>0.5</MinDuration>
-		<MaxDuration>1.0</MaxDuration>
-		<TargetTag>table</TargetTag>
-	</Action>
-</Actions>
+<Action>
+	<ID>ActionEat</ID>
+	<MinDuration>0.5</MinDuration>
+	<MaxDuration>1.0</MaxDuration>
+	<TargetTag>table</TargetTag>
+</Action>

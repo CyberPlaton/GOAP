@@ -7,6 +7,20 @@
 
 #include "common/include/nlohmann/json.hpp"
 
+/*
+* The GOTag can be seen as the App unique identifier for a the GameObject.
+* Thus we can identify each and we can easily search for each.
+* 
+* The tag is generated automatically on construction like for example "GO_16_Furniture".
+*/
+using GOTag = std::string;
+
+/*
+* THE GOName is some given or generated name for a gameobject, which is not necesseraly
+* unique and can be duplicate, like the name "John" in a city.
+*/
+using GOName = std::string;
+
 
 static std::hash<std::string> hasher;
 class GameObject;
@@ -20,7 +34,7 @@ public:
 
 	static void del();
 
-	std::vector< GameObject* > getStorage();
+	std::vector< GameObject* >& getStorage();
 
 	void add(GameObject* go);
 
@@ -46,12 +60,10 @@ class GameObject
 public:
 	/*
 	* Construct a gameobject.
-	* 
-	* A Tag is the string identifier and is unique for each gameobject.
-	* A Name is the user defined "special" name, e.g. the name for an NPC,
-	* and it can be duplicate.
+	* GOTag is a GUID for a GameObject.
+	* GOName is just a name and can be duplicate.
 	*/
-	GameObject(const std::string& tag, const std::string& name) : name(name)
+	GameObject(const GOTag& tag, const GOName& name) : name(name)
 	{
 		this->tag = "GO_" + std::to_string(++g_GameObjectCount) + "_" + tag;
 
@@ -77,15 +89,25 @@ public:
 		}
 	}
 
-	Component* getComponent(const std::string& name)
+	Component* getComponent(const ComponentType& name)
 	{
 		for (auto& cmp : components)
 		{
+			// All components are unique for a GameObject,
+			// so there cannot be e.g. 2 Transforms.. Thus we can search with ComponentType.
+
+			if (cmp->getType().compare(name) == 0)
+			{
+				return cmp;
+			}
+
+			/*
 			// Search for component adjusted to own name.
 			if (cmp->name.compare(name) == 0)
 			{
 				return cmp;
 			}
+			*/
 		}
 
 		return nullptr;
@@ -100,15 +122,23 @@ public:
 
 
 
-	bool hasComponent(const std::string& name)
+	bool hasComponent(const ComponentType& name)
 	{
 		for (auto& cmp : components)
 		{
+
+			if (cmp->getType().compare(name) == 0)
+			{
+				return true;
+			}
+
+			/*
 			// Search for component adjusted to own name.
 			if (cmp->name.compare(name) == 0)
 			{
 				return true;
 			}
+			*/
 		}
 
 		return false;

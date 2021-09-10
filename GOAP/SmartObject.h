@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ComponentSystem.h"
+
 #include "tinyxml2.h"
 
 
@@ -10,24 +11,20 @@
 class SmartObject : public Component
 {
 public:
-	SmartObject()
+	SmartObject(const ComponentID& name)
 	{
 		this->name = name;
 		type = "SmartObject";
 		init(type);
 	}
 
-	std::string getType() override { return this->type; }
+	ComponentType getType() override { return this->type; }
 
 
 	/*
 	* Import Definition from XML.
 	*/
-	bool init(const std::string& path)
-	{
-		// Not implemented
-		return false;
-	}
+	bool loadDefinition(const std::string& path);
 
 
 	/*
@@ -67,7 +64,7 @@ public:
 
 
 private:
-	std::string type;
+	ComponentType type;
 
 	/*
 	* Map of how much this object fulfills a certain need.

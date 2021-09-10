@@ -23,7 +23,7 @@ void GameObjectStorage::del()
 	}
 }
 
-std::vector< GameObject* > GameObjectStorage::getStorage()
+std::vector< GameObject* >& GameObjectStorage::getStorage()
 {
 	return g_GameObjectStorage->m_GameObjects;
 }

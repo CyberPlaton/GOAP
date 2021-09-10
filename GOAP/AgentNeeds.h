@@ -5,14 +5,14 @@
 class AgentNeedsCmp : public Component
 {
 public:
-	AgentNeedsCmp(const std::string& name)
+	AgentNeedsCmp(const ComponentID& name)
 	{
 		this->name = name;
 		type = "AgentNeeds";
 		init(type);
 	}
 
-	std::string getType() override { return this->type; }
+	ComponentType getType() override { return this->type; }
 
 	/*
 	* Basic needs.
@@ -27,10 +27,10 @@ public:
 
 
 private:
-	std::string type;
+	ComponentType type;
 
-	double hunger;
-	double thirst;
-	double sleep;
+	double hunger = 0.0;
+	double thirst = 0.0;
+	double sleep = 0.0;
 
 };

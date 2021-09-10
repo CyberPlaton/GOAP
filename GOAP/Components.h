@@ -13,7 +13,7 @@
 class CollisionBoxCmp : public Component
 {
 public:
-	CollisionBoxCmp(const std::string& name, float width, float height, GameObject* go) :
+	CollisionBoxCmp(const ComponentID& name, float width, float height, GameObject* go) :
 		width(width), height(height), this_agent(go)
 	{
 		this->name = name;
@@ -22,7 +22,7 @@ public:
 		init(type);
 	}
 
-	std::string getType() override { return this->type; }
+	ComponentType getType() override { return this->type; }
 
 	bool resolve(GameObject* other)
 	{
@@ -70,7 +70,7 @@ public:
 
 	GameObject* this_agent = nullptr;
 
-	std::string type;
+	ComponentType type;
 
 	float width = 0.0f;
 	float height = 0.0f;
@@ -369,16 +369,16 @@ class NavigatorCmp : public Component
 {
 public:
 
-	NavigatorCmp(const std::string&name, GameObject* go) : agent(go)
+	NavigatorCmp(const ComponentID& name, GameObject* go) : agent(go)
 	{
 		this->name = name;
-		type = "NavigatorCmp";
+		type = "Navigator";
 
 		init(type);
 	}
 
 
-	std::string getType() override { return this->type; }
+	ComponentType getType() override { return this->type; }
 
 
 	/*
@@ -474,7 +474,7 @@ public:
 
 	GameObject* agent = nullptr;
 
-	std::string type;
+	ComponentType type;
 
 	float destx = 0.0f;
 	float desty = 0.0f;

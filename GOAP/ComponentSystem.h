@@ -9,6 +9,25 @@
 class Component;
 using ComponentMap = std::map<std::string, std::vector<Component*>>;
 
+
+/*
+* The ComponentID is how the user names it, this can be anything, even a unique name for each component,
+* for example for the TransformCmp of some Agent named "Ralf" we can assign the ComponentID as := "GO_98_Ralf_Transform".
+*/
+using ComponentID = std::string;
+
+/*
+* The ComponentType is more of a runtime  type information and describes what kind of class the component it,
+* thus we can know to what we can cast it. For now it is a string, but will be enumed or hashed...
+*/
+using ComponentType = std::string;
+
+
+
+
+
+
+
 /*
 * General storage for all components with types.
 * Usage, e.g. for iteration of all components with some type.
@@ -24,7 +43,7 @@ public:
 	/*
 	* Each comonent adds itself on creation.
 	*/
-	void add(Component* c, const std::string& type);
+	void add(Component* c, const ComponentType& type);
 
 	/*
 	* Each component removes itself on destr.
@@ -35,7 +54,7 @@ public:
 	* Iteratable for a set of components of same type.
 	*/
 	template < class T >
-	std::vector<T*> getAllOfType(const std::string& type)
+	std::vector<T*> getAllOfType(const ComponentType& type)
 	{
 		if (componentMap.contains(type))
 		{
@@ -73,7 +92,7 @@ public:
 	virtual ~Component(){}
 
 
-	bool init(const std::string& type)
+	bool init(const ComponentType& type)
 	{
 		// Assign a numerical id to self.
 		id = ++g_ComponentID;
@@ -86,10 +105,10 @@ public:
 	}
 
 
-	virtual std::string getType() = 0;
+	virtual ComponentType getType() = 0;
 
 	unsigned long long id;
-	std::string name;
+	ComponentID name;
 };
 
 
@@ -99,7 +118,7 @@ public:
 class TransformCmp : public Component
 {
 public:
-	TransformCmp(const std::string& name) :xpos(0), ypos(0)
+	TransformCmp(const ComponentID& name) :xpos(0), ypos(0)
 	{
 		this->name = name;
 		type = "Transform";
@@ -114,9 +133,9 @@ public:
 		this->ypos = y;
 	}
 
-	std::string getType() override { return this->type; }
+	ComponentType getType() override { return this->type; }
 
-	std::string type;
+	ComponentType type;
 	int xpos;
 	int ypos;
 };
@@ -126,7 +145,7 @@ public:
 class RendererableCmp : public Component
 {
 public:
-	RendererableCmp(const std::string& name, float width, float height, const std::string& color):
+	RendererableCmp(const ComponentID& name, float width, float height, const std::string& color):
 		width(width), height(height), color(color)
 	{
 		this->name = name;
@@ -136,14 +155,17 @@ public:
 	}
 
 
-	std::string getType() override { return this->type; }
+	ComponentType getType() override { return this->type; }
+
+
+
+
+	ComponentType type;
 
 	/*
 	* Specify the dimension of it.
 	* Where to draw is derived from transform.
 	*/
-	std::string type;
-
 	float width = 0.0f;
 	float height = 0.0f;
 

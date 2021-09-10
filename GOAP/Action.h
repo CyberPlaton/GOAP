@@ -37,11 +37,9 @@ struct ActionDefinition
 		if (root == nullptr) throw std::runtime_error("Could not load action definition!");
 
 
-
-		XMLElement* action = root->FirstChildElement("Action");
 		
 		// Get id
-		XMLElement* elem = action->FirstChildElement("ID");
+		XMLElement* elem = root->FirstChildElement("ID");
 		this->id = elem->GetText();
 
 		// Set hash
@@ -49,15 +47,15 @@ struct ActionDefinition
 
 
 		// Get duration
-		elem = action->FirstChildElement("MinDuration");
+		elem = root->FirstChildElement("MinDuration");
 		this->minDuration = std::stod(elem->GetText());
 
-		elem = action->FirstChildElement("MaxDuration");
+		elem = root->FirstChildElement("MaxDuration");
 		this->maxDuration = std::stod(elem->GetText());
 
 
 		// Get tag of the target
-		elem = action->FirstChildElement("TargetTag");
+		elem = root->FirstChildElement("TargetTag");
 		this->targetTag = elem->GetText();
 	}
 

@@ -10,7 +10,7 @@ public:
 	OwnershipCmp()
 	{
 		this->name = name;
-		type = "Needs";
+		type = "Ownership";
 		init(type);
 	}
 

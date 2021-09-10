@@ -5,14 +5,14 @@
 class AgentStatsCmp : public Component
 {
 public:
-	AgentStatsCmp(const std::string& name)
+	AgentStatsCmp(const ComponentID& name)
 	{
 		this->name = name;
 		type = "AgentStats";
 		init(type);
 	}
 
-	std::string getType() override { return this->type; }
+	ComponentType getType() override { return this->type; }
 
 
 	void setStrength(double n) { strength = n; };
@@ -43,17 +43,17 @@ public:
 	double getMagicka() { return magicka; };
 
 private:
-	std::string type;
+	ComponentType type;
 
-	double strength;
-	double intellect;
-	double willpower;
-	double agility;
-	double speed;
-	double endurance;
-	double personality;
-	double luck;
-	double health;
-	double magicka;
-	double fatigue;
+	double strength = 0.0;
+	double intellect = 0.0;
+	double willpower = 0.0;
+	double agility = 0.0;
+	double speed = 0.0;
+	double endurance = 0.0;
+	double personality = 0.0;
+	double luck = 0.0;
+	double health = 0.0;
+	double magicka = 0.0;
+	double fatigue = 0.0;
 };
