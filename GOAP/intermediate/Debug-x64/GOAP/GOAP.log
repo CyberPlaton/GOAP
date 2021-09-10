@@ -35,7 +35,7 @@ C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Timer.h(60,16): warning C4244: 'ret
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\GameWorldTime.h(39,14): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\GameWorldTime.h(48,12): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\DaySchedule.h(8,14): warning C4099: 'Action': type name first seen using 'class' now seen using 'struct'
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Action.h(73): message : see declaration of 'Action'
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Action.h(76): message : see declaration of 'Action'
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\BTCommon.h(42,25): warning C4244: 'return': conversion from '_Rep' to 'double', possible loss of data
           with
           [
@@ -197,20 +197,4 @@ C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(311): message : see re
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(311): message : see reference to function template instantiation 'std::tuple<int,int,int,int,float>::tuple<int,int,int,int,int,0>(std::tuple<int,int,int,int,int> &&) noexcept' being compiled
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\ComponentSystem.h(51): warning C4715: 'ComponentStorage::getAllOfType<CollisionBoxCmp>': not all control paths return a value
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\ActionDatabase.h(47): warning C4715: 'ActionDatabase::getActionDefinition': not all control paths return a value
-     Creating library C:\Users\Bogdan Strohonov\Desktop\GOAP2\\GOAP\bin\Debug-x64\GOAP\GOAP.lib and object C:\Users\Bogdan Strohonov\Desktop\GOAP2\\GOAP\bin\Debug-x64\GOAP\GOAP.exp
-glfw3.lib(context.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(context.obj)' or at 'C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\bin\Debug-x64\GOAP\glfw.pdb'; linking object as if no debug info
-glfw3.lib(init.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(init.obj)' or at 'C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\bin\Debug-x64\GOAP\glfw.pdb'; linking object as if no debug info
-glfw3.lib(input.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(input.obj)' or at 'C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\bin\Debug-x64\GOAP\glfw.pdb'; linking object as if no debug info
-glfw3.lib(monitor.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(monitor.obj)' or at 'C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\bin\Debug-x64\GOAP\glfw.pdb'; linking object as if no debug info
-glfw3.lib(vulkan.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(vulkan.obj)' or at 'C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\bin\Debug-x64\GOAP\glfw.pdb'; linking object as if no debug info
-glfw3.lib(window.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(window.obj)' or at 'C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\bin\Debug-x64\GOAP\glfw.pdb'; linking object as if no debug info
-glfw3.lib(win32_init.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(win32_init.obj)' or at 'C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\bin\Debug-x64\GOAP\glfw.pdb'; linking object as if no debug info
-glfw3.lib(win32_joystick.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(win32_joystick.obj)' or at 'C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\bin\Debug-x64\GOAP\glfw.pdb'; linking object as if no debug info
-glfw3.lib(win32_monitor.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(win32_monitor.obj)' or at 'C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\bin\Debug-x64\GOAP\glfw.pdb'; linking object as if no debug info
-glfw3.lib(win32_time.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(win32_time.obj)' or at 'C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\bin\Debug-x64\GOAP\glfw.pdb'; linking object as if no debug info
-glfw3.lib(win32_thread.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(win32_thread.obj)' or at 'C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\bin\Debug-x64\GOAP\glfw.pdb'; linking object as if no debug info
-glfw3.lib(win32_window.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(win32_window.obj)' or at ''; linking object as if no debug info
-glfw3.lib(wgl_context.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(wgl_context.obj)' or at 'C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\bin\Debug-x64\GOAP\glfw.pdb'; linking object as if no debug info
-glfw3.lib(egl_context.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(egl_context.obj)' or at 'C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\bin\Debug-x64\GOAP\glfw.pdb'; linking object as if no debug info
-glfw3.lib(osmesa_context.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(osmesa_context.obj)' or at 'C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\bin\Debug-x64\GOAP\glfw.pdb'; linking object as if no debug info
   GOAP.vcxproj -> C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\bin\Debug-x64\GOAP\GOAP.exe

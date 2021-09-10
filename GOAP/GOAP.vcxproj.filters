@@ -97,7 +97,10 @@
       <Filter>Source Files\Actions</Filter>
     </ClCompile>
     <ClCompile Include="Agent.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions.cpp">
+      <Filter>Source Files\Actions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -89,6 +89,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ActionDatabase.cpp" />
+    <ClCompile Include="Actions.cpp" />
     <ClCompile Include="Agent.cpp" />
     <ClCompile Include="AI.cpp" />
     <ClCompile Include="Any.cpp" />

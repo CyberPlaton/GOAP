@@ -8,6 +8,7 @@
 #include "WorldState.h"
 #include "DaySchedule.h"
 
+#include "Action.h"
 
 /*
 * An agent is an extended gameobject with game specific functionality.
@@ -36,17 +37,28 @@ private:
 	/*
 	* Use scoring functions to score the needs in the map.
 	*/
-	void scoreNeeds();
+	void scoreNeeds()
+	{
+
+	}
 
 	/*
 	* Use a function to get the need we want currently to battle.
 	*/
-	std::string getNeedToBattle();
+	std::string getNeedToBattle()
+	{
+		// Not impl
+		return "";
+	}
 
 	/*
 	* Search for object which does satisfy the need.
 	* Searching is done in owned object or inventory and then in the world around.
 	*/
-	GameObject* getObjectToFulfillNeedWith(const std::string& need);
+	GameObject* getObjectToFulfillNeedWith(const std::string& need)
+	{
+		// Not impl
+		return nullptr;
+	}
 
 };

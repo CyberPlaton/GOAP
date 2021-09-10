@@ -1,8 +1,8 @@
 #pragma once
+
 #include "Action.h"
 
 #include <iostream>
-
 
 class ActionMoveToDestination : public ActionInstance
 {
@@ -13,14 +13,7 @@ public:
 	}
 
 
-	bool perform(double dt) override final
-	{
-		using namespace std;
-
-		cout << "\"MoveToDestinationAction\" Action Completed for \"" << this->getPawn()->name << "\" reaching target at {"<< destx << ":"<< desty << "}" << endl;
-
-		return true;
-	}
+	bool perform(double dt) override final;
 
 	bool postPerform(double dt) override final
 	{

@@ -240,13 +240,13 @@ bool App::OnUserCreate()
 	static_cast<TransformCmp*>(another_house->getComponent("Transform"))->xpos = 16;
 	static_cast<TransformCmp*>(another_house->getComponent("Transform"))->ypos = 15;
 
-
+	/*
 	GameObjectCreator creator;
 	for (int i = 0; i < 20; i++)
 	{
 		Agent* a = creator.createAgent("GOAP/Gameobjects/Villager.xml", "Villager_" + std::to_string(i), 0, 0);
 	}
-
+	*/
 	
 	ActionDatabase::get()->loadDefinitions("GOAP/Actions/ActionDatabase.xml");
 	ActionDefinition* def = ActionDatabase::get()->getActionDefinition("Sleep");
@@ -257,7 +257,7 @@ bool App::OnUserCreate()
 	a = ActionDatabase::get()->constructAction<ActionEat>("Eat", agent);
 	a->perform(0.1);
 
-	a = ActionDatabase::get()->constructAction<ActionMoveToDestination>("MoveToDestination", agent, 10, 10);
+	a = ActionDatabase::get()->constructAction<ActionMoveToDestination>("MoveToDestination", agent, 25, 25);
 	a->perform(0.1);
 
 

@@ -1,7 +1,10 @@
 #pragma once
+#include "tinyxml2.h"
 
 #include "GameObject.h"
-#include "tinyxml2.h"
+
+#include <string>
+#include <stdexcept>
 
 
 class ActionMoveToDestination;
