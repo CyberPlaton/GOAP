@@ -201,7 +201,7 @@ bool App::OnUserCreate()
 	tv = olc::TileTransformedView({ ScreenWidth(), ScreenHeight() }, {32, 32});
 
 	
-	GameWorldTime::get()->setTimeSpeed(0.04);
+	GameWorldTime::get()->setTimeSpeed(0.03);
 
 
 	GameObject* agent = new GameObject("Agent", "Dude");
@@ -516,6 +516,54 @@ void App::_onImGui()
 
 							ImGui::Checkbox("Render", &rc->render);
 						}
+
+
+						if (cmp->getType().find("AgentStats") != std::string::npos)
+						{
+							AgentStatsCmp* stats = static_cast<AgentStatsCmp*>(cmp);
+
+						}
+
+						if (cmp->getType().find("AgentNeeds") != std::string::npos)
+						{
+							static std::vector<float> hunger_plot;
+							static std::vector<float> sleep_plot;
+							static std::vector<float> thirst_plot;
+
+							AgentNeedsCmp* stats = static_cast<AgentNeedsCmp*>(cmp);
+
+							ImGui::Text("Hunger: %.5f", stats->getHunger());
+							hunger_plot.push_back((float)stats->getHunger());
+							ImGui::SameLine();
+							ImGui::PlotLines("Function", &hunger_plot[0], hunger_plot.size());
+
+
+							ImGui::Text("Sleep: %.5f", stats->getSleep());
+							sleep_plot.push_back((float)stats->getSleep());
+							ImGui::SameLine();
+							ImGui::PlotLines("Function", &sleep_plot[0], sleep_plot.size());
+
+
+							ImGui::Text("Thirst: %.5f", stats->getThirst());
+							thirst_plot.push_back((float)stats->getThirst());
+							ImGui::SameLine();
+							ImGui::PlotLines("Function", &thirst_plot[0], thirst_plot.size());
+
+
+							if (hunger_plot.size() > 100)
+							{
+								hunger_plot.erase(hunger_plot.begin());
+							}
+							if (sleep_plot.size() > 100)
+							{
+								sleep_plot.erase(sleep_plot.begin());
+							}
+							if (thirst_plot.size() > 100)
+							{
+								thirst_plot.erase(thirst_plot.begin());
+							}
+						}
+
 
 						ImGui::TreePop();
 					}

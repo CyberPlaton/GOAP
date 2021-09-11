@@ -49,15 +49,14 @@ bool ActionSleep::perform(double dt)
 
 	if (timer->getElapsedGamehours() <= duration)
 	{
-		// Check whether agent does not need sleep anymore.
 		Agent* pawn = static_cast<Agent*>(getPawn());
 		AgentNeedsCmp* needs = pawn->getComponent<AgentNeedsCmp>("AgentNeeds");
-		if (needs->getSleep() == 0.0) return true;
-
 
 		// Decrease sleep a bit.
-		needs->setSleep(needs->getSleep() - 3.14152);
+		needs->incrementSleep(-(1.3 * GameWorldTime::get()->getTimeSpeed()));
 
+		// Check whether agent does not need sleep anymore.
+		if (needs->getSleep() <= 0.0) return true;
 
 		// Action not completed yet.
 		return false;
@@ -106,7 +105,20 @@ bool ActionEat::perform(double dt)
 	// Get duration of action
 	double duration = getMaxDuration() - getMinDuration();
 
-	if (timer->getElapsedGamehours() <= duration) return false;
+	if (timer->getElapsedGamehours() <= duration)
+	{
+		Agent* pawn = static_cast<Agent*>(getPawn());
+		AgentNeedsCmp* needs = pawn->getComponent<AgentNeedsCmp>("AgentNeeds");
+
+		// Decrease hunger a bit.
+		needs->incrementHunger(-(1.3 * GameWorldTime::get()->getTimeSpeed()));
+
+		// Check whether agent does not need sleep anymore.
+		if (needs->getHunger() <= 0.0) return true;
+
+		// Action not completed yet.
+		return false;
+	}
 	else
 	{
 		return true;
@@ -140,6 +152,39 @@ bool ActionDrink::perform(double dt)
 {
 	using namespace std;
 
+	if (timer_started == 0)
+	{
+		timer->startTimer();
+		timer_started = 1;
+	}
+
+	// Get duration of action
+	double duration = getMaxDuration() - getMinDuration();
+
+	if (timer->getElapsedGamehours() <= duration)
+	{
+		Agent* pawn = static_cast<Agent*>(getPawn());
+		AgentNeedsCmp* needs = pawn->getComponent<AgentNeedsCmp>("AgentNeeds");
+
+		// Decrease thirst a bit.
+		needs->incrementThirst(-(1.3 * GameWorldTime::get()->getTimeSpeed()));
+
+		// Check whether agent does not need sleep anymore.
+		if (needs->getThirst() <= 0.0) return true;
+
+		// Action not completed yet.
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+
+bool ActionDrink::postPerform(double dt)
+{
+	using namespace std;
+
 	Agent* pawn = static_cast<Agent*>(getPawn());
 
 	AgentNeedsCmp* needs = pawn->getComponent<AgentNeedsCmp>("AgentNeeds");
@@ -152,5 +197,7 @@ bool ActionDrink::perform(double dt)
 
 	cout << "\"ActionDrink\" Action Completed for \"" << this->getPawn()->name << "\"" << endl;
 
+
+	delete this;
 	return true;
 }

@@ -74,19 +74,14 @@ class ActionDrink : public ActionInstance
 public:
 	ActionDrink(ActionDefinition* def, GameObject* pawn, GameObject* smartObject) : ActionInstance(def, pawn, smartObject)
 	{
-
+		timer = new GameworldTimer();
 	}
 
 
 	bool perform(double dt) override final;
 
-	bool postPerform(double dt) override final
-	{
+	bool postPerform(double dt) override final;
 
-
-
-
-		delete this;
-		return true;
-	}
+	int timer_started = 0;
+	GameworldTimer* timer = nullptr;
 };

@@ -66,6 +66,25 @@ public:
 	};
 
 
+	void incrementHunger(double n)
+	{
+		double d = getHunger() + n;
+		setHunger(d);
+	}
+
+	void incrementSleep(double n)
+	{
+		double d = getSleep() + n;
+		setSleep(d);
+	}
+
+	void incrementThirst(double n)
+	{
+		double d = getThirst() + n;
+		setThirst(d);
+	}
+
+
 	double getHunger() { return hunger; };
 	double getThirst() { return thirst; };
 	double getSleep() { return sleep; };

@@ -2,14 +2,13 @@
 
 void Agent::update(double dt)
 {
+	// Update the needs of the agent.
+	scoreNeeds();
+
+
 	if (actionStack.empty())
 	{
 		// Agent has nothing to do.
-
-
-		// Score needs.
-		scoreNeeds();
-
 
 		// Get the need to battle.
 		std::string need = getNeedToBattle();
@@ -86,29 +85,22 @@ void Agent::scoreNeeds()
 	using namespace std;
 
 	AgentNeedsCmp* needs = getComponent<AgentNeedsCmp>("AgentNeeds");
-
+	double timedt = GameWorldTime::get()->getTimeSpeed();
 
 	// Score sleep
-	needs->setSleep(1.3 + needs->getSleep() * needs->getSleep());
+	needs->incrementSleep(0.13 * timedt);
 
 	// Score hunger
-	needs->setHunger(0.3 + needs->getHunger() * needs->getHunger());
+	needs->incrementHunger(0.03 * timedt);
 
 	// Score thirst
-	needs->setThirst(0.7 + needs->getThirst() * needs->getThirst());
+	needs->incrementThirst(0.07 * timedt);
 
 
 	// Store scores
 	needsScoreMap["Sleep"] = needs->getSleep();
 	needsScoreMap["Hunger"] = needs->getHunger();
 	needsScoreMap["Thirst"] = needs->getThirst();
-
-	cout << color(colors::YELLOW);
-	cout << "Needs of \""<< getName() << "\": " << endl;
-	cout << "\"Sleep\": " << needs->getSleep() << endl;
-	cout << "\"Hunger\": " << needs->getHunger() << endl;
-	cout << "\"Thirst\": " << needs->getThirst() << endl;
-	cout << white;
 }
 
 
