@@ -51,9 +51,13 @@ bool ActionSleep::perform(double dt)
 	{
 		Agent* pawn = static_cast<Agent*>(getPawn());
 		AgentNeedsCmp* needs = pawn->getComponent<AgentNeedsCmp>("AgentNeeds");
+		GameObject* smartGO = getSmartObject();
+		SmartObject* smo = smartGO->getComponent<SmartObject>("SmartObject");
+		double a = smo->getFulfillmentAmount("Sleep");
 
 		// Decrease sleep a bit.
-		needs->incrementSleep(-(1.3 * GameWorldTime::get()->getTimeSpeed()));
+		needs->incrementSleep(-(a * GameWorldTime::get()->getTimeSpeed()));
+
 
 		// Check whether agent does not need sleep anymore.
 		if (needs->getSleep() <= 0.0) return true;
@@ -71,20 +75,7 @@ bool ActionSleep::postPerform(double dt)
 {
 	using namespace std;
 
-
-	Agent* pawn = static_cast<Agent*>(getPawn());
-
-	AgentNeedsCmp* needs = pawn->getComponent<AgentNeedsCmp>("AgentNeeds");
-
-	GameObject* smartGO = getSmartObject();
-	SmartObject* smo = smartGO->getComponent<SmartObject>("SmartObject");
-
-
-	needs->setSleep(needs->getSleep() - smo->getFulfillmentAmount("Sleep"));
-
-
 	cout << "\"ActionSleep\" Action Completed for \"" << this->getPawn()->name << "\"" << endl;
-
 
 
 	delete this;
@@ -109,9 +100,12 @@ bool ActionEat::perform(double dt)
 	{
 		Agent* pawn = static_cast<Agent*>(getPawn());
 		AgentNeedsCmp* needs = pawn->getComponent<AgentNeedsCmp>("AgentNeeds");
+		GameObject* smartGO = getSmartObject();
+		SmartObject* smo = smartGO->getComponent<SmartObject>("SmartObject");
+		double a = smo->getFulfillmentAmount("Hunger");
 
 		// Decrease hunger a bit.
-		needs->incrementHunger(-(1.3 * GameWorldTime::get()->getTimeSpeed()));
+		needs->incrementHunger(-(a * GameWorldTime::get()->getTimeSpeed()));
 
 		// Check whether agent does not need sleep anymore.
 		if (needs->getHunger() <= 0.0) return true;
@@ -129,19 +123,7 @@ bool ActionEat::postPerform(double dt)
 {
 	using namespace std;
 
-
-	Agent* pawn = static_cast<Agent*>(getPawn());
-
-	AgentNeedsCmp* needs = pawn->getComponent<AgentNeedsCmp>("AgentNeeds");
-
-	GameObject* smartGO = getSmartObject();
-	SmartObject* smo = smartGO->getComponent<SmartObject>("SmartObject");
-
-
-	needs->setHunger(needs->getHunger() - smo->getFulfillmentAmount("Hunger"));
-
 	cout << "\"ActionEat\" Action Completed for \"" << this->getPawn()->name << "\"" << endl;
-
 
 	delete this;
 	return true;
@@ -165,9 +147,12 @@ bool ActionDrink::perform(double dt)
 	{
 		Agent* pawn = static_cast<Agent*>(getPawn());
 		AgentNeedsCmp* needs = pawn->getComponent<AgentNeedsCmp>("AgentNeeds");
+		GameObject* smartGO = getSmartObject();
+		SmartObject* smo = smartGO->getComponent<SmartObject>("SmartObject");
+		double a = smo->getFulfillmentAmount("Thirst");
 
 		// Decrease thirst a bit.
-		needs->incrementThirst(-(1.3 * GameWorldTime::get()->getTimeSpeed()));
+		needs->incrementThirst(-(a * GameWorldTime::get()->getTimeSpeed()));
 
 		// Check whether agent does not need sleep anymore.
 		if (needs->getThirst() <= 0.0) return true;
@@ -185,18 +170,7 @@ bool ActionDrink::postPerform(double dt)
 {
 	using namespace std;
 
-	Agent* pawn = static_cast<Agent*>(getPawn());
-
-	AgentNeedsCmp* needs = pawn->getComponent<AgentNeedsCmp>("AgentNeeds");
-
-	GameObject* smartGO = getSmartObject();
-	SmartObject* smo = smartGO->getComponent<SmartObject>("SmartObject");
-
-
-	needs->setThirst(needs->getThirst() - smo->getFulfillmentAmount("Thirst"));
-
 	cout << "\"ActionDrink\" Action Completed for \"" << this->getPawn()->name << "\"" << endl;
-
 
 	delete this;
 	return true;
