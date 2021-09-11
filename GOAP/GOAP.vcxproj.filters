@@ -230,5 +230,8 @@
     <ClInclude Include="Actions.h">
       <Filter>Source Files\Actions</Filter>
     </ClInclude>
+    <ClInclude Include="GameWorldTimer.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

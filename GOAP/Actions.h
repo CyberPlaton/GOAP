@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Action.h"
+#include "GameWorldTimer.h"
 
 #include <iostream>
 
@@ -34,16 +35,16 @@ class ActionSleep : public ActionInstance
 public:
 	ActionSleep(ActionDefinition* def, GameObject* pawn, GameObject* smartObject) : ActionInstance(def, pawn, smartObject)
 	{
-
+		timer = new GameworldTimer();
 	}
 
 
 	bool perform(double dt) override final;
+	bool postPerform(double dt) override final;
 
-	bool postPerform(double dt) override final
-	{
-		return true;
-	}
+
+	int timer_started = 0;
+	GameworldTimer* timer = nullptr;
 };
 
 
@@ -53,16 +54,17 @@ class ActionEat : public ActionInstance
 public:
 	ActionEat(ActionDefinition* def, GameObject* pawn, GameObject* smartObject) : ActionInstance(def, pawn, smartObject)
 	{
-
+		timer = new GameworldTimer();
 	}
 
 
 	bool perform(double dt) override final;
+	bool postPerform(double dt) override final;
 
-	bool postPerform(double dt) override final
-	{
-		return true;
-	}
+
+
+	int timer_started = 0;
+	GameworldTimer* timer = nullptr;
 };
 
 
@@ -80,6 +82,11 @@ public:
 
 	bool postPerform(double dt) override final
 	{
+
+
+
+
+		delete this;
 		return true;
 	}
 };

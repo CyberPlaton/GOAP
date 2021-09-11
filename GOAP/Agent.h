@@ -1,5 +1,7 @@
 #pragma once
 
+#include "ColorConsole.h"
+
 #include "ComponentSystem.h"
 #include "Components.h"
 #include "GameObject.h"

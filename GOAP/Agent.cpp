@@ -87,17 +87,15 @@ void Agent::scoreNeeds()
 
 	AgentNeedsCmp* needs = getComponent<AgentNeedsCmp>("AgentNeeds");
 
-	double r = static_cast<double>(rand() % 5);
-
 
 	// Score sleep
-	needs->setSleep(needs->getSleep() + r * 1.3);
+	needs->setSleep(1.3 + needs->getSleep() * needs->getSleep());
 
 	// Score hunger
-	needs->setHunger(needs->getHunger() + r * 0.3);
+	needs->setHunger(0.3 + needs->getHunger() * needs->getHunger());
 
 	// Score thirst
-	needs->setThirst(needs->getThirst() + r * 0.7);
+	needs->setThirst(0.7 + needs->getThirst() * needs->getThirst());
 
 
 	// Store scores
@@ -105,11 +103,12 @@ void Agent::scoreNeeds()
 	needsScoreMap["Hunger"] = needs->getHunger();
 	needsScoreMap["Thirst"] = needs->getThirst();
 
-
+	cout << color(colors::YELLOW);
 	cout << "Needs of \""<< getName() << "\": " << endl;
 	cout << "\"Sleep\": " << needs->getSleep() << endl;
 	cout << "\"Hunger\": " << needs->getHunger() << endl;
 	cout << "\"Thirst\": " << needs->getThirst() << endl;
+	cout << white;
 }
 
 

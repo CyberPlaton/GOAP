@@ -149,6 +149,7 @@
     <ClInclude Include="GameObjectCreator.h" />
     <ClInclude Include="GameWorld.h" />
     <ClInclude Include="GameWorldTime.h" />
+    <ClInclude Include="GameWorldTimer.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="SmartObject.h" />

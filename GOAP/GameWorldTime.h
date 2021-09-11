@@ -103,6 +103,15 @@ public:
 		return timestring;
 	}
 
+	int getMinutes()
+	{
+		return minutes;
+	}
+
+	int getHours()
+	{
+		return hours;
+	}
 
 	int getDay()
 	{

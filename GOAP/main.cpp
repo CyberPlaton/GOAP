@@ -201,7 +201,7 @@ bool App::OnUserCreate()
 	tv = olc::TileTransformedView({ ScreenWidth(), ScreenHeight() }, {32, 32});
 
 	
-	GameWorldTime::get()->setTimeSpeed(0.1);
+	GameWorldTime::get()->setTimeSpeed(0.04);
 
 
 	GameObject* agent = new GameObject("Agent", "Dude");
