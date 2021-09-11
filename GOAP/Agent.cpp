@@ -139,20 +139,31 @@ std::string Agent::getNeedToBattle()
 GameObject* Agent::getObjectToFulfillNeedWith(const std::string& need)
 {
 	GameObject* go = nullptr;
+	double satisfaction_level = 0.0;
 
-	// First search in invenory and owned objects.
+	// First search in invenory and owned objects
+	// and choose the object which satisfies te most
 	for (auto& o : agentInventory->getItems())
 	{
 		if (o->hasComponent("SmartObject"))
 		{
 			SmartObject* smo = o->getComponent<SmartObject>("SmartObject");
 
-			if (smo->getFulfillmentAmount(need) > 0.0)
+			double d = smo->getFulfillmentAmount(need);
+			if (d > 0.0)
 			{
-				return o;
+				if (d > satisfaction_level)
+				{
+					go = o;
+					satisfaction_level = d;
+				}
 			}
 		}
 	}
+
+	if (go) return go;
+
+
 
 	for (auto& o : agentOwnedObjects)
 	{
@@ -160,12 +171,19 @@ GameObject* Agent::getObjectToFulfillNeedWith(const std::string& need)
 		{
 			SmartObject* smo = o->getComponent<SmartObject>("SmartObject");
 
-			if (smo->getFulfillmentAmount(need) > 0.0)
+			double d = smo->getFulfillmentAmount(need);
+			if (d > 0.0)
 			{
-				return o;
+				if (d > satisfaction_level)
+				{
+					go = o;
+					satisfaction_level = d;
+				}
 			}
 		}
 	}
+
+	if (go) return go;
 
 
 	// Then search in world.
@@ -176,12 +194,19 @@ GameObject* Agent::getObjectToFulfillNeedWith(const std::string& need)
 		{
 			SmartObject* smo = o->getComponent<SmartObject>("SmartObject");
 
-			if (smo->getFulfillmentAmount(need) > 0.0)
+			double d = smo->getFulfillmentAmount(need);
+			if (d > 0.0)
 			{
-				return o;
+				if (d > satisfaction_level)
+				{
+					go = o;
+					satisfaction_level = d;
+				}
 			}
 		}
 	}
+
+	if (go) return go;
 
 
 	// Nothing found to fulfill need with

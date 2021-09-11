@@ -250,6 +250,9 @@ bool App::OnUserCreate()
 
 
 	// Set up test smart object
+	/*
+	* TABLE
+	*/
 	GameObject* table = new GameObject("Furniture", "testing_table");
 	table->AddComponent(new TransformCmp("Transform"));
 	table->AddComponent(new RendererableCmp("Renderable", 1.0f, 1.0f, "yellow"));
@@ -261,6 +264,9 @@ bool App::OnUserCreate()
 	smo->loadDefinition("GOAP/Gameobjects/Table.xml");
 	table->AddComponent(smo);
 
+	/*
+	* WELL
+	*/
 	GameObject* well = new GameObject("Furniture", "testing_well");
 	well->AddComponent(new TransformCmp("Transform"));
 	well->AddComponent(new RendererableCmp("Renderable", 1.0f, 1.0f, "yellow"));
@@ -272,6 +278,19 @@ bool App::OnUserCreate()
 	smo2->loadDefinition("GOAP/Gameobjects/Well.xml");
 	well->AddComponent(smo2);
 
+	/*
+	* BED
+	*/
+	GameObject* bed = new GameObject("Furniture", "testing_bed");
+	bed->AddComponent(new TransformCmp("Transform"));
+	bed->AddComponent(new RendererableCmp("Renderable", 1.0f, 1.0f, "dark_magenta"));
+	bed->AddComponent(new CollisionBoxCmp("CollisionBox", 1.0f, 1.0f, bed));
+	static_cast<TransformCmp*>(bed->getComponent("Transform"))->xpos = 27;
+	static_cast<TransformCmp*>(bed->getComponent("Transform"))->ypos = 1;
+
+	SmartObject* smo3 = new SmartObject("SmartObject");
+	smo3->loadDefinition("GOAP/Gameobjects/Bed.xml");
+	bed->AddComponent(smo3);
 
 
 	/*
