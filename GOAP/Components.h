@@ -752,3 +752,51 @@ public:
 	}
 
 };
+
+
+class AnimatorCmp : public Component
+{
+public:
+	enum Animations
+	{
+		ANIM_NONE,
+		ANIM_IDLE,
+		ANIM_SLEEP,
+		ANIM_WALK,
+		ANIM_DRINK,
+		ANIM_EAT
+	};
+public:
+	AnimatorCmp(const ComponentID& name, GameObject* go) : agent(go)
+	{
+		this->name = name;
+		type = "Animator";
+
+		init(type);
+	}
+
+
+	ComponentType getType() override { return this->type; }
+
+
+	Animations getAnimation()
+	{
+		return currentAnimation;
+	}
+
+
+	bool setAnimation(Animations anim)
+	{
+		currentAnimation = anim;
+		return true;
+	}
+
+
+private:
+
+	ComponentType type;
+	GameObject* agent = nullptr;
+
+
+	Animations currentAnimation;
+};

@@ -6,6 +6,12 @@ bool ActionMoveToDestination::perform(double dt)
 {
 	using namespace std;
 
+	// Animate character if needed
+	if (getPawn()->hasComponent("Animator"))
+	{
+		getPawn()->getComponent< AnimatorCmp >("Animator")->setAnimation(AnimatorCmp::Animations::ANIM_WALK);
+	}
+
 	// Check if waypoint was assigned
 	if (destx == -1 || desty == -1)
 	{
@@ -38,6 +44,13 @@ bool ActionMoveToDestination::perform(double dt)
 
 bool ActionSleep::perform(double dt)
 {
+	// Animate character if needed
+	if (getPawn()->hasComponent("Animator"))
+	{
+		getPawn()->getComponent< AnimatorCmp >("Animator")->setAnimation(AnimatorCmp::Animations::ANIM_SLEEP);
+	}
+
+
 	if (timer_started == 0)
 	{
 		timer->startTimer();
@@ -87,6 +100,12 @@ bool ActionEat::perform(double dt)
 {
 	using namespace std;
 
+	// Animate character if needed
+	if (getPawn()->hasComponent("Animator"))
+	{
+		getPawn()->getComponent< AnimatorCmp >("Animator")->setAnimation(AnimatorCmp::Animations::ANIM_EAT);
+	}
+
 	if (timer_started == 0)
 	{
 		timer->startTimer();
@@ -133,6 +152,12 @@ bool ActionEat::postPerform(double dt)
 bool ActionDrink::perform(double dt)
 {
 	using namespace std;
+
+	// Animate character if needed
+	if (getPawn()->hasComponent("Animator"))
+	{
+		getPawn()->getComponent< AnimatorCmp >("Animator")->setAnimation(AnimatorCmp::Animations::ANIM_DRINK);
+	}
 
 	if (timer_started == 0)
 	{
@@ -182,6 +207,12 @@ bool ActionDrink::postPerform(double dt)
 bool ActionDoNothing::perform(double dt)
 {
 	using namespace std;
+
+	// Animate character if needed
+	if (getPawn()->hasComponent("Animator"))
+	{
+		getPawn()->getComponent< AnimatorCmp >("Animator")->setAnimation(AnimatorCmp::Animations::ANIM_IDLE);
+	}
 
 	if (timer_started == 0)
 	{

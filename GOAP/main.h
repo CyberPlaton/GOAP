@@ -10,7 +10,6 @@
 #pragma comment(lib, "glfw3.lib")
 #pragma comment(lib, "opengl32.lib")
 
-
 /*
 * OLC
 */
@@ -63,7 +62,6 @@ private:
 	olc::imgui::PGE_ImGUI pge_imgui;
 	int m_GameLayer;
 
-	BehaviorTree* dude_tree = nullptr;
 
 private:
 

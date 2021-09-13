@@ -46,6 +46,7 @@ public:
 		AddComponent(new NavigatorCmp("Navigator", this));
 		AddComponent(new RendererableCmp("Renderable", 1.0f, 1.0f, "red"));
 		AddComponent(new TransformCmp("Transform"));
+		AddComponent(new AnimatorCmp("Animator", this));
 	}
 
 	void update(double dt) override final;

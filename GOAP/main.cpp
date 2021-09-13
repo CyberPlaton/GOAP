@@ -82,6 +82,41 @@ bool App::OnUserUpdate(float fElapsedTime)
 			if (rc->render)
 			{
 				tv.FillRect(olc::vf2d(tr->xpos, tr->ypos), olc::vf2d(rc->width, rc->height), color);
+			
+				// Draw animation if needed
+				if (go->hasComponent("Animator"))
+				{
+					AnimatorCmp* anim = go->getComponent< AnimatorCmp >("Animator");
+
+					AnimatorCmp::Animations currAnim = anim->getAnimation();
+
+					switch (currAnim)
+					{
+					case AnimatorCmp::Animations::ANIM_SLEEP:
+						tv.DrawStringDecal(olc::vf2d(tr->xpos + rc->width / 4, tr->ypos - rc->height / 2), "Sleep");
+						break;
+
+					case AnimatorCmp::Animations::ANIM_WALK:
+						tv.DrawStringDecal(olc::vf2d(tr->xpos + rc->width / 4, tr->ypos - rc->height / 2), "Walk");
+						break;
+
+					case AnimatorCmp::Animations::ANIM_IDLE:
+						tv.DrawStringDecal(olc::vf2d(tr->xpos + rc->width / 4, tr->ypos - rc->height / 2), "Idle");
+						break;
+
+					case AnimatorCmp::Animations::ANIM_EAT:
+						tv.DrawStringDecal(olc::vf2d(tr->xpos + rc->width / 4, tr->ypos - rc->height / 2), "Eat");
+						break;
+
+					case AnimatorCmp::Animations::ANIM_DRINK:
+						tv.DrawStringDecal(olc::vf2d(tr->xpos + rc->width / 4, tr->ypos - rc->height / 2), "Drink");
+						break;
+
+
+					default:
+						break;
+					}
+				}
 			}
 		}
 	}
@@ -211,12 +246,11 @@ bool App::OnUserCreate()
 	agent->AddComponent(new CollisionBoxCmp("CollisionBox", 1.0f, 1.0f, agent));
 	static_cast<TransformCmp*>(agent->getComponent("Transform"))->xpos = 5;
 	static_cast<TransformCmp*>(agent->getComponent("Transform"))->ypos = 5;
-	agent->AddComponent(new NavigatorCmp("Navigator", agent));
-	
+	agent->AddComponent(new NavigatorCmp("Navigator", agent));	
 
 	BTFactory factory("Dude BT");
 
-	dude_tree = factory.add<BTSequence>("Sequence")
+	BehaviorTree* dude_tree = factory.add<BTSequence>("Sequence")
 								.add<BTMoveToRandomPosition>("Random Movement", agent)
 		.end()
 		.build();
