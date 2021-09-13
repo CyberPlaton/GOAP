@@ -393,6 +393,24 @@ public:
 		desty = y;
 	}
 
+	std::pair<int, int> getRandomDestinationAroundAgent(int radius)
+	{
+		using namespace std;
+
+		int x = rand() % radius + 1;
+		int y = rand() % radius + 1;
+
+		while (!isTargetDestinationValid(x, y))
+		{
+			cout << color(colors::RED);
+			cout << "[NavigatorCmp] Invalid Destination {"<< x << ","<< y << "}, searching for new one" << white << endl;
+
+			x = rand() % radius + 1;
+			y = rand() % radius + 1;
+		}
+
+		return std::make_pair(x, y);
+	}
 
 	bool isTargetDestinationValid(int x, int y)
 	{

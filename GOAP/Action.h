@@ -132,15 +132,24 @@ public:
 		this->targetTag = def->targetTag;
 	}
 
+	/*
+	* Get the agent instance to which this action belongs.
+	*/
 	GameObject* getPawn() override final
 	{
 		return this->pawn;
 	}
 
+	/*
+	* Get the Smartobject associated with this action,
+	* this is needed to get the fulfillment amount for a given need,
+	* or set some data in the smartobject itself, for example a "was_used" flag.
+	*/
 	GameObject* getSmartObject() override final
 	{
 		return this->smartObject;
 	}
+
 
 	ActionID getID() override final
 	{
@@ -157,7 +166,9 @@ public:
 		return this->maxDuration;
 	}
 
-
+	/*
+	* Get the duration of this action.
+	*/
 	double getDuration() override final
 	{
 		return getMaxDuration() - getMinDuration();
@@ -167,6 +178,7 @@ public:
 	{
 		return this->targetTag;
 	}
+
 
 	virtual double getStartTime() { return (double)INT_MAX; }
 	virtual double getEndTime() { return (double)INT_MAX; }

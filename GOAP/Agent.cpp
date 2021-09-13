@@ -1,7 +1,7 @@
 #include "Agent.h"
 
-double Agent::AGENT_HUNGER_SCORE = 0.0314152;
-double Agent::AGENT_HUNGER_SCORE_STEEPNESS = 0.017735;
+double Agent::AGENT_HUNGER_SCORE = 0.00314152;
+double Agent::AGENT_HUNGER_SCORE_STEEPNESS = 0.0017735;
 
 
 double scoreAgentHunger(double hunger)
@@ -13,7 +13,12 @@ double scoreAgentHunger(double hunger)
 
 	r *= t;
 
-	cout << "HungerPrev: " << hunger << " HungerNew: " << r << endl;
+	cout << color(colors::MAGENTA);
+	cout << "Hunger: " << hunger << endl;
+	cout << "HungerLog: " << std::log(hunger) << endl;
+	cout << "Increase: " << r  << endl;
+	cout << "New HungerScore: " << hunger + r << endl;
+	cout << white;
 
 	return r;
 }
@@ -36,8 +41,7 @@ void Agent::update(double dt)
 		// Agent has nothing to do.
 
 		// Get the need to battle.
-		std::string need = getNeedToBattle();
-
+		std::string need = getMostValuableGoal();
 
 		// Search for object that fulfills the need.
 		GameObject* go = getObjectToFulfillNeedWith(need);
@@ -45,35 +49,17 @@ void Agent::update(double dt)
 
 		if (go)
 		{
-			// There exists a gameobject 
+			// There exists a gameobject that satisfies the need
 
 			// Push actions on stack:
 			// - Action associated with the need to fulfill
 			// - Action to let agent move to fulfilling object
-			SmartObject* smo = go->getComponent<SmartObject>("SmartObject");
-			std::string actionName = smo->getAssociatedAction(need);
 
-			ActionInstance* action = nullptr;
-			if (actionName.compare("ActionEat") == 0)
-			{
-				action = ActionDatabase::get()->constructAction<ActionEat>(actionName, this, go);
-				actionStack.push(action);
-			}
-			else if (actionName.compare("ActionSleep") == 0)
-			{
-				action = ActionDatabase::get()->constructAction<ActionSleep>(actionName, this, go);
-				actionStack.push(action);
-			}
-			else if (actionName.compare("ActionDrink") == 0)
-			{
-				action = ActionDatabase::get()->constructAction<ActionDrink>(actionName, this, go);
-				actionStack.push(action);
-			}
-			else if (actionName.compare("ActionDoNothing") == 0)
-			{
-				action = ActionDatabase::get()->constructAction<ActionDoNothing>(actionName, this, go);
-				actionStack.push(action);
-			}
+			// Create appropriate action for smartobject and need
+			Action* action = getActionOfSmartObjectForNeed(go, need);
+			
+			// Push the smartobject action on the stack to execute after agent arrived
+			actionStack.push(action);
 
 
 			// Get the position of destination object
@@ -83,25 +69,24 @@ void Agent::update(double dt)
 			y = transf->ypos;
 
 			// Create special action which lets the agent just move to destination
-			action = ActionDatabase::get()->constructAction<ActionMoveToDestination>(actionName, this, go, x, y);
-			actionStack.push(action);
+			Action* move = ActionDatabase::get()->constructAction<ActionMoveToDestination>("ActionMoveToDestination", this, go, x, y);
+			actionStack.push(move);
 		}
 		else
 		{
 			// There exists no gameobject or the needs does not require one
 
-			// Currently, just create an idle action..
-			// Where the agent goes to some location and the just waits
 
-			ActionInstance* action = ActionDatabase::get()->constructAction<ActionDoNothing>("ActionDoNothing", this, nullptr);
+
+			// Create an "IDLE" action, where agent wanders around and does nothing.
+			Action* action = ActionDatabase::get()->constructAction<ActionDoNothing>("ActionDoNothing", this, nullptr);
 			actionStack.push(action);
 
-			TransformCmp* cmp = getComponent<TransformCmp>("Transform");
-		
-			int x = cmp->xpos;
-			int y = cmp->ypos;
+			NavigatorCmp* nav = getComponent<NavigatorCmp>("Navigator");
+			std::pair<int, int> dest = nav->getRandomDestinationAroundAgent(2);
+			
 
-			action = ActionDatabase::get()->constructAction<ActionMoveToDestination>("ActionMoveToDestination", this, nullptr, x, y);
+			action = ActionDatabase::get()->constructAction<ActionMoveToDestination>("ActionMoveToDestination", this, nullptr, dest.first, dest.second);
 			actionStack.push(action);
 		}
 
@@ -115,7 +100,7 @@ void Agent::update(double dt)
 
 
 		// Get latest action from stack
-		ActionInstance* action = actionStack.top();
+		Action* action = actionStack.top();
 
 		// Perform it
 		bool result = false;
@@ -134,6 +119,47 @@ void Agent::update(double dt)
 	}
 }
 
+
+Action* Agent::getActionOfSmartObjectForNeed(GameObject* go, const std::string& need)
+{
+	using namespace std;
+
+	// Get the smartobject
+	if (!go->hasComponent("SmartObject")) return nullptr;
+	SmartObject* smo = go->getComponent<SmartObject>("SmartObject");
+
+
+	// Get the action name for the need
+	std::string actionName = smo->getAssociatedAction(need);
+	if (actionName.compare("") == 0) return nullptr;
+
+
+	// Create the action
+	Action* action = nullptr;
+	if (actionName.compare("ActionEat") == 0)
+	{
+		action = ActionDatabase::get()->constructAction<ActionEat>(actionName, this, go);
+	}
+	else if (actionName.compare("ActionSleep") == 0)
+	{
+		action = ActionDatabase::get()->constructAction<ActionSleep>(actionName, this, go);
+	}
+	else if (actionName.compare("ActionDrink") == 0)
+	{
+		action = ActionDatabase::get()->constructAction<ActionDrink>(actionName, this, go);
+	}
+	else if (actionName.compare("ActionDoNothing") == 0)
+	{
+		action = ActionDatabase::get()->constructAction<ActionDoNothing>(actionName, this, go);
+	}
+	else
+	{
+		cout << color(colors::RED);
+		cout << "[AGENT::getActionOfSmartObjectForNeed] Undefined action \""<< actionName  <<"\"" << white << endl;
+	}
+
+	return action;
+}
 
 
 void Agent::scoreNeeds()
@@ -165,7 +191,7 @@ void Agent::scoreNeeds()
 }
 
 
-std::string Agent::getNeedToBattle()
+std::string Agent::getMostValuableGoal()
 {
 	// For now just return highest need.
 	double max = 0.0;

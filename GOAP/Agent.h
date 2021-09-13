@@ -64,7 +64,7 @@ public:
 public:
 
 	std::map< std::string, double > needsScoreMap;
-	std::stack< ActionInstance* > actionStack;
+	std::stack< Action* > actionStack;
 	Inventory* agentInventory = nullptr;
 	std::vector<GameObject*> agentOwnedObjects;
 
@@ -86,7 +86,7 @@ private:
 	/*
 	* Use a function to get the need we want currently to battle.
 	*/
-	std::string getNeedToBattle();
+	std::string getMostValuableGoal();
 
 	/*
 	* Search for object which does satisfy the need.
@@ -94,6 +94,11 @@ private:
 	*/
 	GameObject* getObjectToFulfillNeedWith(const std::string& need);
 
+	/*
+	* Get the action of a smartobject associated with given need.
+	* If the SmartObject does not satisfy the need given, it returns nullptr.
+	*/
+	Action* getActionOfSmartObjectForNeed(GameObject* go, const std::string& need);
 };
 
 

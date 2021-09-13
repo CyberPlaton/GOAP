@@ -1,36 +1,6 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(498,5): warning MSB8004: Intermediate Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Intermediate Directory.
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(499,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
-  AI.cpp
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\BTCommon.h(42,25): warning C4244: 'return': conversion from '_Rep' to 'double', possible loss of data
-          with
-          [
-              _Rep=__int64
-          ]
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\BTCommon.h(57,25): warning C4244: 'return': conversion from '_Rep' to 'double', possible loss of data
-          with
-          [
-              _Rep=__int64
-          ]
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\BTCommon.h(72,16): warning C4244: 'return': conversion from '_Rep' to 'double', possible loss of data
-          with
-          [
-              _Rep=__int64
-          ]
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\BTRandomSequence.h(52,16): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(138,10): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(142,54): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(145,1): warning C4305: 'return': truncation from 'int' to 'float'
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(280,58): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(281,58): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(450,68): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(450,61): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(521,25): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(522,25): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(669,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(745,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(746,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(747,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(748,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  ActionDatabase.cpp
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Timer.h(30,25): warning C4244: 'return': conversion from '_Rep' to 'double', possible loss of data
           with
           [
@@ -46,129 +16,6 @@ C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Timer.h(60,16): warning C4244: 'ret
           [
               _Rep=__int64
           ]
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\BTMoveToRandomPosition.h(36,73): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\BTMoveToRandomPosition.h(36,70): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\BTMoveToRandomPosition.h(51,69): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\BTMoveToRandomPosition.h(51,66): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(170,47): warning C4244: 'initializing': conversion from '_Ty' to '_Ty', possible loss of data
-          with
-          [
-              _Ty=int
-          ]
-          and
-          [
-              _Ty=float
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(258): message : see reference to function template instantiation 'std::_Tuple_val<_This>::_Tuple_val<_Ty>(_Other &&)' being compiled
-          with
-          [
-              _This=float,
-              _Ty=int,
-              _Other=int
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(258): message : see reference to function template instantiation 'std::_Tuple_val<_This>::_Tuple_val<_Ty>(_Other &&)' being compiled
-          with
-          [
-              _This=float,
-              _Ty=int,
-              _Other=int
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(258): message : see reference to function template instantiation 'std::tuple<float>::tuple<std::_Exact_args_t,_Ty,,0>(_Tag,_This2 &&)' being compiled
-          with
-          [
-              _Ty=int,
-              _Tag=std::_Exact_args_t,
-              _This2=int
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(258): message : see reference to function template instantiation 'std::tuple<float>::tuple<std::_Exact_args_t,_Ty,,0>(_Tag,_This2 &&)' being compiled
-          with
-          [
-              _Ty=int,
-              _Tag=std::_Exact_args_t,
-              _This2=int
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(258): message : see reference to function template instantiation 'std::tuple<int,float>::tuple<std::_Exact_args_t,_Ty,_Ty,0>(_Tag,_This2 &&,_Ty &&)' being compiled
-          with
-          [
-              _Ty=int,
-              _Tag=std::_Exact_args_t,
-              _This2=int
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(258): message : see reference to function template instantiation 'std::tuple<int,float>::tuple<std::_Exact_args_t,_Ty,_Ty,0>(_Tag,_This2 &&,_Ty &&)' being compiled
-          with
-          [
-              _Ty=int,
-              _Tag=std::_Exact_args_t,
-              _This2=int
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(258): message : see reference to function template instantiation 'std::tuple<int,int,float>::tuple<std::_Exact_args_t,_Ty,_Ty,_Ty,0>(_Tag,_This2 &&,_Ty &&,_Ty &&)' being compiled
-          with
-          [
-              _Ty=int,
-              _Tag=std::_Exact_args_t,
-              _This2=int
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(258): message : see reference to function template instantiation 'std::tuple<int,int,float>::tuple<std::_Exact_args_t,_Ty,_Ty,_Ty,0>(_Tag,_This2 &&,_Ty &&,_Ty &&)' being compiled
-          with
-          [
-              _Ty=int,
-              _Tag=std::_Exact_args_t,
-              _This2=int
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(258): message : see reference to function template instantiation 'std::tuple<int,int,int,float>::tuple<std::_Exact_args_t,_Ty,_Ty,_Ty,_Ty,0>(_Tag,_This2 &&,_Ty &&,_Ty &&,_Ty &&)' being compiled
-          with
-          [
-              _Ty=int,
-              _Tag=std::_Exact_args_t,
-              _This2=int
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(258): message : see reference to function template instantiation 'std::tuple<int,int,int,float>::tuple<std::_Exact_args_t,_Ty,_Ty,_Ty,_Ty,0>(_Tag,_This2 &&,_Ty &&,_Ty &&,_Ty &&)' being compiled
-          with
-          [
-              _Ty=int,
-              _Tag=std::_Exact_args_t,
-              _This2=int
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(878): message : see reference to function template instantiation 'std::tuple<int,int,int,int,float>::tuple<std::_Exact_args_t,int,int,int,int,int,0>(_Tag,_This2 &&,int &&,int &&,int &&,int &&)' being compiled
-          with
-          [
-              _Tag=std::_Exact_args_t,
-              _This2=int
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(878): message : see reference to function template instantiation 'std::tuple<int,int,int,int,float>::tuple<std::_Exact_args_t,int,int,int,int,int,0>(_Tag,_This2 &&,int &&,int &&,int &&,int &&)' being compiled
-          with
-          [
-              _Tag=std::_Exact_args_t,
-              _This2=int
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(265): message : see reference to function template instantiation 'std::tuple<int,int,int,int,float>::tuple<std::_Unpack_tuple_t,_Ty,0,1,2,3,4,0>(_Tag,_Tpl &&,std::integer_sequence<size_t,0,1,2,3,4>)' being compiled
-          with
-          [
-              _Ty=std::tuple<int,int,int,int,int>,
-              _Tag=std::_Unpack_tuple_t,
-              _Tpl=std::tuple<int,int,int,int,int>
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(265): message : see reference to function template instantiation 'std::tuple<int,int,int,int,float>::tuple<std::_Unpack_tuple_t,_Ty,0,1,2,3,4,0>(_Tag,_Tpl &&,std::integer_sequence<size_t,0,1,2,3,4>)' being compiled
-          with
-          [
-              _Ty=std::tuple<int,int,int,int,int>,
-              _Tag=std::_Unpack_tuple_t,
-              _Tpl=std::tuple<int,int,int,int,int>
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(392): message : see reference to function template instantiation 'std::tuple<int,int,int,int,float>::tuple<std::_Unpack_tuple_t,std::tuple<int,int,int,int,int>,0>(_Tag,_Tpl &&)' being compiled
-          with
-          [
-              _Tag=std::_Unpack_tuple_t,
-              _Tpl=std::tuple<int,int,int,int,int>
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(392): message : see reference to function template instantiation 'std::tuple<int,int,int,int,float>::tuple<std::_Unpack_tuple_t,std::tuple<int,int,int,int,int>,0>(_Tag,_Tpl &&)' being compiled
-          with
-          [
-              _Tag=std::_Unpack_tuple_t,
-              _Tpl=std::tuple<int,int,int,int,int>
-          ]
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(311): message : see reference to function template instantiation 'std::tuple<int,int,int,int,float>::tuple<int,int,int,int,int,0>(std::tuple<int,int,int,int,int> &&) noexcept' being compiled
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(311): message : see reference to function template instantiation 'std::tuple<int,int,int,int,float>::tuple<int,int,int,int,int,0>(std::tuple<int,int,int,int,int> &&) noexcept' being compiled
   Actions.cpp
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Timer.h(30,25): warning C4244: 'return': conversion from '_Rep' to 'double', possible loss of data
           with
@@ -190,15 +37,15 @@ C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(142,54): warning C4244
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(145,1): warning C4305: 'return': truncation from 'int' to 'float'
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(280,58): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(281,58): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(450,68): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(450,61): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(521,25): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(522,25): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(669,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(745,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(746,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(747,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(748,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(468,68): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(468,61): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(539,25): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(540,25): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(687,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(763,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(764,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(765,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(766,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\DaySchedule.h(8,14): warning C4099: 'Action': type name first seen using 'class' now seen using 'struct'
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Action.h(75): message : see declaration of 'Action'
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\BTCommon.h(42,25): warning C4244: 'return': conversion from '_Rep' to 'double', possible loss of data
@@ -349,15 +196,15 @@ C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(142,54): warning C4244
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(145,1): warning C4305: 'return': truncation from 'int' to 'float'
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(280,58): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(281,58): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(450,68): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(450,61): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(521,25): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(522,25): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(669,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(745,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(746,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(747,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(748,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(468,68): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(468,61): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(539,25): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(540,25): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(687,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(763,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(764,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(765,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(766,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Timer.h(30,25): warning C4244: 'return': conversion from '_Rep' to 'double', possible loss of data
           with
           [
@@ -514,309 +361,6 @@ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.
           ]
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(311): message : see reference to function template instantiation 'std::tuple<int,int,int,int,float>::tuple<int,int,int,int,int,0>(std::tuple<int,int,int,int,int> &&) noexcept' being compiled
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(311): message : see reference to function template instantiation 'std::tuple<int,int,int,int,float>::tuple<int,int,int,int,int,0>(std::tuple<int,int,int,int,int> &&) noexcept' being compiled
-  BehaviorTreeDefinitions.cpp
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\BTCommon.h(42,25): warning C4244: 'return': conversion from '_Rep' to 'double', possible loss of data
-          with
-          [
-              _Rep=__int64
-          ]
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\BTCommon.h(57,25): warning C4244: 'return': conversion from '_Rep' to 'double', possible loss of data
-          with
-          [
-              _Rep=__int64
-          ]
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\BTCommon.h(72,16): warning C4244: 'return': conversion from '_Rep' to 'double', possible loss of data
-          with
-          [
-              _Rep=__int64
-          ]
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\BTRandomSequence.h(52,16): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(138,10): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(142,54): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(145,1): warning C4305: 'return': truncation from 'int' to 'float'
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(280,58): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(281,58): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(450,68): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(450,61): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(521,25): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(522,25): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(669,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(745,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(746,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(747,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(748,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Timer.h(30,25): warning C4244: 'return': conversion from '_Rep' to 'double', possible loss of data
-          with
-          [
-              _Rep=__int64
-          ]
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Timer.h(45,25): warning C4244: 'return': conversion from '_Rep' to 'double', possible loss of data
-          with
-          [
-              _Rep=__int64
-          ]
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Timer.h(60,16): warning C4244: 'return': conversion from '_Rep' to 'double', possible loss of data
-          with
-          [
-              _Rep=__int64
-          ]
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\BTMoveToRandomPosition.h(36,73): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\BTMoveToRandomPosition.h(36,70): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\BTMoveToRandomPosition.h(51,69): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\BTMoveToRandomPosition.h(51,66): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(170,47): warning C4244: 'initializing': conversion from '_Ty' to '_Ty', possible loss of data
-          with
-          [
-              _Ty=int
-          ]
-          and
-          [
-              _Ty=float
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(258): message : see reference to function template instantiation 'std::_Tuple_val<_This>::_Tuple_val<_Ty>(_Other &&)' being compiled
-          with
-          [
-              _This=float,
-              _Ty=int,
-              _Other=int
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(258): message : see reference to function template instantiation 'std::_Tuple_val<_This>::_Tuple_val<_Ty>(_Other &&)' being compiled
-          with
-          [
-              _This=float,
-              _Ty=int,
-              _Other=int
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(258): message : see reference to function template instantiation 'std::tuple<float>::tuple<std::_Exact_args_t,_Ty,,0>(_Tag,_This2 &&)' being compiled
-          with
-          [
-              _Ty=int,
-              _Tag=std::_Exact_args_t,
-              _This2=int
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(258): message : see reference to function template instantiation 'std::tuple<float>::tuple<std::_Exact_args_t,_Ty,,0>(_Tag,_This2 &&)' being compiled
-          with
-          [
-              _Ty=int,
-              _Tag=std::_Exact_args_t,
-              _This2=int
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(258): message : see reference to function template instantiation 'std::tuple<int,float>::tuple<std::_Exact_args_t,_Ty,_Ty,0>(_Tag,_This2 &&,_Ty &&)' being compiled
-          with
-          [
-              _Ty=int,
-              _Tag=std::_Exact_args_t,
-              _This2=int
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(258): message : see reference to function template instantiation 'std::tuple<int,float>::tuple<std::_Exact_args_t,_Ty,_Ty,0>(_Tag,_This2 &&,_Ty &&)' being compiled
-          with
-          [
-              _Ty=int,
-              _Tag=std::_Exact_args_t,
-              _This2=int
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(258): message : see reference to function template instantiation 'std::tuple<int,int,float>::tuple<std::_Exact_args_t,_Ty,_Ty,_Ty,0>(_Tag,_This2 &&,_Ty &&,_Ty &&)' being compiled
-          with
-          [
-              _Ty=int,
-              _Tag=std::_Exact_args_t,
-              _This2=int
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(258): message : see reference to function template instantiation 'std::tuple<int,int,float>::tuple<std::_Exact_args_t,_Ty,_Ty,_Ty,0>(_Tag,_This2 &&,_Ty &&,_Ty &&)' being compiled
-          with
-          [
-              _Ty=int,
-              _Tag=std::_Exact_args_t,
-              _This2=int
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(258): message : see reference to function template instantiation 'std::tuple<int,int,int,float>::tuple<std::_Exact_args_t,_Ty,_Ty,_Ty,_Ty,0>(_Tag,_This2 &&,_Ty &&,_Ty &&,_Ty &&)' being compiled
-          with
-          [
-              _Ty=int,
-              _Tag=std::_Exact_args_t,
-              _This2=int
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(258): message : see reference to function template instantiation 'std::tuple<int,int,int,float>::tuple<std::_Exact_args_t,_Ty,_Ty,_Ty,_Ty,0>(_Tag,_This2 &&,_Ty &&,_Ty &&,_Ty &&)' being compiled
-          with
-          [
-              _Ty=int,
-              _Tag=std::_Exact_args_t,
-              _This2=int
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(878): message : see reference to function template instantiation 'std::tuple<int,int,int,int,float>::tuple<std::_Exact_args_t,int,int,int,int,int,0>(_Tag,_This2 &&,int &&,int &&,int &&,int &&)' being compiled
-          with
-          [
-              _Tag=std::_Exact_args_t,
-              _This2=int
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(878): message : see reference to function template instantiation 'std::tuple<int,int,int,int,float>::tuple<std::_Exact_args_t,int,int,int,int,int,0>(_Tag,_This2 &&,int &&,int &&,int &&,int &&)' being compiled
-          with
-          [
-              _Tag=std::_Exact_args_t,
-              _This2=int
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(265): message : see reference to function template instantiation 'std::tuple<int,int,int,int,float>::tuple<std::_Unpack_tuple_t,_Ty,0,1,2,3,4,0>(_Tag,_Tpl &&,std::integer_sequence<size_t,0,1,2,3,4>)' being compiled
-          with
-          [
-              _Ty=std::tuple<int,int,int,int,int>,
-              _Tag=std::_Unpack_tuple_t,
-              _Tpl=std::tuple<int,int,int,int,int>
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(265): message : see reference to function template instantiation 'std::tuple<int,int,int,int,float>::tuple<std::_Unpack_tuple_t,_Ty,0,1,2,3,4,0>(_Tag,_Tpl &&,std::integer_sequence<size_t,0,1,2,3,4>)' being compiled
-          with
-          [
-              _Ty=std::tuple<int,int,int,int,int>,
-              _Tag=std::_Unpack_tuple_t,
-              _Tpl=std::tuple<int,int,int,int,int>
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(392): message : see reference to function template instantiation 'std::tuple<int,int,int,int,float>::tuple<std::_Unpack_tuple_t,std::tuple<int,int,int,int,int>,0>(_Tag,_Tpl &&)' being compiled
-          with
-          [
-              _Tag=std::_Unpack_tuple_t,
-              _Tpl=std::tuple<int,int,int,int,int>
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(392): message : see reference to function template instantiation 'std::tuple<int,int,int,int,float>::tuple<std::_Unpack_tuple_t,std::tuple<int,int,int,int,int>,0>(_Tag,_Tpl &&)' being compiled
-          with
-          [
-              _Tag=std::_Unpack_tuple_t,
-              _Tpl=std::tuple<int,int,int,int,int>
-          ]
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(311): message : see reference to function template instantiation 'std::tuple<int,int,int,int,float>::tuple<int,int,int,int,int,0>(std::tuple<int,int,int,int,int> &&) noexcept' being compiled
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(311): message : see reference to function template instantiation 'std::tuple<int,int,int,int,float>::tuple<int,int,int,int,int,0>(std::tuple<int,int,int,int,int> &&) noexcept' being compiled
-  Components.cpp
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(138,10): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(142,54): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(145,1): warning C4305: 'return': truncation from 'int' to 'float'
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(280,58): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(281,58): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(450,68): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(450,61): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(521,25): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(522,25): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(669,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(745,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(746,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(747,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(748,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(170,47): warning C4244: 'initializing': conversion from '_Ty' to '_Ty', possible loss of data
-          with
-          [
-              _Ty=int
-          ]
-          and
-          [
-              _Ty=float
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(258): message : see reference to function template instantiation 'std::_Tuple_val<_This>::_Tuple_val<_Ty>(_Other &&)' being compiled
-          with
-          [
-              _This=float,
-              _Ty=int,
-              _Other=int
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(258): message : see reference to function template instantiation 'std::_Tuple_val<_This>::_Tuple_val<_Ty>(_Other &&)' being compiled
-          with
-          [
-              _This=float,
-              _Ty=int,
-              _Other=int
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(258): message : see reference to function template instantiation 'std::tuple<float>::tuple<std::_Exact_args_t,_Ty,,0>(_Tag,_This2 &&)' being compiled
-          with
-          [
-              _Ty=int,
-              _Tag=std::_Exact_args_t,
-              _This2=int
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(258): message : see reference to function template instantiation 'std::tuple<float>::tuple<std::_Exact_args_t,_Ty,,0>(_Tag,_This2 &&)' being compiled
-          with
-          [
-              _Ty=int,
-              _Tag=std::_Exact_args_t,
-              _This2=int
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(258): message : see reference to function template instantiation 'std::tuple<int,float>::tuple<std::_Exact_args_t,_Ty,_Ty,0>(_Tag,_This2 &&,_Ty &&)' being compiled
-          with
-          [
-              _Ty=int,
-              _Tag=std::_Exact_args_t,
-              _This2=int
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(258): message : see reference to function template instantiation 'std::tuple<int,float>::tuple<std::_Exact_args_t,_Ty,_Ty,0>(_Tag,_This2 &&,_Ty &&)' being compiled
-          with
-          [
-              _Ty=int,
-              _Tag=std::_Exact_args_t,
-              _This2=int
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(258): message : see reference to function template instantiation 'std::tuple<int,int,float>::tuple<std::_Exact_args_t,_Ty,_Ty,_Ty,0>(_Tag,_This2 &&,_Ty &&,_Ty &&)' being compiled
-          with
-          [
-              _Ty=int,
-              _Tag=std::_Exact_args_t,
-              _This2=int
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(258): message : see reference to function template instantiation 'std::tuple<int,int,float>::tuple<std::_Exact_args_t,_Ty,_Ty,_Ty,0>(_Tag,_This2 &&,_Ty &&,_Ty &&)' being compiled
-          with
-          [
-              _Ty=int,
-              _Tag=std::_Exact_args_t,
-              _This2=int
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(258): message : see reference to function template instantiation 'std::tuple<int,int,int,float>::tuple<std::_Exact_args_t,_Ty,_Ty,_Ty,_Ty,0>(_Tag,_This2 &&,_Ty &&,_Ty &&,_Ty &&)' being compiled
-          with
-          [
-              _Ty=int,
-              _Tag=std::_Exact_args_t,
-              _This2=int
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(258): message : see reference to function template instantiation 'std::tuple<int,int,int,float>::tuple<std::_Exact_args_t,_Ty,_Ty,_Ty,_Ty,0>(_Tag,_This2 &&,_Ty &&,_Ty &&,_Ty &&)' being compiled
-          with
-          [
-              _Ty=int,
-              _Tag=std::_Exact_args_t,
-              _This2=int
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(878): message : see reference to function template instantiation 'std::tuple<int,int,int,int,float>::tuple<std::_Exact_args_t,int,int,int,int,int,0>(_Tag,_This2 &&,int &&,int &&,int &&,int &&)' being compiled
-          with
-          [
-              _Tag=std::_Exact_args_t,
-              _This2=int
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(878): message : see reference to function template instantiation 'std::tuple<int,int,int,int,float>::tuple<std::_Exact_args_t,int,int,int,int,int,0>(_Tag,_This2 &&,int &&,int &&,int &&,int &&)' being compiled
-          with
-          [
-              _Tag=std::_Exact_args_t,
-              _This2=int
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(265): message : see reference to function template instantiation 'std::tuple<int,int,int,int,float>::tuple<std::_Unpack_tuple_t,_Ty,0,1,2,3,4,0>(_Tag,_Tpl &&,std::integer_sequence<size_t,0,1,2,3,4>)' being compiled
-          with
-          [
-              _Ty=std::tuple<int,int,int,int,int>,
-              _Tag=std::_Unpack_tuple_t,
-              _Tpl=std::tuple<int,int,int,int,int>
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(265): message : see reference to function template instantiation 'std::tuple<int,int,int,int,float>::tuple<std::_Unpack_tuple_t,_Ty,0,1,2,3,4,0>(_Tag,_Tpl &&,std::integer_sequence<size_t,0,1,2,3,4>)' being compiled
-          with
-          [
-              _Ty=std::tuple<int,int,int,int,int>,
-              _Tag=std::_Unpack_tuple_t,
-              _Tpl=std::tuple<int,int,int,int,int>
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(392): message : see reference to function template instantiation 'std::tuple<int,int,int,int,float>::tuple<std::_Unpack_tuple_t,std::tuple<int,int,int,int,int>,0>(_Tag,_Tpl &&)' being compiled
-          with
-          [
-              _Tag=std::_Unpack_tuple_t,
-              _Tpl=std::tuple<int,int,int,int,int>
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30037\include\tuple(392): message : see reference to function template instantiation 'std::tuple<int,int,int,int,float>::tuple<std::_Unpack_tuple_t,std::tuple<int,int,int,int,int>,0>(_Tag,_Tpl &&)' being compiled
-          with
-          [
-              _Tag=std::_Unpack_tuple_t,
-              _Tpl=std::tuple<int,int,int,int,int>
-          ]
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(311): message : see reference to function template instantiation 'std::tuple<int,int,int,int,float>::tuple<int,int,int,int,int,0>(std::tuple<int,int,int,int,int> &&) noexcept' being compiled
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(311): message : see reference to function template instantiation 'std::tuple<int,int,int,int,float>::tuple<int,int,int,int,int,0>(std::tuple<int,int,int,int,int> &&) noexcept' being compiled
   main.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': macro redefinition
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\common\include\GLFW\glfw3.h(123): message : see previous definition of 'APIENTRY'
@@ -825,15 +369,15 @@ C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(142,54): warning C4244
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(145,1): warning C4305: 'return': truncation from 'int' to 'float'
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(280,58): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(281,58): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(450,68): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(450,61): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(521,25): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(522,25): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(669,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(745,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(746,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(747,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(748,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(468,68): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(468,61): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(539,25): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(540,25): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(687,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(763,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(764,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(765,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(766,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Timer.h(30,25): warning C4244: 'return': conversion from '_Rep' to 'double', possible loss of data
           with
           [

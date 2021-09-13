@@ -57,10 +57,9 @@ bool ActionSleep::perform(double dt)
 		timer_started = 1;
 	}
 
-	// Get duration of action ( as mean )
-	double duration = (getMaxDuration() + getMinDuration()) / 2.0;
-
-	if (timer->getElapsedGamehours() <= duration)
+	// Is the action complete
+	double left = getLeftTime();
+	if (left > 0.0)
 	{
 		Agent* pawn = static_cast<Agent*>(getPawn());
 		AgentNeedsCmp* needs = pawn->getComponent<AgentNeedsCmp>("AgentNeeds");
@@ -113,9 +112,8 @@ bool ActionEat::perform(double dt)
 	}
 
 	// Get duration of action
-	double duration = getMaxDuration() - getMinDuration();
-
-	if (timer->getElapsedGamehours() <= duration)
+	double left = getLeftTime();
+	if (left > 0.0)
 	{
 		Agent* pawn = static_cast<Agent*>(getPawn());
 		AgentNeedsCmp* needs = pawn->getComponent<AgentNeedsCmp>("AgentNeeds");
@@ -166,9 +164,9 @@ bool ActionDrink::perform(double dt)
 	}
 
 	// Get duration of action
-	double duration = getMaxDuration() - getMinDuration();
+	double left = getLeftTime();
 
-	if (timer->getElapsedGamehours() <= duration)
+	if (left > 0.0)
 	{
 		Agent* pawn = static_cast<Agent*>(getPawn());
 		AgentNeedsCmp* needs = pawn->getComponent<AgentNeedsCmp>("AgentNeeds");

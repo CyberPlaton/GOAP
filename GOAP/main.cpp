@@ -471,7 +471,7 @@ void App::_onImGui()
 					// Show current action
 					if (ImGui::TreeNode("ActionStack"))
 					{
-						ActionInstance* action = nullptr;
+						Action* action = nullptr;
 
 						if (npc->actionStack.size() > 0)
 						{
