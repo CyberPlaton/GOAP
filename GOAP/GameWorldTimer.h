@@ -19,10 +19,14 @@ public:
 	*/
 	void startTimer()
 	{
-		now = _currentTime();
+		counter_stop = _currentTime();
+		startday = GameWorldTime::get()->getDay();
+		startweek = GameWorldTime::get()->getWeek();
+		startmonth = GameWorldTime::get()->getMonth();
 	}
 
 
+	double currentTime() { return _currentTime(); }
 
 	/*
 	* Returns the elapsed gamehours since start, where 2.4 means 2 Hours and 40 Minutes
@@ -30,31 +34,52 @@ public:
 	* Note that first digit can only go to 12 and second digit only to 6,
 	* anything else is invalid...
 	*/
-	double getElapsedGamehours(bool print = false)
+	double getElapsedGamehours()
 	{
 		using namespace std;
 
-		if (print)
+		double starttime = counter_stop;
+		double endtime = _currentTime();
+
+		// End of elapsed time on next day
+		if (!_isEndOnSameDay())
 		{
-			cout << color(colors::MAGENTA);
-			cout << "Elapsedgamehours: " << white;
+			// How long until end of day
+			double a = 24.0 - starttime;
 
-			double d = _currentTime();
-
-			cout << color(colors::RED);
-			cout << "CurrTime: " << d << " - " << " TimerStart: " << now << "  =>  Duration: " << d - now << endl;
-			cout << white;
+			// Return elapsed time
+			return a + endtime;
 		}
-
-		return _currentTime() - now;
+		// End of elapsed time on same day
+		else
+		{
+			return endtime - starttime;
+		}
 	}
 
 
 private:
-	double now = 0.0;
+	double counter_stop = 0.0;
+	
+	int startday = 0;
+	int startweek = 0;
+	int startmonth = 0;
 
 	double _currentTime()
 	{
 		return std::stod(GameWorldTime::get()->getDaytimeString());
+	}
+
+
+	bool _isEndOnSameDay()
+	{
+		if (startday != GameWorldTime::get()->getDay() || 
+			startweek != GameWorldTime::get()->getWeek() || 
+			startmonth != GameWorldTime::get()->getMonth())
+		{
+			return false;
+		}
+
+		return true;
 	}
 };

@@ -1,0 +1,6 @@
+<Action>
+	<ID>ActionDoNothing</ID>
+	<MinDuration>1.0</MinDuration>
+	<MaxDuration>5.0</MaxDuration>
+	<TargetTag>none</TargetTag>
+</Action>

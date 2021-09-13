@@ -13,6 +13,7 @@ class ActionEat;
 
 using ActionID = std::string;
 
+using ScoringFunction = double(*)(double);
 
 
 /*
@@ -91,12 +92,20 @@ public:
 	virtual ActionID getID() = 0;
 
 
+	virtual std::string getTargetTag() = 0;
+
+
 	/*
 	* Get the duration of the action.
 	*/
 	virtual double getMinDuration() = 0;
 	virtual double getMaxDuration() = 0;
+	virtual double getDuration() = 0;
 
+
+	virtual double getStartTime() = 0;
+	virtual double getEndTime() = 0;
+	virtual double getLeftTime() = 0;
 
 	/*
 	* Perform the action. Return true if the action was successfully completed.
@@ -147,6 +156,21 @@ public:
 	{
 		return this->maxDuration;
 	}
+
+
+	double getDuration() override final
+	{
+		return getMaxDuration() - getMinDuration();
+	}
+
+	std::string getTargetTag() override final
+	{
+		return this->targetTag;
+	}
+
+	virtual double getStartTime() { return (double)INT_MAX; }
+	virtual double getEndTime() { return (double)INT_MAX; }
+	virtual double getLeftTime() { return (double)INT_MAX; }
 
 	
 	virtual bool perform(double dt)

@@ -34,7 +34,7 @@ void GameObjectStorage::add(GameObject* go)
 }
 
 
-GameObject* GameObjectStorage::getGOByTag(const std::string& tag)
+GameObject* GameObjectStorage::getGOByTag(const GOTag& tag)
 {
 	size_t tag_hash = hasher(tag);
 
@@ -47,7 +47,7 @@ GameObject* GameObjectStorage::getGOByTag(const std::string& tag)
 }
 
 
-GameObject* GameObjectStorage::findAnyGOByTag(const std::string& tag)
+GameObject* GameObjectStorage::findAnyGOByTag(const GOTag& tag)
 {
 	for (auto& go : m_GameObjects)
 	{
@@ -62,11 +62,25 @@ GameObject* GameObjectStorage::findAnyGOByTag(const std::string& tag)
 
 
 
-GameObject* GameObjectStorage::getGOByName(const std::string& name)
+GameObject* GameObjectStorage::findAnyGOByName(const GOName& name)
 {
 	for (auto& go : m_GameObjects)
 	{
 		if (go->getName().find(name) != std::string::npos)
+		{
+			return go;
+		}
+	}
+
+	return nullptr;
+}
+
+
+GameObject* GameObjectStorage::getGOByName(const GOName& name)
+{
+	for (auto& go : m_GameObjects)
+	{
+		if (go->getName().compare(name) == 0)
 		{
 			return go;
 		}

@@ -1,5 +1,6 @@
 <Root>
 	<Action>GOAP/Actions/Sleep.xml</Action>
+	<Action>GOAP/Actions/DoNothing.xml</Action>
 	<Action>GOAP/Actions/Eat.xml</Action>
 	<Action>GOAP/Actions/Thirst.xml</Action>
 	<Action>GOAP/Actions/MoveToDestination.xml</Action>

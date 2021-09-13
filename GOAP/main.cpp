@@ -13,6 +13,7 @@ static int show_agent_stats_at_index = -1;
 static bool show_agent_stats_window = false;
 static bool show_nav_mesh = false;
 static bool show_nav_path = false;
+static bool show_agent_action = false;
 
 /*
 * Helper, maybe GUI related vars.
@@ -201,7 +202,7 @@ bool App::OnUserCreate()
 	tv = olc::TileTransformedView({ ScreenWidth(), ScreenHeight() }, {32, 32});
 
 	
-	GameWorldTime::get()->setTimeSpeed(0.03);
+	GameWorldTime::get()->setTimeSpeed(0.2);
 
 
 	GameObject* agent = new GameObject("Agent", "Dude");
@@ -427,6 +428,45 @@ void App::_onImGui()
 			// Show the components of Selected GO.
 			if (ret)
 			{
+				// Show stuff for an agent
+				if (go->hasComponent("AgentNeeds"))
+				{
+					Agent* npc = static_cast<Agent*>(go);
+
+
+					// Show current action
+					if (ImGui::TreeNode("ActionStack"))
+					{
+						ActionInstance* action = nullptr;
+
+						if (npc->actionStack.size() > 0)
+						{
+							// We show only the current action, thus top of stack
+							action = npc->actionStack.top();
+
+							if (ImGui::Begin(action->getID().c_str(), &show_agent_action))
+							{
+								// Get action duration etc.
+								double start = action->getStartTime();
+								double end = action->getEndTime();
+								double left = action->getLeftTime();
+
+								// Combine to a string
+								std::string text = "From \"" + std::to_string(start) + "\" To \"" + std::to_string(end) + "\" Left \"" + std::to_string(left) + "\"";
+
+								ImGui::Text("Duration: %s", text.c_str());
+								ImGui::Text("Target: %s", action->getTargetTag().c_str());
+							}
+							ImGui::End();
+						}
+
+
+						ImGui::TreePop();
+					}
+
+				}
+
+
 				/*
 				Agent* npc = static_cast<Agent*>(go);
 				
@@ -526,6 +566,8 @@ void App::_onImGui()
 
 						if (cmp->getType().find("AgentNeeds") != std::string::npos)
 						{
+							static bool plotted = false;
+							static std::vector<float> compare_hunger_plot;
 							static std::vector<float> hunger_plot;
 							static std::vector<float> sleep_plot;
 							static std::vector<float> thirst_plot;
@@ -536,6 +578,12 @@ void App::_onImGui()
 							hunger_plot.push_back((float)stats->getHunger());
 							ImGui::SameLine();
 							ImGui::PlotLines("Function", &hunger_plot[0], hunger_plot.size());
+							float f = Agent::AGENT_HUNGER_SCORE;
+							ImGui::SliderFloat("BaseScore", &f, 0.0001f, 1.0f, "%.5f", ImGuiSliderFlags_Logarithmic);
+							Agent::AGENT_HUNGER_SCORE = f;
+							f = Agent::AGENT_HUNGER_SCORE_STEEPNESS;
+							ImGui::SliderFloat("Steepness", &f, 0.0001f, 1.0f, "%.5f", ImGuiSliderFlags_Logarithmic);
+							Agent::AGENT_HUNGER_SCORE_STEEPNESS = f;
 
 
 							ImGui::Text("Sleep: %.5f", stats->getSleep());
@@ -550,18 +598,34 @@ void App::_onImGui()
 							ImGui::PlotLines("Function", &thirst_plot[0], thirst_plot.size());
 
 
-							if (hunger_plot.size() > 100)
+							if (!plotted)
+							{
+								for (float i = 1.0f; i < 100.0f; i += 0.5f)
+								{
+									float f = scoreAgentHunger(i);
+									compare_hunger_plot.push_back(f);
+								}
+
+								plotted = true;
+							}
+
+							ImGui::Text("ScoreFunction: ");
+							ImGui::SameLine();
+							ImGui::PlotLines("Plot", &compare_hunger_plot[0], compare_hunger_plot.size());
+
+							if (hunger_plot.size() > 1000)
 							{
 								hunger_plot.erase(hunger_plot.begin());
 							}
-							if (sleep_plot.size() > 100)
+							if (sleep_plot.size() > 1000)
 							{
 								sleep_plot.erase(sleep_plot.begin());
 							}
-							if (thirst_plot.size() > 100)
+							if (thirst_plot.size() > 1000)
 							{
 								thirst_plot.erase(thirst_plot.begin());
 							}
+							
 						}
 
 

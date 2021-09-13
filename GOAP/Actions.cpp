@@ -175,3 +175,54 @@ bool ActionDrink::postPerform(double dt)
 	delete this;
 	return true;
 }
+
+
+
+
+bool ActionDoNothing::perform(double dt)
+{
+	using namespace std;
+
+	if (timer_started == 0)
+	{
+		timer->startTimer();
+		timer_started = 1;
+
+		Agent* pawn = static_cast<Agent*>(getPawn());
+		pawn->isIdling = true;
+
+		start_time = timer->currentTime();
+	}
+
+	// How much is left to simulate
+	double left = getLeftTime();
+	if (left > 0.1)
+	{
+		cout << color(colors::RED);
+		cout << "Simulate idling from \"" << start_time << "\" until \"" << getEndTime() << "\" for \"" << left << "\" gamehours" << white << endl;
+
+		cout << color(colors::DARKGREEN);
+		cout << "\"ActionDoNothing\" simulate animation \"Idling\" for "<< left << " gamehours" << white << endl;
+
+		// Action not completed yet.
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+
+bool ActionDoNothing::postPerform(double dt)
+{
+	using namespace std;
+
+
+	Agent* pawn = static_cast<Agent*>(getPawn());
+	pawn->isIdling = false;
+
+	cout << "\"ActionDoNothing\" Action Completed for \"" << this->getPawn()->name << "\"" << endl;
+
+	delete this;
+	return true;
+}

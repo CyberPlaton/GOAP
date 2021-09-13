@@ -18,6 +18,10 @@
 
 #include "Action.h"
 
+
+#define EULER_NUMBER 2.71828
+
+
 /*
 * An agent is an extended gameobject with game specific functionality.
 * 
@@ -49,19 +53,35 @@ public:
 
 
 
-private:
+
+public:
+	static double AGENT_HUNGER_SCORE;
+	static double AGENT_HUNGER_SCORE_STEEPNESS;
+
+	bool isIdling = false;
+
+public:
 
 	std::map< std::string, double > needsScoreMap;
 	std::stack< ActionInstance* > actionStack;
 	Inventory* agentInventory = nullptr;
 	std::vector<GameObject*> agentOwnedObjects;
 
-
 private:
 	/*
 	* Use scoring functions to score the needs in the map.
 	*/
 	void scoreNeeds();
+
+	/*
+	* Execute a scoring function.
+	*/
+	double score(ScoringFunction f, double input)
+	{
+		return f(input);
+	}
+
+	bool isTargetDestinationValid(int x, int y);
 
 	/*
 	* Use a function to get the need we want currently to battle.
@@ -75,3 +95,7 @@ private:
 	GameObject* getObjectToFulfillNeedWith(const std::string& need);
 
 };
+
+
+double scoreAgentHunger(double hunger);
+double logScoringFunction(double v);

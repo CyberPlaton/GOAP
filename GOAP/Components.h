@@ -331,6 +331,9 @@ public:
 	std::vector<std::vector<int>> getNavMesh() { return map; }
 	std::vector<std::vector<int>> getNavGraph() { return graph->nodes; }
 	Graph* getGraph() { return graph; }
+	int getWidth() { return width; }
+	int getHeight() { return height; }
+
 
 private:
 

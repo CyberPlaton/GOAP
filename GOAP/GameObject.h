@@ -38,9 +38,32 @@ public:
 
 	void add(GameObject* go);
 
-	GameObject* getGOByTag(const std::string& tag);
-	GameObject* findAnyGOByTag(const std::string& tag);
-	GameObject* getGOByName(const std::string& name);
+
+	/*
+	* Returns the Gameobject with given tag or nullptr if none exists.
+	*/
+	GameObject* getGOByTag(const GOTag& tag);
+
+
+	/*
+	* Returns the Gameobject which has given tag as substring in its tag.
+	* For example let "GO_12_Furniture" be the Gameobject tag,
+	* then findAnyGOByTag( "Furniture" ) would return that Gameobject.
+	*/
+	GameObject* findAnyGOByTag(const GOTag& tag);
+
+
+	/*
+	* Returns the first Gameobject with given name.
+	* Beware, as names are not enforced to be unique app wide.
+	*/
+	GameObject* getGOByName(const GOName& name);
+
+
+	/*
+	* Returns the first Gameobject which has given name as substring in its name.
+	*/
+	GameObject* findAnyGOByName(const GOName& name);
 
 
 private:

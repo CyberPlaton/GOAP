@@ -33,21 +33,22 @@ public:
 		}
 
 
-		if (minutes >= 60.0)
+		if (minutes >= 60)
 		{
 			hours++;
-			minutes = 0.0;
+			minutes = 0;
 		}
 
 
-		if (hours >= 24.00)
+		if (hours >= 24)
 		{
 			// Day elapsed.
 			day++;
 
-			hours = 0.00;
+			hours = 0;
 		}
 
+		// From here on we  have here modulo from 1-8 as e.g. "day 0" does not exist.
 		// Adjust counters.
 		if (day > 7)
 		{

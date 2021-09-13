@@ -1,7 +1,32 @@
 #include "Agent.h"
 
+double Agent::AGENT_HUNGER_SCORE = 0.0314152;
+double Agent::AGENT_HUNGER_SCORE_STEEPNESS = 0.017735;
+
+
+double scoreAgentHunger(double hunger)
+{
+	using namespace std;
+
+	double t = GameWorldTime::get()->getTimeSpeed();
+	double r = Agent::AGENT_HUNGER_SCORE + Agent::AGENT_HUNGER_SCORE * Agent::AGENT_HUNGER_SCORE_STEEPNESS;
+
+	r *= t;
+
+	cout << "HungerPrev: " << hunger << "HungerNew: " << r << endl;
+
+	return r;
+}
+
+double logScoringFunction(double v)
+{
+	return std::log(v) * GameWorldTime::get()->getTimeSpeed();
+}
+
 void Agent::update(double dt)
 {
+	using namespace std;
+
 	// Update the needs of the agent.
 	scoreNeeds();
 
@@ -18,39 +43,69 @@ void Agent::update(double dt)
 		GameObject* go = getObjectToFulfillNeedWith(need);
 
 
-		// Push actions on stack:
-		// Action associated with the need to fulfill
-		// Action to let agent move to fulfilling object
-		SmartObject* smo = go->getComponent<SmartObject>("SmartObject");
-		std::string actionName = smo->getAssociatedAction(need);
-
-
-		ActionInstance* action = nullptr;
-		if (actionName.compare("ActionEat") == 0)
+		if (go)
 		{
-			action = ActionDatabase::get()->constructAction<ActionEat>(actionName, this, go);
+			// There exists a gameobject 
+
+			// Push actions on stack:
+			// - Action associated with the need to fulfill
+			// - Action to let agent move to fulfilling object
+			SmartObject* smo = go->getComponent<SmartObject>("SmartObject");
+			std::string actionName = smo->getAssociatedAction(need);
+
+			ActionInstance* action = nullptr;
+			if (actionName.compare("ActionEat") == 0)
+			{
+				action = ActionDatabase::get()->constructAction<ActionEat>(actionName, this, go);
+				actionStack.push(action);
+			}
+			else if (actionName.compare("ActionSleep") == 0)
+			{
+				action = ActionDatabase::get()->constructAction<ActionSleep>(actionName, this, go);
+				actionStack.push(action);
+			}
+			else if (actionName.compare("ActionDrink") == 0)
+			{
+				action = ActionDatabase::get()->constructAction<ActionDrink>(actionName, this, go);
+				actionStack.push(action);
+			}
+			else if (actionName.compare("ActionDoNothing") == 0)
+			{
+				action = ActionDatabase::get()->constructAction<ActionDoNothing>(actionName, this, go);
+				actionStack.push(action);
+			}
+
+
+			// Get the position of destination object
+			int x, y;
+			TransformCmp* transf = go->getComponent<TransformCmp>("Transform");
+			x = transf->xpos;
+			y = transf->ypos;
+
+			// Create special action which lets the agent just move to destination
+			action = ActionDatabase::get()->constructAction<ActionMoveToDestination>(actionName, this, go, x, y);
 			actionStack.push(action);
 		}
-		else if (actionName.compare("ActionSleep") == 0)
+		else
 		{
-			action = ActionDatabase::get()->constructAction<ActionSleep>(actionName, this, go);
+			// There exists no gameobject or the needs does not require one
+
+			// Currently, just create an idle action..
+			// Where the agent goes to some location and the just waits
+
+			ActionInstance* action = ActionDatabase::get()->constructAction<ActionDoNothing>("ActionDoNothing", this, nullptr);
+			actionStack.push(action);
+
+			TransformCmp* cmp = getComponent<TransformCmp>("Transform");
+		
+			int x = cmp->xpos;
+			int y = cmp->ypos;
+
+			action = ActionDatabase::get()->constructAction<ActionMoveToDestination>("ActionMoveToDestination", this, nullptr, x, y);
 			actionStack.push(action);
 		}
-		else if (actionName.compare("ActionDrink") == 0)
-		{
-			action = ActionDatabase::get()->constructAction<ActionDrink>(actionName, this, go);
-			actionStack.push(action);
-		}
 
 
-		// Get the position of destination object
-		int x, y;
-		TransformCmp* transf = go->getComponent<TransformCmp>("Transform");
-		x = transf->xpos;
-		y = transf->ypos;
-
-		action = ActionDatabase::get()->constructAction<ActionMoveToDestination>(actionName, this, go, x, y);
-		actionStack.push(action);
 
 		// return
 	}
@@ -80,6 +135,37 @@ void Agent::update(double dt)
 }
 
 
+bool Agent::isTargetDestinationValid(int x, int y)
+{
+	if (x > NavMesh::get()->getWidth() ||
+		y > NavMesh::get()->getHeight() ||
+		x < 0 ||
+		y < 0)
+	{
+		return false;
+	}
+
+
+	std::vector<std::vector<int>> v = NavMesh::get()->getNavGraph();
+
+	for (int i = 0; i < v.size(); i++)
+	{
+		for (int j = 0; j < v[i].size(); j++)
+		{
+			if (x == i || y == j)
+			{
+				if (v[i][j] != 1)
+				{
+					return false;
+				}
+			}
+		}
+	}
+
+	return true;
+}
+
+
 void Agent::scoreNeeds()
 {
 	using namespace std;
@@ -88,13 +174,18 @@ void Agent::scoreNeeds()
 	double timedt = GameWorldTime::get()->getTimeSpeed();
 
 	// Score sleep
-	needs->incrementSleep(0.13 * timedt);
+	double sleep = score(scoreAgentHunger, needs->getSleep());
+	needs->incrementSleep(sleep);
+
 
 	// Score hunger
-	needs->incrementHunger(0.03 * timedt);
+	double hunger = score(scoreAgentHunger, needs->getHunger());
+	needs->incrementHunger(hunger);
+
 
 	// Score thirst
-	needs->incrementThirst(0.07 * timedt);
+	double thirst = score(scoreAgentHunger, needs->getThirst());
+	needs->incrementThirst(thirst);
 
 
 	// Store scores
@@ -111,17 +202,11 @@ std::string Agent::getNeedToBattle()
 	std::string need = "none";
 	for (auto& n : needsScoreMap)
 	{
-		if (n.second > max)
+		if (n.second > 50.0 && n.second > max)
 		{
 			need = n.first;
 			max = n.second;
 		}
-	}
-
-
-	if (need.compare("none") == 0)
-	{
-		return "Sleep";
 	}
 
 	return need;
@@ -132,6 +217,10 @@ GameObject* Agent::getObjectToFulfillNeedWith(const std::string& need)
 {
 	GameObject* go = nullptr;
 	double satisfaction_level = 0.0;
+
+	// Check for a valid need
+	if (need.compare("none") == 0) return nullptr;
+
 
 	// First search in invenory and owned objects
 	// and choose the object which satisfies te most
