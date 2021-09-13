@@ -81,7 +81,6 @@ private:
 		return f(input);
 	}
 
-	bool isTargetDestinationValid(int x, int y);
 
 	/*
 	* Use a function to get the need we want currently to battle.

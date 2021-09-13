@@ -153,12 +153,6 @@ public:
 		// How much left from whole waittime
 		double left = d - timer->getElapsedGamehours();
 
-
-		cout << color(colors::CYAN);
-		cout << "Waittime: " << d << endl;
-		cout << "Elapsed Gamehours: " << timer->getElapsedGamehours() << endl;
-		cout << "LeftWaittime: " << left << white << endl;
-		
 		return left;
 	}
 

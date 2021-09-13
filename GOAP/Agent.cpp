@@ -13,7 +13,7 @@ double scoreAgentHunger(double hunger)
 
 	r *= t;
 
-	cout << "HungerPrev: " << hunger << "HungerNew: " << r << endl;
+	cout << "HungerPrev: " << hunger << " HungerNew: " << r << endl;
 
 	return r;
 }
@@ -134,36 +134,6 @@ void Agent::update(double dt)
 	}
 }
 
-
-bool Agent::isTargetDestinationValid(int x, int y)
-{
-	if (x > NavMesh::get()->getWidth() ||
-		y > NavMesh::get()->getHeight() ||
-		x < 0 ||
-		y < 0)
-	{
-		return false;
-	}
-
-
-	std::vector<std::vector<int>> v = NavMesh::get()->getNavGraph();
-
-	for (int i = 0; i < v.size(); i++)
-	{
-		for (int j = 0; j < v[i].size(); j++)
-		{
-			if (x == i || y == j)
-			{
-				if (v[i][j] != 1)
-				{
-					return false;
-				}
-			}
-		}
-	}
-
-	return true;
-}
 
 
 void Agent::scoreNeeds()

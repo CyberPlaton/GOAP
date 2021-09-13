@@ -196,14 +196,8 @@ bool ActionDoNothing::perform(double dt)
 
 	// How much is left to simulate
 	double left = getLeftTime();
-	if (left > 0.1)
+	if (left > 0.0)
 	{
-		cout << color(colors::RED);
-		cout << "Simulate idling from \"" << start_time << "\" until \"" << getEndTime() << "\" for \"" << left << "\" gamehours" << white << endl;
-
-		cout << color(colors::DARKGREEN);
-		cout << "\"ActionDoNothing\" simulate animation \"Idling\" for "<< left << " gamehours" << white << endl;
-
 		// Action not completed yet.
 		return false;
 	}
