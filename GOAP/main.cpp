@@ -117,6 +117,20 @@ bool App::OnUserUpdate(float fElapsedTime)
 						break;
 					}
 				}
+
+
+				// Draw walkable building inside and doorway if it is a walkable building
+				if (go->hasComponent("WalkableBuilding"))
+				{
+					WalkableBuildingCmp* wb = go->getComponent<WalkableBuildingCmp>("WalkableBuilding");
+					std::pair<int, int> door = wb->getDoorToBuilding();
+
+					// Draw Doorway
+					tv.FillRect(olc::vf2d(door.first, door.second), olc::vf2d(1, 1), olc::DARK_GREY);
+
+					// Draw building inside
+					tv.FillRect(olc::vf2d(tr->xpos + 1, tr->ypos + 1), olc::vf2d(rc->width - 2, rc->height - 2), olc::VERY_DARK_GREY);
+				}
 			}
 		}
 	}
@@ -237,7 +251,7 @@ bool App::OnUserCreate()
 	tv = olc::TileTransformedView({ ScreenWidth(), ScreenHeight() }, {32, 32});
 
 	
-	GameWorldTime::get()->setTimeSpeed(0.2);
+	GameWorldTime::get()->setTimeSpeed(0.1);
 
 
 	GameObject* agent = new GameObject("Agent", "Dude");
@@ -266,6 +280,7 @@ bool App::OnUserCreate()
 	small_house->AddComponent(new CollisionBoxCmp("CollisionBox", 3.0f, 4.0f, small_house));
 	static_cast<TransformCmp*>(small_house->getComponent("Transform"))->xpos = 14;
 	static_cast<TransformCmp*>(small_house->getComponent("Transform"))->ypos = 10;
+	small_house->AddComponent(new WalkableBuildingCmp("WalkableBuilding", small_house, 2, 2));
 
 
 	GameObject* big_house = new GameObject("Building", "Tavern");
@@ -274,6 +289,7 @@ bool App::OnUserCreate()
 	big_house->AddComponent(new CollisionBoxCmp("CollisionBox", 8.0f, 7.0f, big_house));
 	static_cast<TransformCmp*>(big_house->getComponent("Transform"))->xpos = 3;
 	static_cast<TransformCmp*>(big_house->getComponent("Transform"))->ypos = 6;
+	big_house->AddComponent(new WalkableBuildingCmp("WalkableBuilding", big_house, 1, 0));
 
 
 	GameObject* another_house = new GameObject("Building", "Store");
@@ -282,6 +298,7 @@ bool App::OnUserCreate()
 	another_house->AddComponent(new CollisionBoxCmp("CollisionBox", 5.0f, 5.0f, another_house));
 	static_cast<TransformCmp*>(another_house->getComponent("Transform"))->xpos = 16;
 	static_cast<TransformCmp*>(another_house->getComponent("Transform"))->ypos = 15;
+	another_house->AddComponent(new WalkableBuildingCmp("WalkableBuilding", another_house, 0, 3));
 
 
 	// Set up test smart object
@@ -634,10 +651,11 @@ void App::_onImGui()
 
 							if (!plotted)
 							{
-								for (float i = 1.0f; i < 100.0f; i += 0.5f)
+								for (float i = 1.0f; i < 100.0f; i += 0.1f)
 								{
-									float f = scoreAgentHunger(i);
-									compare_hunger_plot.push_back(f);
+									//float f = scoreAgentHunger(i);
+									float f = squareScoringFunction(i);
+									compare_hunger_plot.push_back(i + f);
 								}
 
 								plotted = true;
@@ -645,7 +663,7 @@ void App::_onImGui()
 
 							ImGui::Text("ScoreFunction: ");
 							ImGui::SameLine();
-							ImGui::PlotLines("Plot", &compare_hunger_plot[0], compare_hunger_plot.size());
+							ImGui::PlotLines("Plot", &compare_hunger_plot[0], compare_hunger_plot.size(), 0, 0, 0, (float)INT_MAX, ImVec2(250, 100));
 
 							if (hunger_plot.size() > 1000)
 							{

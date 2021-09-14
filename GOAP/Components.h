@@ -9,6 +9,8 @@
 #include <stack>
 #include <queue>
 
+class WalkableBuildingCmp;
+
 
 class CollisionBoxCmp : public Component
 {
@@ -251,81 +253,7 @@ public:
 	}
 
 
-	bool bake()
-	{
-		graph = new Graph(width, height);
-		for (int i = 0; i < width; i++)
-		{
-			for (int j = 0; j < height; j++)
-			{
-				graph->addNode(i, j);
-			}
-		}
-
-
-		for (auto& go : GameObjectStorage::get()->getStorage())
-		{
-
-			if (go->getTag().find("Building") == std::string::npos) continue;
-
-			// Start baking the Graph too.
-			//
-			if (go->hasComponent("CollisionBox"))
-			{
-				int x, y, w, h;
-
-				x = go->getComponent<TransformCmp>("Transform")->xpos;
-				y = go->getComponent<TransformCmp>("Transform")->ypos;
-
-				w = go->getComponent<CollisionBoxCmp>("CollisionBox")->width;
-				h = go->getComponent<CollisionBoxCmp>("CollisionBox")->height;
-
-
-
-				for (int i = x; i < x + w; i++)
-				{
-					for (int j = y; j < y + h; j++)
-					{
-						map[i][j] = 99;
-						graph->deleteNode(i, j);
-					}
-				}
-			}
-			else
-			{
-			}
-		}
-
-
-		for (int i = 0; i < width - 1; i++)
-		{
-			for (int j = 0; j < height - 1; j++)
-			{
-				if (graph->nodes[i][j] == 1)
-				{
-					// We make exactly 2 edges for each node,
-					// thus every node has 4 edges in total.
-
-					if (graph->nodes[i + 1][j] == 1)
-					{
-						edge e = std::make_tuple(i, j, i + 1, j, 1);
-						graph->edges.push_back(e);
-					}
-					if (graph->nodes[i][j + 1] == 1)
-					{
-						edge e2 = std::make_tuple(i, j, i, j + 1, 1);
-						graph->edges.push_back(e2);
-					}
-				}
-			}
-		}
-
-
-
-		return true;
-	}
-
-
+	bool bake();
 
 
 	std::vector<std::vector<int>> getNavMesh() { return map; }
@@ -817,4 +745,39 @@ private:
 
 
 	Animations currentAnimation;
+};
+
+
+
+/*
+* The walkable building is a special component which does the following.
+* For a given building it creates a doorway on given location and
+* inserts walkable nodes into the NavMesh before baking.
+*/
+class WalkableBuildingCmp : public Component
+{
+public:
+	WalkableBuildingCmp(const ComponentID& name, GameObject* go, int doorx, int doory)
+		: building(go), doorway(std::make_pair(doorx, doory))
+	{
+		this->name = name;
+		type = "WalkableBuilding";
+
+		init(type);
+	}
+
+	ComponentType getType() override { return this->type; }
+
+
+	std::pair<int, int> getDoorToBuilding()
+	{
+		TransformCmp* tr = building->getComponent<TransformCmp>("Transform");
+		return std::make_pair(tr->xpos + doorway.first, tr->ypos + doorway.second);
+	}
+
+
+private:
+	ComponentType type;
+	GameObject* building = nullptr;
+	std::pair<int, int> doorway;
 };

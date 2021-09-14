@@ -9,23 +9,31 @@ double scoreAgentHunger(double hunger)
 	using namespace std;
 
 	double t = GameWorldTime::get()->getTimeSpeed();
-	double r = Agent::AGENT_HUNGER_SCORE + Agent::AGENT_HUNGER_SCORE * Agent::AGENT_HUNGER_SCORE_STEEPNESS;
+	double r = 0.0;
+
+	if (std::log(hunger) < 0.0)
+	{
+		r = std::log(hunger) + Agent::AGENT_HUNGER_SCORE * Agent::AGENT_HUNGER_SCORE_STEEPNESS;
+	}
+	else
+	{
+		r = Agent::AGENT_HUNGER_SCORE + Agent::AGENT_HUNGER_SCORE * Agent::AGENT_HUNGER_SCORE_STEEPNESS;
+	}
 
 	r *= t;
-
-	cout << color(colors::MAGENTA);
-	cout << "Hunger: " << hunger << endl;
-	cout << "HungerLog: " << std::log(hunger) << endl;
-	cout << "Increase: " << r  << endl;
-	cout << "New HungerScore: " << hunger + r << endl;
-	cout << white;
 
 	return r;
 }
 
 double logScoringFunction(double v)
 {
-	return std::log(v) * GameWorldTime::get()->getTimeSpeed();
+	return std::log(v);
+}
+
+
+double squareScoringFunction(double v)
+{
+	return std::powf(v, 2.0);
 }
 
 void Agent::update(double dt)

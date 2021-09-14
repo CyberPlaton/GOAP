@@ -104,3 +104,4 @@ private:
 
 double scoreAgentHunger(double hunger);
 double logScoringFunction(double v);
+double squareScoringFunction(double v);
