@@ -72,7 +72,8 @@ bool ActionSleep::perform(double dt)
 
 
 		// Check whether agent does not need sleep anymore.
-		if (needs->getSleep() <= 0.0) return true;
+		double margin = getActionCompletionMargin();
+		if (needs->getSleep() <= 0.0 + margin) return true;
 
 		// Action not completed yet.
 		return false;
@@ -121,11 +122,17 @@ bool ActionEat::perform(double dt)
 		SmartObject* smo = smartGO->getComponent<SmartObject>("SmartObject");
 		double a = smo->getFulfillmentAmount("Hunger");
 
+
+		cout << color(colors::DARKRED);
+		cout << "Decrease Hunger of \""<< this->getPawn()->getName() << "\" by " << -(a * GameWorldTime::get()->getTimeSpeed()) << white << endl;
+
 		// Decrease hunger a bit.
 		needs->incrementHunger(-(a * GameWorldTime::get()->getTimeSpeed()));
 
+
 		// Check whether agent does not need sleep anymore.
-		if (needs->getHunger() <= 0.0) return true;
+		double margin = getActionCompletionMargin();
+		if (needs->getHunger() <= 0.0 + margin) return true;
 
 		// Action not completed yet.
 		return false;
@@ -177,8 +184,10 @@ bool ActionDrink::perform(double dt)
 		// Decrease thirst a bit.
 		needs->incrementThirst(-(a * GameWorldTime::get()->getTimeSpeed()));
 
+
 		// Check whether agent does not need sleep anymore.
-		if (needs->getThirst() <= 0.0) return true;
+		double margin = getActionCompletionMargin();
+		if (needs->getThirst() <= 0.0 + margin) return true;
 
 		// Action not completed yet.
 		return false;

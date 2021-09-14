@@ -383,8 +383,8 @@ bool App::OnUserCreate()
 	table->AddComponent(new TransformCmp("Transform"));
 	table->AddComponent(new RendererableCmp("Renderable", 1.0f, 1.0f, "yellow"));
 	table->AddComponent(new CollisionBoxCmp("CollisionBox", 1.0f, 1.0f, table));
-	static_cast<TransformCmp*>(table->getComponent("Transform"))->xpos = 28;
-	static_cast<TransformCmp*>(table->getComponent("Transform"))->ypos = 18;
+	static_cast<TransformCmp*>(table->getComponent("Transform"))->xpos = 8;
+	static_cast<TransformCmp*>(table->getComponent("Transform"))->ypos = 8;
 
 	SmartObject* smo = new SmartObject("SmartObject");
 	smo->loadDefinition("GOAP/Gameobjects/Table.xml");
@@ -397,8 +397,8 @@ bool App::OnUserCreate()
 	well->AddComponent(new TransformCmp("Transform"));
 	well->AddComponent(new RendererableCmp("Renderable", 1.0f, 1.0f, "yellow"));
 	well->AddComponent(new CollisionBoxCmp("CollisionBox", 1.0f, 1.0f, well));
-	static_cast<TransformCmp*>(well->getComponent("Transform"))->xpos = 2;
-	static_cast<TransformCmp*>(well->getComponent("Transform"))->ypos = 4;
+	static_cast<TransformCmp*>(well->getComponent("Transform"))->xpos = 9;
+	static_cast<TransformCmp*>(well->getComponent("Transform"))->ypos = 10;
 
 	SmartObject* smo2 = new SmartObject("SmartObject");
 	smo2->loadDefinition("GOAP/Gameobjects/Well.xml");
@@ -409,10 +409,10 @@ bool App::OnUserCreate()
 	*/
 	GameObject* bed = new GameObject("Furniture", "testing_bed");
 	bed->AddComponent(new TransformCmp("Transform"));
-	bed->AddComponent(new RendererableCmp("Renderable", 1.0f, 1.0f, "dark_magenta"));
+	bed->AddComponent(new RendererableCmp("Renderable", 1.0f, 1.0f, "yellow"));
 	bed->AddComponent(new CollisionBoxCmp("CollisionBox", 1.0f, 1.0f, bed));
-	static_cast<TransformCmp*>(bed->getComponent("Transform"))->xpos = 27;
-	static_cast<TransformCmp*>(bed->getComponent("Transform"))->ypos = 1;
+	static_cast<TransformCmp*>(bed->getComponent("Transform"))->xpos = 15;
+	static_cast<TransformCmp*>(bed->getComponent("Transform"))->ypos = 11;
 
 	SmartObject* smo3 = new SmartObject("SmartObject");
 	smo3->loadDefinition("GOAP/Gameobjects/Bed.xml");
@@ -691,8 +691,6 @@ void App::_onImGui()
 
 						if (cmp->getType().find("AgentNeeds") != std::string::npos)
 						{
-							static bool plotted = false;
-							static std::vector<float> compare_hunger_plot;
 							static std::vector<float> hunger_plot;
 							static std::vector<float> sleep_plot;
 							static std::vector<float> thirst_plot;
@@ -722,22 +720,6 @@ void App::_onImGui()
 							ImGui::SameLine();
 							ImGui::PlotLines("Function", &thirst_plot[0], thirst_plot.size());
 
-
-							if (!plotted)
-							{
-								for (float i = 1.0f; i < 100.0f; i += 0.1f)
-								{
-									//float f = scoreAgentHunger(i);
-									float f = squareScoringFunction(i);
-									compare_hunger_plot.push_back(i + f);
-								}
-
-								plotted = true;
-							}
-
-							ImGui::Text("ScoreFunction: ");
-							ImGui::SameLine();
-							ImGui::PlotLines("Plot", &compare_hunger_plot[0], compare_hunger_plot.size(), 0, 0, 0, (float)INT_MAX, ImVec2(250, 100));
 
 							if (hunger_plot.size() > 1000)
 							{

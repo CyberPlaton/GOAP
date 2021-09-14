@@ -1,7 +1,10 @@
 #include "Agent.h"
 
-double Agent::AGENT_HUNGER_SCORE = 0.00314152;
-double Agent::AGENT_HUNGER_SCORE_STEEPNESS = 0.0017735;
+double Agent::AGENT_HUNGER_SCORE = 0.0064152;
+double Agent::AGENT_HUNGER_SCORE_STEEPNESS = 0.00012735;
+double Agent::AGENT_SLEEP_SCORE = 0.00121152;
+double Agent::AGENT_SLEEP_SCORE_STEEPNESS = 0.61135;
+
 
 
 double scoreAgentHunger(double hunger)
@@ -10,31 +13,38 @@ double scoreAgentHunger(double hunger)
 
 	double t = GameWorldTime::get()->getTimeSpeed();
 	double r = 0.0;
+	hunger = hunger + 0.001;
 
-	if (std::log(hunger) < 0.0)
-	{
-		r = std::log(hunger) + Agent::AGENT_HUNGER_SCORE * Agent::AGENT_HUNGER_SCORE_STEEPNESS;
-	}
-	else
-	{
-		r = Agent::AGENT_HUNGER_SCORE + Agent::AGENT_HUNGER_SCORE * Agent::AGENT_HUNGER_SCORE_STEEPNESS;
-	}
+	r = t * (hunger * Agent::AGENT_HUNGER_SCORE_STEEPNESS + Agent::AGENT_HUNGER_SCORE);
 
-	r *= t;
+
+	cout << color(colors::DARKRED);
+	cout << "Increase Hunger by " << r;
+	cout << ", where Hunger =" << hunger << white << endl;
 
 	return r;
 }
 
-double logScoringFunction(double v)
+
+double scoreAgentSleep(double sleep)
 {
-	return std::log(v);
+	using namespace std;
+
+	double t = GameWorldTime::get()->getTimeSpeed();
+	double r = 0.0;
+	sleep = sleep + 0.001;
+
+	r = t * ( 1 / sleep * Agent::AGENT_SLEEP_SCORE_STEEPNESS + Agent::AGENT_SLEEP_SCORE);
+
+
+	cout << color(colors::DARKCYAN);
+	cout << "Increase Sleep by " << r;
+	cout << ", where Sleep =" << sleep << white << endl;
+
+	return r;
 }
 
 
-double squareScoringFunction(double v)
-{
-	return std::powf(v, 2.0);
-}
 
 void Agent::update(double dt)
 {
@@ -178,7 +188,7 @@ void Agent::scoreNeeds()
 	double timedt = GameWorldTime::get()->getTimeSpeed();
 
 	// Score sleep
-	double sleep = score(scoreAgentHunger, needs->getSleep());
+	double sleep = score(scoreAgentSleep, needs->getSleep());
 	needs->incrementSleep(sleep);
 
 

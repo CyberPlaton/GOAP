@@ -1,6 +1,6 @@
 <SmartObject>
 	<Fulfillments>
-		<Need name="Sleep" amount="0.5"></Need>
+		<Need name="Sleep" amount="0.79"></Need>
 	</Fulfillments>
 
 	<AvailableActions>

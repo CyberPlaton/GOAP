@@ -41,7 +41,10 @@ public:
 
 	bool perform(double dt) override final;
 	bool postPerform(double dt) override final;
-
+	double getActionCompletionMargin() override final
+	{
+		return 3.0;
+	}
 
 	int timer_started = 0;
 	GameworldTimer* timer = nullptr;
@@ -60,7 +63,10 @@ public:
 
 	bool perform(double dt) override final;
 	bool postPerform(double dt) override final;
-
+	double getActionCompletionMargin() override final
+	{
+		return 3.0;
+	}
 
 
 	int timer_started = 0;
@@ -79,9 +85,11 @@ public:
 
 
 	bool perform(double dt) override final;
-
 	bool postPerform(double dt) override final;
-
+	double getActionCompletionMargin() override final
+	{
+		return 3.0;
+	}
 
 
 	int timer_started = 0;

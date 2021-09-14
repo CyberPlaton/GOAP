@@ -58,6 +58,8 @@ public:
 public:
 	static double AGENT_HUNGER_SCORE;
 	static double AGENT_HUNGER_SCORE_STEEPNESS;
+	static double AGENT_SLEEP_SCORE;
+	static double AGENT_SLEEP_SCORE_STEEPNESS;
 
 	bool isIdling = false;
 
@@ -102,6 +104,16 @@ private:
 };
 
 
+/*
+* Hunger Scoring function.
+* Behaves somewhat exponentially.
+* 
+* Description: Score is rising very lowly in the beginning, for 1-2 Gamedays,
+* when it reaches a considerable level of +30-40 then it starts to grow somewhat fast.
+*/
 double scoreAgentHunger(double hunger);
-double logScoringFunction(double v);
-double squareScoringFunction(double v);
+
+
+/*
+*/
+double scoreAgentSleep(double sleep);

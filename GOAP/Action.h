@@ -108,6 +108,12 @@ public:
 	virtual double getLeftTime() = 0;
 
 	/*
+	* If this action diminishes the insistence of a need,
+	* this returns how near to 0 of the need the action can come until it is finished.
+	*/
+	virtual double getActionCompletionMargin() = 0;
+
+	/*
 	* Perform the action. Return true if the action was successfully completed.
 	*/
 	virtual bool perform(double dt) = 0;
@@ -166,6 +172,7 @@ public:
 		return this->maxDuration;
 	}
 
+
 	/*
 	* Get the duration of this action.
 	*/
@@ -183,7 +190,7 @@ public:
 	virtual double getStartTime() { return (double)INT_MAX; }
 	virtual double getEndTime() { return (double)INT_MAX; }
 	virtual double getLeftTime() { return (double)INT_MAX; }
-
+	virtual double getActionCompletionMargin() { return (double)INT_MAX; }
 	
 	virtual bool perform(double dt)
 	{
