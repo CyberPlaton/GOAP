@@ -13,7 +13,7 @@ class ActionEat;
 
 using ActionID = std::string;
 
-using ScoringFunction = double(*)(double);
+using ScoringFunction = double(*)(GameObject*, double);
 
 
 /*

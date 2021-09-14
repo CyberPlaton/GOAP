@@ -47,6 +47,9 @@ public:
 		AddComponent(new RendererableCmp("Renderable", 1.0f, 1.0f, "red"));
 		AddComponent(new TransformCmp("Transform"));
 		AddComponent(new AnimatorCmp("Animator", this));
+
+		agentBeliefs = new WorldStates();
+		timer = new GameworldTimer();
 	}
 
 	void update(double dt) override final;
@@ -70,6 +73,10 @@ public:
 	Inventory* agentInventory = nullptr;
 	std::vector<GameObject*> agentOwnedObjects;
 
+	WorldStates* agentBeliefs = nullptr;
+
+	GameworldTimer* timer = nullptr;
+
 private:
 	/*
 	* Use scoring functions to score the needs in the map.
@@ -79,9 +86,9 @@ private:
 	/*
 	* Execute a scoring function.
 	*/
-	double score(ScoringFunction f, double input)
+	double score(ScoringFunction f, GameObject* pawn, double input)
 	{
-		return f(input);
+		return f(pawn, input);
 	}
 
 
@@ -111,9 +118,9 @@ private:
 * Description: Score is rising very lowly in the beginning, for 1-2 Gamedays,
 * when it reaches a considerable level of +30-40 then it starts to grow somewhat fast.
 */
-double scoreAgentHunger(double hunger);
+double scoreAgentHunger(GameObject* pawn, double hunger);
 
 
 /*
 */
-double scoreAgentSleep(double sleep);
+double scoreAgentSleep(GameObject* pawn, double sleep);

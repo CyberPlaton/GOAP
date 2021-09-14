@@ -7,7 +7,7 @@ double Agent::AGENT_SLEEP_SCORE_STEEPNESS = 0.61135;
 
 
 
-double scoreAgentHunger(double hunger)
+double scoreAgentHunger(GameObject* pawn, double hunger)
 {
 	using namespace std;
 
@@ -17,7 +17,6 @@ double scoreAgentHunger(double hunger)
 
 	r = t * (hunger * Agent::AGENT_HUNGER_SCORE_STEEPNESS + Agent::AGENT_HUNGER_SCORE);
 
-
 	cout << color(colors::DARKRED);
 	cout << "Increase Hunger by " << r;
 	cout << ", where Hunger =" << hunger << white << endl;
@@ -26,7 +25,7 @@ double scoreAgentHunger(double hunger)
 }
 
 
-double scoreAgentSleep(double sleep)
+double scoreAgentSleep(GameObject* pawn, double sleep)
 {
 	using namespace std;
 
@@ -36,6 +35,15 @@ double scoreAgentSleep(double sleep)
 
 	r = t * ( 1 / sleep * Agent::AGENT_SLEEP_SCORE_STEEPNESS + Agent::AGENT_SLEEP_SCORE);
 
+	// Modify the sleep score if agent has slept lastly.
+	if (static_cast<Agent*>(pawn)->agentBeliefs->getStates()["HasSlept"] == 1.0)
+	{
+		r -= Agent::AGENT_SLEEP_SCORE * 2;
+	
+		cout << color(colors::GREEN);
+		cout << "Decreasing SleepScore by " << Agent::AGENT_SLEEP_SCORE * 2;
+		cout << ", because Agent has slept lastly" << white << endl;
+	}
 
 	cout << color(colors::DARKCYAN);
 	cout << "Increase Sleep by " << r;
@@ -52,6 +60,17 @@ void Agent::update(double dt)
 
 	// Update the needs of the agent.
 	scoreNeeds();
+
+
+	// Check for beliefs which need to be altered.
+	// Slept lastly benefit
+	if (timer->getElapsedGamehours() > 5.0)
+	{
+		agentBeliefs->setState("HasSlept", 0.0);
+
+		cout << color(colors::DARKGREEN);
+		cout << "Reset \"HasSlept\" benefit" << white << endl;
+	}
 
 
 	if (actionStack.empty())
@@ -188,17 +207,17 @@ void Agent::scoreNeeds()
 	double timedt = GameWorldTime::get()->getTimeSpeed();
 
 	// Score sleep
-	double sleep = score(scoreAgentSleep, needs->getSleep());
+	double sleep = score(scoreAgentSleep, this, needs->getSleep());
 	needs->incrementSleep(sleep);
 
 
 	// Score hunger
-	double hunger = score(scoreAgentHunger, needs->getHunger());
+	double hunger = score(scoreAgentHunger, this, needs->getHunger());
 	needs->incrementHunger(hunger);
 
 
 	// Score thirst
-	double thirst = score(scoreAgentHunger, needs->getThirst());
+	double thirst = score(scoreAgentHunger, this, needs->getThirst());
 	needs->incrementThirst(thirst);
 
 

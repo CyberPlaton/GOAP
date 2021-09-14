@@ -88,8 +88,11 @@ bool ActionSleep::postPerform(double dt)
 {
 	using namespace std;
 
-	cout << "\"ActionSleep\" Action Completed for \"" << this->getPawn()->name << "\"" << endl;
+	// Set the state of the pawn for sleeping and monitor for how long it will stay up.
+	static_cast<Agent*>(getPawn())->agentBeliefs->setState("HasSlept", 1.0);
+	static_cast<Agent*>(getPawn())->timer->startTimer();
 
+	cout << "\"ActionSleep\" Action Completed for \"" << this->getPawn()->name << "\"" << endl;
 
 	delete this;
 	return true;
