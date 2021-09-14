@@ -67,73 +67,123 @@ bool App::OnUserUpdate(float fElapsedTime)
 	}
 
 
+	// Draw Buildings
 	for (auto& go : GameObjectStorage::get()->getStorage())
 	{
-		olc::Pixel color;
-
-		// Just to get color string and to render it then we need O(n*n), which is baad.
 		if (go->hasComponent("Renderable"))
 		{
-			TransformCmp* tr = static_cast<TransformCmp*> (go->getComponent("Transform"));
-			RendererableCmp* rc = static_cast<RendererableCmp*> (go->getComponent("Renderable"));
-
-			color = _getColorFromString(rc->color);
-
-			if (rc->render)
+			RendererableCmp* render = go->getComponent<RendererableCmp>("Renderable");
+			if (render->render)
 			{
-				tv.FillRect(olc::vf2d(tr->xpos, tr->ypos), olc::vf2d(rc->width, rc->height), color);
-			
-				// Draw animation if needed
-				if (go->hasComponent("Animator"))
+				if (go->getTag().find("Building") != std::string::npos)
 				{
-					AnimatorCmp* anim = go->getComponent< AnimatorCmp >("Animator");
+					TransformCmp* transform = go->getComponent<TransformCmp>("Transform");
 
-					AnimatorCmp::Animations currAnim = anim->getAnimation();
+					// Draw solid building ground
+					tv.FillRect(olc::vf2d(transform->xpos, transform->ypos), olc::vf2d(render->width, render->height), olc::GREY);
 
-					switch (currAnim)
+					
+					// Draw walkable building
+					if (go->hasComponent("WalkableBuilding"))
 					{
-					case AnimatorCmp::Animations::ANIM_SLEEP:
-						tv.DrawStringDecal(olc::vf2d(tr->xpos + rc->width / 4, tr->ypos - rc->height / 2), "Sleep");
-						break;
+						WalkableBuildingCmp* wb = go->getComponent<WalkableBuildingCmp>("WalkableBuilding");
+						std::pair<int, int> door = wb->getDoorToBuilding();
 
-					case AnimatorCmp::Animations::ANIM_WALK:
-						tv.DrawStringDecal(olc::vf2d(tr->xpos + rc->width / 4, tr->ypos - rc->height / 2), "Walk");
-						break;
+						// Draw Doorway
+						tv.FillRect(olc::vf2d(door.first, door.second), olc::vf2d(1, 1), olc::DARK_GREY);
 
-					case AnimatorCmp::Animations::ANIM_IDLE:
-						tv.DrawStringDecal(olc::vf2d(tr->xpos + rc->width / 4, tr->ypos - rc->height / 2), "Idle");
-						break;
-
-					case AnimatorCmp::Animations::ANIM_EAT:
-						tv.DrawStringDecal(olc::vf2d(tr->xpos + rc->width / 4, tr->ypos - rc->height / 2), "Eat");
-						break;
-
-					case AnimatorCmp::Animations::ANIM_DRINK:
-						tv.DrawStringDecal(olc::vf2d(tr->xpos + rc->width / 4, tr->ypos - rc->height / 2), "Drink");
-						break;
-
-
-					default:
-						break;
+						// Draw building inside
+						tv.FillRect(olc::vf2d(transform->xpos + 1, transform->ypos + 1), olc::vf2d(render->width - 2, render->height - 2), olc::VERY_DARK_GREY);
 					}
-				}
-
-
-				// Draw walkable building inside and doorway if it is a walkable building
-				if (go->hasComponent("WalkableBuilding"))
-				{
-					WalkableBuildingCmp* wb = go->getComponent<WalkableBuildingCmp>("WalkableBuilding");
-					std::pair<int, int> door = wb->getDoorToBuilding();
-
-					// Draw Doorway
-					tv.FillRect(olc::vf2d(door.first, door.second), olc::vf2d(1, 1), olc::DARK_GREY);
-
-					// Draw building inside
-					tv.FillRect(olc::vf2d(tr->xpos + 1, tr->ypos + 1), olc::vf2d(rc->width - 2, rc->height - 2), olc::VERY_DARK_GREY);
 				}
 			}
 		}
 	}
+
+
+	// Draw Gameobjects, such as NPCs and Furniture
+	for (auto& go : GameObjectStorage::get()->getStorage())
+	{
+		if (go->hasComponent("Renderable"))
+		{
+			RendererableCmp* render = go->getComponent<RendererableCmp>("Renderable");
+			if (render->render)
+			{
+				if (go->getTag().find("Furniture") != std::string::npos)
+				{
+					olc::Pixel color;
+
+					TransformCmp* transform = go->getComponent<TransformCmp>("Transform");
+					
+					color = _getColorFromString(render->color);
+
+					// Draw entity
+					tv.FillRect(olc::vf2d(transform->xpos, transform->ypos), olc::vf2d(render->width, render->height), color);
+				}
+			}
+		}
+	}
+
+	// Draw NPCs
+	for (auto& go : GameObjectStorage::get()->getStorage())
+	{
+		if (go->hasComponent("Renderable"))
+		{
+			RendererableCmp* render = go->getComponent<RendererableCmp>("Renderable");
+			if (render->render)
+			{
+				if (go->getTag().find("Agent") != std::string::npos)
+				{
+					// Draw entity
+					olc::Pixel color;
+
+					TransformCmp* transform = go->getComponent<TransformCmp>("Transform");
+
+					color = _getColorFromString(render->color);
+
+					tv.FillRect(olc::vf2d(transform->xpos, transform->ypos), olc::vf2d(render->width, render->height), color);
+
+
+					// Draw animation if needed
+					if (go->hasComponent("Animator"))
+					{
+						AnimatorCmp* anim = go->getComponent< AnimatorCmp >("Animator");
+
+						AnimatorCmp::Animations currAnim = anim->getAnimation();
+
+						switch (currAnim)
+						{
+						case AnimatorCmp::Animations::ANIM_SLEEP:
+							tv.DrawStringDecal(olc::vf2d(transform->xpos + render->width / 4, transform->ypos - render->height / 2), "Sleep");
+							break;
+
+						case AnimatorCmp::Animations::ANIM_WALK:
+							tv.DrawStringDecal(olc::vf2d(transform->xpos + render->width / 4, transform->ypos - render->height / 2), "Walk");
+							break;
+
+						case AnimatorCmp::Animations::ANIM_IDLE:
+							tv.DrawStringDecal(olc::vf2d(transform->xpos + render->width / 4, transform->ypos - render->height / 2), "Idle");
+							break;
+
+						case AnimatorCmp::Animations::ANIM_EAT:
+							tv.DrawStringDecal(olc::vf2d(transform->xpos + render->width / 4, transform->ypos - render->height / 2), "Eat");
+							break;
+
+						case AnimatorCmp::Animations::ANIM_DRINK:
+							tv.DrawStringDecal(olc::vf2d(transform->xpos + render->width / 4, transform->ypos - render->height / 2), "Drink");
+							break;
+
+
+						default:
+							break;
+						}
+					}
+
+				}
+			}
+		}
+	}
+
 
 
 	if (selected_gameobject)
@@ -149,13 +199,37 @@ bool App::OnUserUpdate(float fElapsedTime)
 	}
 
 
+	// Draw objects that are colliding
+	for (auto& first : GameObjectStorage::get()->getStorage())
+	{
+		for (auto& second : GameObjectStorage::get()->getStorage())
+		{
+			if (first->getTag().compare(second->getTag()) == 0) continue;
 
+			if (first->hasComponent("CollisionBox") && second->hasComponent("CollisionBox"))
+			{
+				if (first->getComponent<CollisionBoxCmp>("CollisionBox")->resolve(second) &&
+					second->getComponent<CollisionBoxCmp>("CollisionBox")->resolve(first))
+				{
+					TransformCmp* tr = first->getComponent<TransformCmp>("Transform");
+					CollisionBoxCmp* c = first->getComponent<CollisionBoxCmp>("CollisionBox");
+
+					tv.DrawRect(olc::vf2d(tr->xpos - 0.1f, tr->ypos - 0.1f), olc::vf2d(c->width + 0.1f, c->height + 0.1f), olc::DARK_RED);
+				}
+			}
+		}
+
+	}
+
+	/*
 	for (auto& coll : ComponentStorage::get()->getAllOfType<CollisionBoxCmp>("CollisionBox")) // Update collision detection.
 	{
 		for (auto& go : GameObjectStorage::get()->getStorage())
 		{
+			// Do not draw collision with self
 			if (coll->this_agent->getTag().compare(go->getTag()) == 0) continue;
 
+			// Resolve collision with another object
 			if (coll->resolve(go))
 			{
 				TransformCmp* tr = static_cast<TransformCmp*>(coll->this_agent->getComponent("Transform"));
@@ -165,7 +239,7 @@ bool App::OnUserUpdate(float fElapsedTime)
 			}
 		}
 	}
-
+	*/
 
 	if (show_nav_mesh)
 	{
@@ -251,7 +325,7 @@ bool App::OnUserCreate()
 	tv = olc::TileTransformedView({ ScreenWidth(), ScreenHeight() }, {32, 32});
 
 	
-	GameWorldTime::get()->setTimeSpeed(0.1);
+	GameWorldTime::get()->setTimeSpeed(0.016);
 
 
 	GameObject* agent = new GameObject("Agent", "Dude");

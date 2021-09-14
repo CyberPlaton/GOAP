@@ -26,48 +26,11 @@ public:
 
 	ComponentType getType() override { return this->type; }
 
-	bool resolve(GameObject* other)
-	{
-		if (other->hasComponent("Transform"))
-		{
-			if (other->hasComponent("CollisionBox"))
-			{
-				// Plain standard collision detection.
-
-				TransformCmp* otr = static_cast<TransformCmp*>(other->getComponent("Transform"));
-				CollisionBoxCmp* ocoll = static_cast<CollisionBoxCmp*>(other->getComponent("CollisionBox"));
-				TransformCmp* tr = static_cast<TransformCmp*>(this_agent->getComponent("Transform"));
-
-
-				if (tr->xpos < otr->xpos + ocoll->width &&
-					tr->xpos + width > otr->xpos &&
-					tr->ypos < otr->ypos + ocoll->height &&
-					tr->ypos + height > otr->ypos)
-				{
-					return true;
-				}
-			}
-		}
-
-		return false;
-	}
-
-
-
-	bool resolve(float x, float y, float w, float h)
-	{
-		TransformCmp* tr = static_cast<TransformCmp*>(this_agent->getComponent("Transform"));
-
-		if (tr->xpos < x + w &&
-			tr->xpos + width > x &&
-			tr->ypos < y + h &&
-			tr->ypos + height > y)
-		{
-			return true;
-		}
-
-		return false;
-	}
+	/*
+	* 
+	*/
+	bool resolve(GameObject* other);
+	bool resolve(float x, float y, float w, float h);
 
 
 	GameObject* this_agent = nullptr;

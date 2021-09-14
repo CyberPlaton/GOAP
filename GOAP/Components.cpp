@@ -164,3 +164,181 @@ bool NavMesh::bake()
 
 	return true;
 }
+
+
+
+
+
+bool CollisionBoxCmp::resolve(GameObject* other)
+{
+	if (other->hasComponent("Transform"))
+	{
+		if (other->hasComponent("CollisionBox"))
+		{
+
+			if (this_agent->hasComponent("WalkableBuilding"))
+			{
+				// Special collision detection, where this pawn is the building with a walkable area inside
+				// and other is the collision object
+
+				// Thus if the other is inside the collision box AND collides with our agents walkable area, then no collision is detected
+
+				TransformCmp* otr = static_cast<TransformCmp*>(other->getComponent("Transform"));
+				CollisionBoxCmp* ocoll = static_cast<CollisionBoxCmp*>(other->getComponent("CollisionBox"));
+				TransformCmp* tr = static_cast<TransformCmp*>(this_agent->getComponent("Transform"));
+
+				if (tr->xpos < otr->xpos + ocoll->width &&
+					tr->xpos + width > otr->xpos &&
+					tr->ypos < otr->ypos + ocoll->height &&
+					tr->ypos + height > otr->ypos)
+				{
+					// Other object is inside collision box of building
+
+					// Reduce dimension of buildings collision box according to walkable area
+					int xpos = tr->xpos + 1;
+					int ypos = tr->ypos + 1;
+					int w = width - 2;
+					int h = height - 2;
+
+					// Get the position of the door, which is non-collidable too
+					std::pair<int, int> door = this_agent->getComponent<WalkableBuildingCmp>("WalkableBuilding")->getDoorToBuilding();
+
+					if (xpos < otr->xpos + ocoll->width &&
+						xpos + w > otr->xpos &&
+						ypos < otr->ypos + ocoll->height &&
+						ypos + h > otr->ypos)
+					{
+						// Other object is inside the buildings walkable area --> no collision!
+						return false;
+					}
+					else if (door.first == otr->xpos && door.second == otr->ypos)
+					{
+						// Other object is on the door --> no collision!
+						return false;
+					}
+					else
+					{
+						// Other object is NOT inside the buildings walkable area --> collision!
+						return true;
+					}
+				}
+
+			}
+			else
+			{
+				// Plain standard collision detection.
+				TransformCmp* otr = static_cast<TransformCmp*>(other->getComponent("Transform"));
+				CollisionBoxCmp* ocoll = static_cast<CollisionBoxCmp*>(other->getComponent("CollisionBox"));
+				TransformCmp* tr = static_cast<TransformCmp*>(this_agent->getComponent("Transform"));
+
+
+				if (tr->xpos < otr->xpos + ocoll->width &&
+					tr->xpos + width > otr->xpos &&
+					tr->ypos < otr->ypos + ocoll->height &&
+					tr->ypos + height > otr->ypos)
+				{
+					return true;
+				}
+			}
+		}
+	}
+
+	return false;
+}
+
+
+
+
+bool CollisionBoxCmp::resolve(float x, float y, float w, float h)
+{
+	using namespace std;
+
+	cout << color(colors::CYAN);
+	cout << "[CollisionBoxCmp::resolve] resolving Pawn \""<< this_agent->getName() << "\" and Object {x="<< x << ", y="<< y << ", w="<< w << ", h="<< h << "}" << white << endl;
+
+	TransformCmp* transform = static_cast<TransformCmp*>(this_agent->getComponent("Transform"));
+
+	// Resolve collision for this object 
+	// If it is a walkable building
+	if (this_agent->hasComponent("WalkableBuilding"))
+	{
+		cout << color(colors::DARKCYAN);
+		cout << "\t ...Resolve for Walkable Building..." << white << endl;
+
+
+		// Check if other object is inside the building dimensions
+		if (transform->xpos < x + w &&
+			transform->xpos + width > x &&
+			transform->ypos < y + h &&
+			transform->ypos + height > y)
+		{
+
+			cout << color(colors::DARKCYAN);
+			cout << "\t\t ...Object is inside the Building Collision Box..." << white << endl;
+
+			// Check whether it is inside the walkable-building inside area
+			int xpos = transform->xpos + 1;
+			int ypos = transform->ypos + 1;
+			int walkable_width = width - 2;
+			int walkable_height = height - 2;
+
+
+			// Get the position of the door, which is non-collidable too
+			std::pair<int, int> door = this_agent->getComponent<WalkableBuildingCmp>("WalkableBuilding")->getDoorToBuilding();
+
+			if (xpos < x + w &&
+				xpos + walkable_width > x &&
+				ypos < y + h &&
+				ypos + walkable_height > y)
+			{
+
+				cout << color(colors::DARKCYAN);
+				cout << "\t\t\t ...Object is inside the Building Walkable Area..." << white << endl;
+
+				// Other object is inside the buildings walkable area --> no collision!
+				return false;
+			}
+			else if (door.first == x && door.second == y)
+			{
+				cout << color(colors::DARKCYAN);
+				cout << "\t\t\t ...Object is on the door..." << white << endl;
+
+				// Other object is on the door --> no collision!
+				return false;
+			}
+			else
+			{
+				cout << color(colors::DARKCYAN);
+				cout << "\t\t\t ...Object is on the wall..." << white << endl;
+
+				// Other object is NOT inside the buildings walkable area --> collision!
+				return true;
+			}
+
+		}
+	}
+	// If it is a non-walkable solid object
+	else
+	{
+		cout << color(colors::DARKCYAN);
+		cout << "\t ...Resolve for Solid Object..." << white << endl;
+
+
+		if (transform->xpos < x + w &&
+			transform->xpos + width > x &&
+			transform->ypos < y + h &&
+			transform->ypos + height > y)
+		{
+
+			cout << color(colors::DARKCYAN);
+			cout << "\t\t ...Object is colliding with solid object..." << white << endl;
+
+			return true;
+		}
+	}
+
+
+	cout << color(colors::DARKCYAN);
+	cout << "\t\t ...No collision detected..." << white << endl;
+	return false;
+}
