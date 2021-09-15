@@ -56,8 +56,8 @@ struct ActionDefinition
 
 
 		// Get tag of the target
-		elem = root->FirstChildElement("TargetTag");
-		this->targetTag = elem->GetText();
+		//elem = root->FirstChildElement("TargetTag");
+		//this->targetTag = elem->GetText();
 	}
 
 
