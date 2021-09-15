@@ -35,16 +35,6 @@ double scoreAgentSleep(GameObject* pawn, double sleep)
 
 	r = t * ( 1 / sleep * Agent::AGENT_SLEEP_SCORE_STEEPNESS + Agent::AGENT_SLEEP_SCORE);
 
-	// Modify the sleep score if agent has slept lastly.
-	if (static_cast<Agent*>(pawn)->agentBeliefs->getStates()["HasSlept"] == 1.0)
-	{
-		r -= Agent::AGENT_SLEEP_SCORE * 2;
-	
-		cout << color(colors::GREEN);
-		cout << "Decreasing SleepScore by " << Agent::AGENT_SLEEP_SCORE * 2;
-		cout << ", because Agent has slept lastly" << white << endl;
-	}
-
 	cout << color(colors::DARKCYAN);
 	cout << "Increase Sleep by " << r;
 	cout << ", where Sleep =" << sleep << white << endl;
@@ -60,17 +50,6 @@ void Agent::update(double dt)
 
 	// Update the needs of the agent.
 	scoreNeeds();
-
-
-	// Check for beliefs which need to be altered.
-	// Slept lastly benefit
-	if (timer->getElapsedGamehours() > 5.0)
-	{
-		agentBeliefs->setState("HasSlept", 0.0);
-
-		cout << color(colors::DARKGREEN);
-		cout << "Reset \"HasSlept\" benefit" << white << endl;
-	}
 
 
 	if (actionStack.empty())
