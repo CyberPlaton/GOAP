@@ -1,9 +1,17 @@
-<SmartObject>
-	<Fulfillments>
-		<Need name="Thirst" amount="0.5"></Need>
-	</Fulfillments>
+<Gameobject>
+	<Tag>Furniture</Tag>
+	<Name>Well</Name>
+	<Components>
+		<Component name="SmartObject">
+			<DestroyOnUse>false</DestroyOnUse>
+			<NeedAgentPresence>true</NeedAgentPresence>
+			<Fulfillments>
+				<Need name="Thirst" amount="0.87"></Need>
+			</Fulfillments>
 
-	<AvailableActions>
-		<Action name="Thirst" aName ="ActionDrink"></Action>
-	</AvailableActions>
-</SmartObject>
+			<AvailableActions>
+				<Action name="Thirst" aName ="ActionDrink"></Action>
+			</AvailableActions>
+		</Component>
+	</Components>
+</Gameobject>

@@ -1,23 +1,27 @@
 #include "SmartObject.h"
 
 
-bool SmartObject::loadDefinition(const std::string& path)
+bool SmartObjectCmp::loadDefinition(tinyxml2::XMLElement* element)
 {
 	using namespace tinyxml2;
 
-	tinyxml2::XMLDocument doc;
-	XMLError result = doc.LoadFile(path.c_str());
-	if (result != XMLError::XML_SUCCESS)
-	{
-		return false;
-	}
+	if (!element) return false;
 
-	XMLNode* root = doc.FirstChild();
-	if (root == nullptr) return false;
+
+	// Get agent presence option
+	XMLElement* presence = element->FirstChildElement("NeedAgentPresence");
+	std::string value = presence->GetText();
+	needAgentPresence = value.compare("false") == 0 ? false : true;
+
+
+	// Get whether to destroy after usage
+	XMLElement* usage = element->FirstChildElement("DestroyOnUse");
+	value = usage->GetText();
+	destroyOnUse = value.compare("false") == 0 ? false : true;
 
 
 	// Get Fulfillments
-	XMLElement* elem = root->FirstChildElement("Fulfillments");
+	XMLElement* elem = element->FirstChildElement("Fulfillments");
 	XMLElement* kid = elem->FirstChildElement("Need");
 	while (kid)
 	{
@@ -33,7 +37,7 @@ bool SmartObject::loadDefinition(const std::string& path)
 
 
 	// Get Actions
-	elem = root->FirstChildElement("AvailableActions");
+	elem = element->FirstChildElement("AvailableActions");
 	kid = elem->FirstChildElement("Action");
 	while (kid)
 	{

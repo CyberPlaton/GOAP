@@ -1,9 +1,17 @@
-<SmartObject>
-	<Fulfillments>
-		<Need name="Sleep" amount="0.79"></Need>
-	</Fulfillments>
+<Gameobject>
+	<Tag>Furniture</Tag>
+	<Name>Bed</Name>
+	<Components>
+		<Component name="SmartObject">
+			<DestroyOnUse>false</DestroyOnUse>
+			<NeedAgentPresence>true</NeedAgentPresence>
+			<Fulfillments>
+				<Need name="Sleep" amount="0.9"></Need>
+			</Fulfillments>
 
-	<AvailableActions>
-		<Action name="Sleep" aName ="ActionSleep"></Action>
-	</AvailableActions>
-</SmartObject>
+			<AvailableActions>
+				<Action name="Sleep" aName ="ActionSleep"></Action>
+			</AvailableActions>
+		</Component>
+	</Components>
+</Gameobject>

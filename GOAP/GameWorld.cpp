@@ -9,7 +9,7 @@ GameWorld* GameWorld::get()
 	{
 		g_GameWorld = new GameWorld();
 
-		g_GameWorld->world = new WorldStates();
+		g_GameWorld->world = new WorldStateCmp("GameWorld_WorldState");
 	}
 
 	return g_GameWorld;

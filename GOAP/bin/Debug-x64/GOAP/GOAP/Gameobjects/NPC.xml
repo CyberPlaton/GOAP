@@ -1,0 +1,48 @@
+<Gameobject>
+	<Tag>Agent</Tag>
+	<Name>cmd_create_random_name</Name>
+	<Components>
+		<Component name="Renderable">
+			<Width>1.0</Width>
+			<Height>1.0</Height>
+			<Color>dark_green</Color>
+		</Component>
+
+		<Component name="Transform"></Component>
+
+		<Component name="Navigator"></Component>
+
+		<Component name="WorldState"></Component>
+
+		<Component name="Inventory"></Component>
+
+		<Component name ="Animator"></Component>
+
+		<Component name ="Ownership"></Component>
+
+		<Component name="CollisionBox">
+			<Width>1.0</Width>
+			<Height>1.0</Height>
+		</Component>
+		
+		<Component name="Needs">
+			<Hunger>1.0</Hunger>
+			<Thirst>1.0</Thirst>
+			<Sleep>1.0</Sleep>
+		</Component>
+
+		<Component name="Stats">
+			<Strength>1.0</Strength>
+			<Intellect>1.0</Intellect>
+			<Willpower>1.0</Willpower>
+			<Agility>1.0</Agility>
+			<Speed>1.0</Speed>
+			<Endurance>1.0</Endurance>
+			<Personality>1.0</Personality>
+			<Luck>1.0</Luck>
+			<Health>1.0</Health>
+			<Magicka>1.0</Magicka>
+			<Fatigue>1.0</Fatigue>
+		</Component>
+	</Components>
+</Gameobject>

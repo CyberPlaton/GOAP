@@ -3,29 +3,26 @@
 #include <map>
 #include <string>
 
-class WorldState
+#include "ComponentSystem.h"
+
+
+class WorldStateCmp : public Component
 {
 public:
-	WorldState(const std::string& key, double value) : key(key), value(value) {}
-
-	std::string key;
-	double value;
-};
-
-
-
-class WorldStates
-{
-public:
-	WorldStates()
+	WorldStateCmp(const ComponentID& name)
 	{
-
+		this->name = name;
+		type = "WorldState";
+		init(type);
 	}
 
-	~WorldStates()
+	~WorldStateCmp()
 	{
 		states.clear();
 	}
+
+
+	ComponentType getType() override { return this->type; }
 
 
 	bool hasState(const std::string& key)
@@ -35,7 +32,7 @@ public:
 
 
 	/*
-	* Add Value to a state if it exists, else add new one.
+	* Add given Value to a state if it exists, else add new one.
 	*/
 	void modifyState(const std::string& key, double value)
 	{
@@ -55,6 +52,9 @@ public:
 	}
 
 
+	/*
+	* If the state exists, remove it completely from the states.
+	*/
 	void removeState(const std::string& key)
 	{
 		auto it = states.find(key);
@@ -65,10 +65,11 @@ public:
 		}
 	}
 
+
 	/*
 	* Set value of state directly to a value, or insert a new state.
 	*/
-	void setState(const std::string& key, double value)
+	void setStateValue(const std::string& key, double value)
 	{
 		if (hasState(key))
 		{
@@ -86,7 +87,8 @@ public:
 		states.emplace(std::make_pair(key, value));
 	}
 
-	std::map<std::string, double> getStates()
+
+	std::map<std::string, double>& getStates()
 	{
 		return states;
 	}
@@ -94,6 +96,7 @@ public:
 
 
 private:
+	ComponentType type;
 
 	std::map<std::string, double> states;
 };

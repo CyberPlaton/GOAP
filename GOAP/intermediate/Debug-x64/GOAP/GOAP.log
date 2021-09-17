@@ -1,51 +1,6 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(498,5): warning MSB8004: Intermediate Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Intermediate Directory.
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(499,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
-  ActionDatabase.cpp
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Timer.h(30,25): warning C4244: 'return': conversion from '_Rep' to 'double', possible loss of data
-          with
-          [
-              _Rep=__int64
-          ]
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Timer.h(45,25): warning C4244: 'return': conversion from '_Rep' to 'double', possible loss of data
-          with
-          [
-              _Rep=__int64
-          ]
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Timer.h(60,16): warning C4244: 'return': conversion from '_Rep' to 'double', possible loss of data
-          with
-          [
-              _Rep=__int64
-          ]
-  Actions.cpp
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Timer.h(30,25): warning C4244: 'return': conversion from '_Rep' to 'double', possible loss of data
-          with
-          [
-              _Rep=__int64
-          ]
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Timer.h(45,25): warning C4244: 'return': conversion from '_Rep' to 'double', possible loss of data
-          with
-          [
-              _Rep=__int64
-          ]
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Timer.h(60,16): warning C4244: 'return': conversion from '_Rep' to 'double', possible loss of data
-          with
-          [
-              _Rep=__int64
-          ]
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(103,10): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(107,54): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(110,1): warning C4305: 'return': truncation from 'int' to 'float'
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(359,68): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(359,61): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(430,25): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(431,25): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(578,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(654,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(655,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(656,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(657,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\DaySchedule.h(8,14): warning C4099: 'Action': type name first seen using 'class' now seen using 'struct'
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Action.h(75): message : see declaration of 'Action'
+  GameObjectCreator.cpp
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\BTCommon.h(42,25): warning C4244: 'return': conversion from '_Rep' to 'double', possible loss of data
           with
           [
@@ -62,14 +17,6 @@ C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\BTCommon.h(72,16): warning C4244: '
               _Rep=__int64
           ]
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\BTRandomSequence.h(52,16): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\BTMoveToRandomPosition.h(57,73): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\BTMoveToRandomPosition.h(57,70): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\BTMoveToRandomPosition.h(109,69): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\BTMoveToRandomPosition.h(109,66): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Actions.cpp(22,77): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Actions.cpp(22,70): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Actions.cpp(29,65): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-  Agent.cpp
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(103,10): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(107,54): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Components.h(110,1): warning C4305: 'return': truncation from 'int' to 'float'
@@ -97,28 +44,17 @@ C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Timer.h(60,16): warning C4244: 'ret
           [
               _Rep=__int64
           ]
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\DaySchedule.h(8,14): warning C4099: 'Action': type name first seen using 'class' now seen using 'struct'
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Action.h(75): message : see declaration of 'Action'
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\BTCommon.h(42,25): warning C4244: 'return': conversion from '_Rep' to 'double', possible loss of data
-          with
-          [
-              _Rep=__int64
-          ]
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\BTCommon.h(57,25): warning C4244: 'return': conversion from '_Rep' to 'double', possible loss of data
-          with
-          [
-              _Rep=__int64
-          ]
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\BTCommon.h(72,16): warning C4244: 'return': conversion from '_Rep' to 'double', possible loss of data
-          with
-          [
-              _Rep=__int64
-          ]
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\BTRandomSequence.h(52,16): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\BTMoveToRandomPosition.h(57,73): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\BTMoveToRandomPosition.h(57,70): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\BTMoveToRandomPosition.h(109,69): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\BTMoveToRandomPosition.h(109,66): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\GameObjectCreator.h(85,13): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\GameObjectCreator.h(88,13): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\GameObjectCreator.h(109,13): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\GameObjectCreator.h(112,13): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\GameObjectCreator.h(126,32): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\GameObjectCreator.h(131,32): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\GameObjectCreator.h(136,31): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   main.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': macro redefinition
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\common\include\GLFW\glfw3.h(123): message : see previous definition of 'APIENTRY'
@@ -149,8 +85,6 @@ C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Timer.h(60,16): warning C4244: 'ret
           [
               _Rep=__int64
           ]
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\DaySchedule.h(8,14): warning C4099: 'Action': type name first seen using 'class' now seen using 'struct'
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Action.h(75): message : see declaration of 'Action'
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\BTCommon.h(42,25): warning C4244: 'return': conversion from '_Rep' to 'double', possible loss of data
           with
           [
@@ -171,10 +105,13 @@ C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\BTMoveToRandomPosition.h(57,73): wa
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\BTMoveToRandomPosition.h(57,70): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\BTMoveToRandomPosition.h(109,69): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\BTMoveToRandomPosition.h(109,66): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\GameObjectCreator.h(84,13): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\GameObjectCreator.h(87,13): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\GameObjectCreator.h(108,13): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\GameObjectCreator.h(111,13): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\GameObjectCreator.h(85,13): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\GameObjectCreator.h(88,13): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\GameObjectCreator.h(109,13): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\GameObjectCreator.h(112,13): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\GameObjectCreator.h(126,32): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\GameObjectCreator.h(131,32): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\GameObjectCreator.h(136,31): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\main.cpp(83,54): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
@@ -237,12 +174,7 @@ C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\main.cpp(265,8): warning C4244: '='
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\main.cpp(266,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\main.cpp(267,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\main.cpp(268,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\main.cpp(507,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\main.cpp(536,62): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\main.cpp(703,72): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\main.cpp(704,16): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\main.cpp(707,19): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\main.cpp(715,70): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\main.cpp(721,72): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\main.cpp(405,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\main.cpp(434,62): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   Generating Code...
   GOAP.vcxproj -> C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\bin\Debug-x64\GOAP\GOAP.exe

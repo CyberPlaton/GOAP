@@ -1,0 +1,24 @@
+<Gameobject>
+	<Tag>Building</Tag>
+	<Name>Tavern</Name>
+	<Components>
+		<Component name="Renderable">
+			<Width>8.0</Width>
+			<Height>10.0</Height>
+			<Color>grey</Color>
+		</Component>
+
+		<Component name="Transform"></Component>
+
+		<Component name ="Ownership"></Component>
+
+		<Component name="CollisionBox">
+			<Width>8.0</Width>
+			<Height>10.0</Height>
+		</Component>
+
+
+		<Component name ="WalkableBuilding" doorx="3" doory="0"></Component>
+
+	</Components>
+</Gameobject>

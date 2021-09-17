@@ -1,11 +1,19 @@
-<SmartObject>
-	<Fulfillments>
-		<Need name="Sleep" amount="0.1"></Need>
-		<Need name="Hunger" amount="0.41"></Need>
-	</Fulfillments>
+<Gameobject>
+	<Tag>Furniture_Table</Tag>
+	<Name>Table</Name>
+	<Components>
+		<Component name="SmartObject">
+			<DestroyOnUse>false</DestroyOnUse>
+			<NeedAgentPresence>true</NeedAgentPresence>
+			<Fulfillments>
+				<Need name="Sleep" amount="0.1"></Need>
+				<Need name="Hunger" amount="0.41"></Need>
+			</Fulfillments>
 
-	<AvailableActions>
-		<Action name="Sleep" aName ="ActionSleep"></Action>
-		<Action name="Hunger" aName ="ActionEat"></Action>
-	</AvailableActions>
-</SmartObject>
+			<AvailableActions>
+				<Action name="Sleep" aName ="ActionSleep"></Action>
+				<Action name="Hunger" aName ="ActionEat"></Action>
+			</AvailableActions>
+		</Component>
+	</Components>
+</Gameobject>

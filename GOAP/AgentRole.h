@@ -12,7 +12,7 @@
 class AgentRoleCmp : public Component
 {
 public:
-	AgentRoleCmp(const std::string& name, const std::string& role_name)
+	AgentRoleCmp(const ComponentID& name, const std::string& role_name)
 		: role(role_name)
 	{
 		this->name = name;
@@ -20,33 +20,16 @@ public:
 		init(type);
 	}
 
-
-	bool init(const std::string& tree_path)
-	{
-		return 	_loadTree(tree_path);
-	}
-
-	bool init(BehaviorTree* tree)
-	{
-		this->tree = tree;
-		return this->tree != nullptr;
-	}
-
-	std::string getType() override { return this->type; }
+	ComponentType getType() override { return this->type; }
 
 
 private:
 	std::string role;
-	std::string type;
+	ComponentType type;
 
-	BehaviorTree* tree = nullptr;
 
 
 private:
 
-	bool _loadTree(const std::string& path)
-	{
 
-		return false;
-	}
 };

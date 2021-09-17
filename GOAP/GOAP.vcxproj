@@ -88,12 +88,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ActionDatabase.cpp" />
-    <ClCompile Include="Actions.cpp" />
-    <ClCompile Include="Agent.cpp" />
     <ClCompile Include="AI.cpp" />
     <ClCompile Include="Any.cpp" />
-    <ClCompile Include="BehaviorTreeDefinitions.cpp" />
     <ClCompile Include="BTBlackboard.cpp" />
     <ClCompile Include="BTFactory.cpp" />
     <ClCompile Include="BTNodes.cpp" />
@@ -108,21 +104,17 @@
     <ClCompile Include="Components.cpp" />
     <ClCompile Include="ComponentSystem.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameObjectCreator.cpp" />
     <ClCompile Include="GameWorld.cpp" />
     <ClCompile Include="GameWorldTime.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SmartObject.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Action.h" />
-    <ClInclude Include="ActionDatabase.h" />
-    <ClInclude Include="Actions.h" />
-    <ClInclude Include="Agent.h" />
     <ClInclude Include="AgentNeeds.h" />
     <ClInclude Include="AgentRole.h" />
     <ClInclude Include="AgentStats.h" />
     <ClInclude Include="AI.h" />
-    <ClInclude Include="BehaviorTreeDefinitions.h" />
     <ClInclude Include="BTCommon.h" />
     <ClInclude Include="BTInterface.h" />
     <ClInclude Include="Any.h" />
@@ -144,7 +136,6 @@
     <ClInclude Include="common\include\tinyxml2.h" />
     <ClInclude Include="Components.h" />
     <ClInclude Include="ComponentSystem.h" />
-    <ClInclude Include="DaySchedule.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectCreator.h" />
     <ClInclude Include="GameWorld.h" />

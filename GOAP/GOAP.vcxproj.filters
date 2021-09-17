@@ -16,20 +16,14 @@
     <Filter Include="Header Files\ImGui">
       <UniqueIdentifier>{391f2b4a-76d3-4a8a-a8bd-3cf1ba0341a5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\GOAP">
-      <UniqueIdentifier>{dac35a04-5ab9-4736-ad63-7a0458d433b3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Actions">
-      <UniqueIdentifier>{fe90e92e-2d86-4923-b948-b14023af0f0f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\BT">
       <UniqueIdentifier>{8bce21be-0134-4ba6-9897-537351297cbe}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\BT\Nodes">
       <UniqueIdentifier>{52e0d71c-566a-4b91-9830-567d7a58d5bd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\GameObjects">
-      <UniqueIdentifier>{e1210521-3a71-420f-b66c-c94334fdc05b}</UniqueIdentifier>
+    <Filter Include="Source Files\Components">
+      <UniqueIdentifier>{fd9c6213-b254-4f21-9581-845abe136f22}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -37,9 +31,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ComponentSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GameWorld.cpp">
@@ -56,9 +47,6 @@
     </ClCompile>
     <ClCompile Include="BTNodes.cpp">
       <Filter>Source Files\BT</Filter>
-    </ClCompile>
-    <ClCompile Include="Components.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="common\include\tinyxml2.cpp">
       <Filter>Source Files</Filter>
@@ -87,23 +75,20 @@
     <ClCompile Include="BTFactory.cpp">
       <Filter>Source Files\BT</Filter>
     </ClCompile>
-    <ClCompile Include="BehaviorTreeDefinitions.cpp">
-      <Filter>Source Files\GameObjects</Filter>
-    </ClCompile>
     <ClCompile Include="AI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ActionDatabase.cpp">
-      <Filter>Source Files\Actions</Filter>
+    <ClCompile Include="GameObjectCreator.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Agent.cpp">
-      <Filter>Source Files\GameObjects</Filter>
+    <ClCompile Include="ComponentSystem.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Actions.cpp">
-      <Filter>Source Files\Actions</Filter>
+    <ClCompile Include="Components.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="SmartObject.cpp">
-      <Filter>Source Files\GameObjects</Filter>
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -114,9 +99,6 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Timer.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ComponentSystem.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="GameWorld.h">
@@ -155,9 +137,6 @@
     <ClInclude Include="BTMoveToRandomPosition.h">
       <Filter>Source Files\BT\Nodes</Filter>
     </ClInclude>
-    <ClInclude Include="Components.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="BTCommon.h">
       <Filter>Source Files\BT</Filter>
     </ClInclude>
@@ -188,50 +167,38 @@
     <ClInclude Include="common\include\imgui-master\examples\imgui_impl_opengl3.h">
       <Filter>Header Files\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="AgentStats.h">
-      <Filter>Source Files\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="AgentNeeds.h">
-      <Filter>Source Files\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="AgentRole.h">
-      <Filter>Source Files\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="BehaviorTreeDefinitions.h">
-      <Filter>Source Files\GameObjects</Filter>
-    </ClInclude>
     <ClInclude Include="AI.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="SmartObject.h">
-      <Filter>Source Files\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="OwnershipCmp.h">
-      <Filter>Source Files\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="Agent.h">
-      <Filter>Source Files\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="Inventory.h">
-      <Filter>Source Files\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="DaySchedule.h">
-      <Filter>Source Files\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="WorldState.h">
-      <Filter>Source Files\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="Action.h">
-      <Filter>Source Files\Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="ActionDatabase.h">
-      <Filter>Source Files\Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="Actions.h">
-      <Filter>Source Files\Actions</Filter>
-    </ClInclude>
     <ClInclude Include="GameWorldTimer.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentSystem.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldState.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SmartObject.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="OwnershipCmp.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventory.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="AgentRole.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="AgentNeeds.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="AgentStats.h">
+      <Filter>Source Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

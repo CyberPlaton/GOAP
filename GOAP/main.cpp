@@ -328,117 +328,15 @@ bool App::OnUserCreate()
 	GameWorldTime::get()->setTimeSpeed(0.016);
 
 
-	GameObject* agent = new GameObject("Agent", "Dude");
-	agent->AddComponent(new TransformCmp("Transform"));
-	agent->AddComponent(new RendererableCmp("Renderable", 1.0f, 1.0f, "green"));
-	agent->AddComponent(new CollisionBoxCmp("CollisionBox", 1.0f, 1.0f, agent));
-	static_cast<TransformCmp*>(agent->getComponent("Transform"))->xpos = 5;
-	static_cast<TransformCmp*>(agent->getComponent("Transform"))->ypos = 5;
-	agent->AddComponent(new NavigatorCmp("Navigator", agent));	
-
-	BTFactory factory("Dude BT");
-
-	BehaviorTree* dude_tree = factory.add<BTSequence>("Sequence")
-								.add<BTMoveToRandomPosition>("Random Movement", agent)
-		.end()
-		.build();
-	
-
-	AI::get()->addBehaviorTree(dude_tree);
-
-
-	// Create some houses.
-	GameObject* small_house = new GameObject("Building", "Bakery");
-	small_house->AddComponent(new TransformCmp("Transform"));
-	small_house->AddComponent(new RendererableCmp("Renderable", 3.0f, 4.0f, "grey"));
-	small_house->AddComponent(new CollisionBoxCmp("CollisionBox", 3.0f, 4.0f, small_house));
-	static_cast<TransformCmp*>(small_house->getComponent("Transform"))->xpos = 14;
-	static_cast<TransformCmp*>(small_house->getComponent("Transform"))->ypos = 10;
-	small_house->AddComponent(new WalkableBuildingCmp("WalkableBuilding", small_house, 2, 2));
-
-
-	GameObject* big_house = new GameObject("Building", "Tavern");
-	big_house->AddComponent(new TransformCmp("Transform"));
-	big_house->AddComponent(new RendererableCmp("Renderable", 8.0f, 7.0f, "grey"));
-	big_house->AddComponent(new CollisionBoxCmp("CollisionBox", 8.0f, 7.0f, big_house));
-	static_cast<TransformCmp*>(big_house->getComponent("Transform"))->xpos = 3;
-	static_cast<TransformCmp*>(big_house->getComponent("Transform"))->ypos = 6;
-	big_house->AddComponent(new WalkableBuildingCmp("WalkableBuilding", big_house, 1, 0));
-
-
-	GameObject* another_house = new GameObject("Building", "Store");
-	another_house->AddComponent(new TransformCmp("Transform"));
-	another_house->AddComponent(new RendererableCmp("Renderable", 5.0f, 5.0f, "grey"));
-	another_house->AddComponent(new CollisionBoxCmp("CollisionBox", 5.0f, 5.0f, another_house));
-	static_cast<TransformCmp*>(another_house->getComponent("Transform"))->xpos = 16;
-	static_cast<TransformCmp*>(another_house->getComponent("Transform"))->ypos = 15;
-	another_house->AddComponent(new WalkableBuildingCmp("WalkableBuilding", another_house, 0, 3));
-
-
-	// Set up test smart object
-	/*
-	* TABLE
-	*/
-	GameObject* table = new GameObject("Furniture", "testing_table");
-	table->AddComponent(new TransformCmp("Transform"));
-	table->AddComponent(new RendererableCmp("Renderable", 1.0f, 1.0f, "yellow"));
-	table->AddComponent(new CollisionBoxCmp("CollisionBox", 1.0f, 1.0f, table));
-	static_cast<TransformCmp*>(table->getComponent("Transform"))->xpos = 8;
-	static_cast<TransformCmp*>(table->getComponent("Transform"))->ypos = 8;
-
-	SmartObject* smo = new SmartObject("SmartObject");
-	smo->loadDefinition("GOAP/Gameobjects/Table.xml");
-	table->AddComponent(smo);
-
-	/*
-	* WELL
-	*/
-	GameObject* well = new GameObject("Furniture", "testing_well");
-	well->AddComponent(new TransformCmp("Transform"));
-	well->AddComponent(new RendererableCmp("Renderable", 1.0f, 1.0f, "yellow"));
-	well->AddComponent(new CollisionBoxCmp("CollisionBox", 1.0f, 1.0f, well));
-	static_cast<TransformCmp*>(well->getComponent("Transform"))->xpos = 9;
-	static_cast<TransformCmp*>(well->getComponent("Transform"))->ypos = 10;
-
-	SmartObject* smo2 = new SmartObject("SmartObject");
-	smo2->loadDefinition("GOAP/Gameobjects/Well.xml");
-	well->AddComponent(smo2);
-
-	/*
-	* BED
-	*/
-	GameObject* bed = new GameObject("Furniture", "testing_bed");
-	bed->AddComponent(new TransformCmp("Transform"));
-	bed->AddComponent(new RendererableCmp("Renderable", 1.0f, 1.0f, "yellow"));
-	bed->AddComponent(new CollisionBoxCmp("CollisionBox", 1.0f, 1.0f, bed));
-	static_cast<TransformCmp*>(bed->getComponent("Transform"))->xpos = 15;
-	static_cast<TransformCmp*>(bed->getComponent("Transform"))->ypos = 11;
-
-	SmartObject* smo3 = new SmartObject("SmartObject");
-	smo3->loadDefinition("GOAP/Gameobjects/Bed.xml");
-	bed->AddComponent(smo3);
-
-
-	/*
 	GameObjectCreator creator;
-	for (int i = 0; i < 20; i++)
-	{
-		Agent* a = creator.createAgent("GOAP/Gameobjects/Villager.xml", "Villager_" + std::to_string(i), 0, 0);
-	}
-	*/
-	
-	/*
-	* Test action stuff.
-	*/
-	Agent* aiAgent = new Agent("Agent", "Ralf");
+	GameObject* fred = creator.create("GOAP/Gameobjects/NPC.xml", "Fred", 25, 25);
+	GameObject* tavern = creator.create("GOAP/Gameobjects/Tavern.xml", "Tavern", 10, 5);
 
-	ActionDatabase::get()->loadDefinitions("GOAP/Actions/ActionDatabase.xml");
-	ActionDefinition* def = ActionDatabase::get()->getActionDefinition("ActionSleep");
+
 
 	NavMesh::get()->bake();
 
 	
-
 	return true;
 }
 
@@ -556,12 +454,13 @@ void App::_onImGui()
 				// Show stuff for an agent
 				if (go->hasComponent("AgentNeeds"))
 				{
-					Agent* npc = static_cast<Agent*>(go);
+					//Agent* npc = static_cast<Agent*>(go);
 
 
 					// Show current action
 					if (ImGui::TreeNode("ActionStack"))
 					{
+						/*
 						Action* action = nullptr;
 
 						if (npc->actionStack.size() > 0)
@@ -584,7 +483,7 @@ void App::_onImGui()
 							}
 							ImGui::End();
 						}
-
+						*/
 
 						ImGui::TreePop();
 					}
@@ -691,6 +590,7 @@ void App::_onImGui()
 
 						if (cmp->getType().find("AgentNeeds") != std::string::npos)
 						{
+							/*
 							static std::vector<float> hunger_plot;
 							static std::vector<float> sleep_plot;
 							static std::vector<float> thirst_plot;
@@ -733,7 +633,7 @@ void App::_onImGui()
 							{
 								thirst_plot.erase(thirst_plot.begin());
 							}
-							
+							*/
 						}
 
 

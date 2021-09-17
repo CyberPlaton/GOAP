@@ -1,5 +1,0 @@
-<Action>
-	<ID>ActionSleep</ID>
-	<MinDuration>5.0</MinDuration>
-	<MaxDuration>10.0</MaxDuration>
-</Action>

@@ -1,52 +1,67 @@
 #pragma once
 
 #include "GameObject.h"
+#include "ComponentSystem.h"
 
 
-
-class Inventory
+/*
+* The Inventory stores how many of a certain object an entity has.
+* Note that the name of the object should match the definition file,
+* in order to get it dynamically as an Gameobject.
+*/
+class InventoryCmp : public Component
 {
 public:
-	Inventory(){}
-
-
-	void addItem(GameObject* go)
+	InventoryCmp(const ComponentID& name)
 	{
-		inventory.push_back(go);
+		this->name = name;
+		type = "Inventory";
+		init(type);
+	}
+
+	~InventoryCmp() { inventory.clear(); }
+
+	ComponentType getType() override { return this->type; }
+
+
+	void addItem(const std::string& name)
+	{
+		// Increase or emplace a new one.
+		inventory[name] = inventory[name] + 1;
 	}
 
 
-	void removeItem(GameObject* go)
+	void removeItem(const std::string& name)
 	{
-		auto it = std::find(inventory.begin(), inventory.end(), go);
+		auto it = inventory.find(name);
 
 		if (it != inventory.end())
 		{
-			inventory.erase(it);
-		}
-	}
-
-	GameObject* getItem(const std::string& tag)
-	{
-		for (auto& obj : inventory)
-		{
-			if (obj->tag.compare(tag) == 0)
+			if (inventory[name] == 0)
 			{
-				return obj;
+				return;
+			}
+			else
+			{
+				inventory[name] -= 1;
 			}
 		}
-
-		return nullptr;
 	}
 
+	/*
+	* Construct dynamically an item from the inventory.
+	*/
+	GameObject* getItem(const std::string& name);
 
-	std::vector<GameObject*> getItems()
+
+	std::map<std::string, int >& getItems()
 	{
 		return inventory;
 	}
 
 
 private:
-
-	std::vector<GameObject*> inventory;
+	ComponentType type;
+	
+	std::map<std::string, int > inventory;
 };

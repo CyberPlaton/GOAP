@@ -1,0 +1,17 @@
+<Gameobject>
+	<Tag>Consumable</Tag>
+	<Name>Bread</Name>
+	<Components>
+		<Component name="SmartObject">
+			<DestroyOnUse>true</DestroyOnUse>
+			<NeedAgentPresence>false</NeedAgentPresence>
+			<Fulfillments>
+				<Need name="Hunger" amount="5.2"></Need>
+			</Fulfillments>
+
+			<AvailableActions>
+				<Action name="Hunger" aName ="ActionEat"></Action>
+			</AvailableActions>
+		</Component>
+	</Components>
+</Gameobject>

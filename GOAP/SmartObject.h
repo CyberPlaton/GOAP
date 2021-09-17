@@ -8,10 +8,10 @@
 /*
 * See "Smart Objects".
 */
-class SmartObject : public Component
+class SmartObjectCmp : public Component
 {
 public:
-	SmartObject(const ComponentID& name)
+	SmartObjectCmp(const ComponentID& name)
 	{
 		this->name = name;
 		type = "SmartObject";
@@ -20,11 +20,22 @@ public:
 
 	ComponentType getType() override { return this->type; }
 
-
 	/*
 	* Import Definition from XML.
 	*/
-	bool loadDefinition(const std::string& path);
+	bool loadDefinition(tinyxml2::XMLElement* element);
+
+
+
+	bool doesNeedAgentPresence() const
+	{
+		return needAgentPresence;
+	}
+
+	bool isDestroyedOnUsage() const
+	{
+		return destroyOnUse;
+	}
 
 
 	/*
@@ -62,6 +73,10 @@ public:
 		needsFulfillmentMap[name] = amount;
 	}
 
+
+
+	bool needAgentPresence = false;
+	bool destroyOnUse = false;
 
 private:
 	ComponentType type;

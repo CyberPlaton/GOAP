@@ -1,15 +1,14 @@
 #pragma once
 
 #include "ColorConsole.h"
-#include "Agent.h"
 #include "AgentNeeds.h"
 #include "AgentRole.h"
 #include "AgentStats.h"
 #include "SmartObject.h"
 #include "OwnershipCmp.h"
-#include "BehaviorTreeDefinitions.h"
+#include "WorldState.h"
+#include "Inventory.h"
 #include "AI.h"
-#include "Agent.h"
 
 #include "tinyxml2.h"
 #include "nlohmann/json.hpp"
@@ -26,39 +25,31 @@ public:
 	}
 
 
-	Agent* createAgent(const std::string& filepath, const std::string& name, int x, int y)
+private:
+
+	GameObject* _createFromXML(const std::string& xml_filepath, const std::string& name, int xpos, int ypos)
 	{
 		using namespace std;
 		using namespace tinyxml2;
-
-		Agent* go = nullptr;
-
-		/*
-		* Create Gameobject according to gamerules.
-		*/
-		go = new Agent("Agent", name);
-
-
+		
+		// Create an object defined from xml.
 		tinyxml2::XMLDocument doc;
 
-		XMLError result = doc.LoadFile(filepath.c_str());
-		if (result != XMLError::XML_SUCCESS)
-		{
-			return nullptr;
-		}
+
+		XMLError result = doc.LoadFile(xml_filepath.c_str());
+		if (result != XMLError::XML_SUCCESS) return nullptr;
 
 
 		XMLNode* root = doc.FirstChild();
 		if (root == nullptr) return nullptr;
 
 
-		/*
-		* Get the Role for agent.
-		*/
-		XMLElement* role = root->FirstChildElement("Role");
-		XMLElement* role_tree = role->FirstChildElement("BTTree");
-		std::string role_name = role->Attribute("name");
-		std::string role_tree_name = role_tree->GetText();
+		// Get tag
+		std::string tag = root->FirstChildElement("Tag")->GetText();
+
+		// Create the gameobject
+		GameObject* gameobject = new GameObject(tag, name);
+
 
 		/*
 		* Get the components defining the agent.
@@ -69,13 +60,23 @@ public:
 		XMLElement* cmp = components->FirstChildElement("Component");
 		XMLElement* data = nullptr;
 
+		bool panik = false;
 		while (cmp)
 		{
-			// Get the component name we are dealing with.
+			// Get the component name
 			std::string cmp_name = cmp->Attribute("name");
 
+
 			// Set data based on the component.
-			if (cmp_name.compare("Renderable") == 0)
+			if (cmp_name.compare("SmartObject") == 0)
+			{
+				gameobject->AddComponent(new SmartObjectCmp("SmartObject"));
+				SmartObjectCmp* smart = gameobject->getComponent<SmartObjectCmp>("SmartObject");
+
+				data = cmp->FirstChildElement("Path");
+				if (!smart->loadDefinition(cmp)) panik = true;
+			}
+			else if (cmp_name.compare("Renderable") == 0)
 			{
 				float w, h;
 				std::string color;
@@ -90,16 +91,16 @@ public:
 				color = data->GetText();
 
 
-				go->AddComponent(new RendererableCmp("Renderable", w, h, color));
+				gameobject->AddComponent(new RendererableCmp("Renderable", w, h, color));
 			}
 			else if (cmp_name.compare("Transform") == 0)
 			{
-				go->AddComponent(new TransformCmp("Transform"));
-				go->getComponent<TransformCmp>("Transform")->setPosition(x, y);
+				gameobject->AddComponent(new TransformCmp("Transform"));
+				gameobject->getComponent<TransformCmp>("Transform")->setPosition(xpos, ypos);
 			}
 			else if (cmp_name.compare("Navigator") == 0)
 			{
-				go->AddComponent(new NavigatorCmp("Navigator", go));
+				gameobject->AddComponent(new NavigatorCmp("Navigator", gameobject));
 			}
 			else if (cmp_name.compare("CollisionBox") == 0)
 			{
@@ -110,34 +111,34 @@ public:
 				data = cmp->FirstChildElement("Height");
 				h = stod(data->GetText());
 
-				go->AddComponent(new CollisionBoxCmp("CollisionBox", w, h, go));
+				gameobject->AddComponent(new CollisionBoxCmp("CollisionBox", w, h, gameobject));
 			}
 			else if (cmp_name.compare("Needs") == 0)
 			{
-				go->AddComponent(new AgentNeedsCmp("AgentNeeds"));
-				AgentNeedsCmp* needcmp = go->getComponent< AgentNeedsCmp >("AgentNeeds");
+				gameobject->AddComponent(new AgentNeedsCmp("AgentNeeds"));
+				AgentNeedsCmp* needcmp = gameobject->getComponent< AgentNeedsCmp >("AgentNeeds");
 
 				double value;
 
 				// Get Hunger
 				data = cmp->FirstChildElement("Hunger");
 				value = stod(data->GetText());
-				needcmp->setHunger(value);
+				needcmp->setNeed("Hunger", value);
 
 				// Get Thirst
 				data = cmp->FirstChildElement("Thirst");
 				value = stod(data->GetText());
-				needcmp->setThirst(value);
+				needcmp->setNeed("Thirst", value);
 
 				// Get Sleep
 				data = cmp->FirstChildElement("Sleep");
 				value = stod(data->GetText());
-				needcmp->setSleep(value);
+				needcmp->setNeed("Sleep", value);
 			}
 			else if (cmp_name.compare("Stats") == 0)
 			{
-				go->AddComponent(new AgentStatsCmp("AgentStats"));
-				AgentStatsCmp* statcmp = go->getComponent< AgentStatsCmp >("AgentStats");
+				gameobject->AddComponent(new AgentStatsCmp("AgentStats"));
+				AgentStatsCmp* statcmp = gameobject->getComponent< AgentStatsCmp >("AgentStats");
 
 				double value;
 
@@ -196,45 +197,48 @@ public:
 				value = stod(data->GetText());
 				statcmp->setFatigue(value);
 			}
+			else if (cmp_name.compare("Inventory") == 0)
+			{
+				gameobject->AddComponent(new InventoryCmp("Inventory"));
+			}
+			else if (cmp_name.compare("WorldState") == 0)
+			{
+				gameobject->AddComponent(new WorldStateCmp("WorldState"));
+			}
+			else if (cmp_name.compare("Animator") == 0)
+			{
+				gameobject->AddComponent(new AnimatorCmp("Animator", gameobject));
+			}
+			else if (cmp_name.compare("Ownership") == 0)
+			{
+				gameobject->AddComponent(new OwnershipCmp("Ownership", gameobject->tag));
+			}
+			else if (cmp_name.compare("WalkableBuilding") == 0)
+			{
+				int doorx = (int)stod(cmp->Attribute("doorx"));
+				int doory = (int)stod(cmp->Attribute("doory"));
+
+				gameobject->AddComponent(new WalkableBuildingCmp("WalkableBuilding", gameobject , doorx, doory));
+			}
 
 
-			// Get the next component
+
+			if (panik)
+			{
+				cout << color(colors::RED);
+				cout << "Could not construct Gameobject \"" << name << "\"" << white << endl;
+
+				delete gameobject;
+				gameobject = nullptr;
+				break;
+			}
+
+
 			cmp = cmp->NextSiblingElement("Component");
 		}
 
 
-		// Lastly set the behavior tree.
-		// Currently, we define a function to create a predefined tree.
-		if (role_tree_name.compare("Shopkeeper") == 0)
-		{
-			BehaviorTree* tree = createShopkeeperBehaviorTree(role_tree_name, go);
-			go->AddComponent(new AgentRoleCmp("AgentRole", role_name));
-			AgentRoleCmp* cmp = go->getComponent< AgentRoleCmp >("AgentRole");
-
-			if (!cmp->init(tree))
-			{
-				cout << "Behavior Tree \"" << role_tree_name << "\" could not be created!" << endl;
-			}
-			else
-			{
-				AI::get()->addBehaviorTree(tree);
-			}
-		}
-		else
-		{
-			cout << "Behavior Tree \"" << role_tree_name << "\" is undefined!" << endl;
-		}
-
-		return go;
-	}
-
-
-private:
-
-	GameObject* _createFromXML(const std::string& xml_filepath, const std::string& name, int xpos, int ypos)
-	{
-		// Not implemented
-		return nullptr;
+		return gameobject;
 	}
 
 

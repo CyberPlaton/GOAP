@@ -2,6 +2,8 @@
 
 #include "ComponentSystem.h"
 
+using AgentNeed = std::string;
+
 class AgentNeedsCmp : public Component
 {
 public:
@@ -14,87 +16,38 @@ public:
 
 	ComponentType getType() override { return this->type; }
 
-	/*
-	* Basic needs.
-	*/
-	void setHunger(double n)
-	{ 
-		if (n < 0.0)
-		{
-			hunger = 0.0;
-		}
-		else if (n > 100.0)
-		{
-			hunger = 100.0;
-		}
-		else
-		{
-			hunger = n;
-		}
-	};
-
-	void setThirst(double n)
+	// Create a new need entry with given value. Or set directly the value of an 
+	// existing entry.
+	void setNeed(const AgentNeed& need, float n)
 	{
-		if (n < 0.0)
-		{
-			thirst = 0.0;
-		}
-		else if (n > 100.0)
-		{
-			thirst = 100.0;
-		}
-		else
-		{
-			thirst = n;
-		}
-	};
-
-	void setSleep(double n)
-	{
-		if (n < 0.0)
-		{
-			sleep = 0.0;
-		}
-		else if (n > 100.0)
-		{
-			sleep = 100.0;
-		}
-		else
-		{
-			sleep = n;
-		}
-	};
-
-
-	void incrementHunger(double n)
-	{
-		double d = getHunger() + n;
-		setHunger(d);
+		needs[need] = n;
 	}
 
-	void incrementSleep(double n)
+	// Increment the value if it exists, else do nothing.
+	void incrementNeed(const AgentNeed& need, float n)
 	{
-		double d = getSleep() + n;
-		setSleep(d);
+		float v = getNeed(need);
+		if (v != (float)INT_MAX)
+		{
+			setNeed(need, v + 1);
+		}
 	}
 
-	void incrementThirst(double n)
+	// Get value of a need, if it does not exist returns infinity.
+	float getNeed(const AgentNeed& need)
 	{
-		double d = getThirst() + n;
-		setThirst(d);
+		auto it = needs.find(need);
+		if (it != needs.end())
+		{
+			return needs[need];
+		}
+
+		return (float)INT_MAX;
 	}
-
-
-	double getHunger() { return hunger; };
-	double getThirst() { return thirst; };
-	double getSleep() { return sleep; };
 
 
 private:
 	ComponentType type;
 
-	double hunger = 0.0;
-	double thirst = 0.0;
-	double sleep = 0.0;
-
+	std::map<AgentNeed, float> needs;
 };

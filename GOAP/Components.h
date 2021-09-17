@@ -682,6 +682,8 @@ public:
 		type = "Animator";
 
 		init(type);
+
+		currentAnimation = Animations::ANIM_NONE;
 	}
 
 

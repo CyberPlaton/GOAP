@@ -10,14 +10,14 @@ public:
 
 	static void del();
 
-	WorldStates* getWorldState()
+	WorldStateCmp* getWorldState()
 	{
 		return world;
 	}
 
 private:
 
-	WorldStates* world = nullptr;
+	WorldStateCmp* world = nullptr;
 
 	GameWorld() {}
 
