@@ -95,6 +95,16 @@ public:
 		GameObjectStorage::get()->add(this);
 	}
 
+	virtual ~GameObject()
+	{
+		name.clear();
+		tag.clear();
+		hash = 0;
+		while (components.size() > 0) delete components[0];
+		components.clear();
+		g_GameObjectCount = 0;
+	}
+
 
 	void AddComponent(Component* c)
 	{

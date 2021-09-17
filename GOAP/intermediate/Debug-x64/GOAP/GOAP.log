@@ -107,6 +107,8 @@ C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\GameObjectCreator.h(103,13): warnin
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\GameObjectCreator.h(117,32): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\GameObjectCreator.h(122,32): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\GameObjectCreator.h(127,31): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\GameObjectCreator.h(216,15): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\GameObjectCreator.h(217,15): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
   main.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': macro redefinition
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\common\include\GLFW\glfw3.h(123): message : see previous definition of 'APIENTRY'
@@ -166,6 +168,8 @@ C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\GameObjectCreator.h(103,13): warnin
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\GameObjectCreator.h(117,32): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\GameObjectCreator.h(122,32): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\GameObjectCreator.h(127,31): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\GameObjectCreator.h(216,15): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\GameObjectCreator.h(217,15): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\main.cpp(49,90): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\main.cpp(87,54): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
@@ -229,8 +233,8 @@ C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\main.cpp(269,8): warning C4244: '='
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\main.cpp(270,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\main.cpp(271,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\main.cpp(272,8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\main.cpp(439,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\main.cpp(468,62): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\main.cpp(449,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\main.cpp(478,62): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   Generating Code...
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\BTBlackboard.h(73): warning C4715: 'BTBlackboard::getData<GameObject *>': not all control paths return a value
 C:\Users\Bogdan Strohonov\Desktop\GOAP2\GOAP\Any.h(54): warning C4715: 'Any::as<GameObject *>': not all control paths return a value

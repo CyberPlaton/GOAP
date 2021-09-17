@@ -335,12 +335,11 @@ bool App::OnUserCreate()
 	GameObjectCreator creator;
 	GameObject* fred = creator.create("GOAP/Gameobjects/NPC.xml", "Fred", 25, 25);
 	GameObject* tavern = creator.create("GOAP/Gameobjects/Tavern.xml", "Tavern", 10, 5);
-	GameObject* bed = creator.create("GOAP/Gameobjects/Bed.xml", "Bed", 3, 3);
-	GameObject* table = creator.create("GOAP/Gameobjects/Table.xml", "Table", 6, 3);
-	GameObject* well = creator.create("GOAP/Gameobjects/Well.xml", "Well", 9, 3);
+	GameObject* shop = creator.create("GOAP/Gameobjects/Shop.xml", "Shop", 20, 5);
+	GameObject* freds_house = creator.create("GOAP/Gameobjects/HouseSmall.xml", "Freds_House", 6, 24);
 
 
-	fred->getComponent<OwnershipCmp>("Ownership")->addGameobject(bed);
+	fred->getComponent<OwnershipCmp>("Ownership")->addGameobject(freds_house);
 
 
 	// Blackboard and Tree for Agent Fred.
@@ -381,6 +380,17 @@ int main()
 	App demo;
 	if (demo.Construct(350, 230, 4, 4))
 		demo.Start();
+
+
+
+	AI::del();
+	NavMesh::del();
+	GameObjectStorage::del();
+
+
+	_CrtCheckMemory();
+	_CrtDumpMemoryLeaks();
+
 	return 0;
 }
 

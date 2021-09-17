@@ -33,9 +33,9 @@ public:
 
 			AgentNeedsCmp* needs = pawn->getComponent<AgentNeedsCmp>("AgentNeeds");
 
-			needs->incrementNeed("Hunger", 1.0f);
-			needs->incrementNeed("Sleep", 0.4f);
-			needs->incrementNeed("Thirst", 2.0f);
+			needs->incrementNeed("Hunger", 2.5f);
+			needs->incrementNeed("Sleep", 8.4f);
+			needs->incrementNeed("Thirst", 2.9f);
 
 
 			// In the end restart the timer.

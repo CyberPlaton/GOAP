@@ -13,6 +13,8 @@
 			<Height>1.0</Height>
 		</Component>
 
+		<Component name ="Ownership"></Component>
+		
 		<Component name="Transform"></Component>
 
 		<Component name ="Ownership"></Component>

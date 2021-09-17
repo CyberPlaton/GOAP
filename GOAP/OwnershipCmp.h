@@ -60,7 +60,7 @@ public:
 		for (auto& tag : owned_objects)
 		{
 			GameObject* go = GameObjectStorage::get()->getGOByTag(tag);
-			if (go->getName().compare(name) == 0) return go;
+			if (go->getName().find(name) != std::string::npos) return go;
 
 
 			// Search in objects of owned objects.

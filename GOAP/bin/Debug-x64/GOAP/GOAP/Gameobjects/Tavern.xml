@@ -10,7 +10,13 @@
 
 		<Component name="Transform"></Component>
 
-		<Component name ="Ownership"></Component>
+		<Component name ="Ownership">
+			<Gameobject name="Tavern_Table_One" posx="2" posy="2">Table.xml</Gameobject>
+			<Gameobject name="Tavern_Table_Two" posx="4" posy="2">Table.xml</Gameobject>
+			<Gameobject name="Tavern_Table_Three" posx="6" posy="2">Table.xml</Gameobject>
+			<Gameobject name="Tavern_Bed" posx="2" posy="5">Bed.xml</Gameobject>
+			<Gameobject name="Tavern_Bed" posx="6" posy="5">Bed.xml</Gameobject>
+		</Component>
 
 		<Component name="CollisionBox">
 			<Width>8.0</Width>

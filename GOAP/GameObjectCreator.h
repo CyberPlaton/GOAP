@@ -203,6 +203,40 @@ private:
 			else if (cmp_name.compare("Ownership") == 0)
 			{
 				gameobject->AddComponent(new OwnershipCmp("Ownership", gameobject->getTag()));
+
+
+				// Check whether there are children objects defined which are owned by gameobject
+				XMLElement* kid = cmp->FirstChildElement("Gameobject");
+				XMLElement* kid_data = nullptr;
+				while (kid)
+				{
+					// It exists at least one child object.
+
+					// Get data.
+					int kidx = stod(kid->Attribute("posx"));
+					int kidy = stod(kid->Attribute("posy"));
+					std::string kidname = kid->Attribute("name");
+					
+					// Create the child Gameobject.
+					std::string path = "GOAP/Gameobjects/";
+					std::string childpath = kid->GetText();
+					path += childpath; // Get the path.
+
+					GameObjectCreator creator;
+					GameObject* kidobject = creator.create(path, name + "_" + kidname, xpos + kidx, ypos + kidy);
+					if (kidobject)
+					{
+						gameobject->getComponent<OwnershipCmp>("Ownership")->addGameobject(kidobject);
+					}
+					else
+					{
+						cout << color(colors::RED);
+						cout << "Could not create owned gameobject for \""<< gameobject->getName() << "\" at path \""<< path << "\"" << white << endl;
+					}
+
+					kid = kid->NextSiblingElement("Gameobject");
+				}
+
 			}
 			else if (cmp_name.compare("WalkableBuilding") == 0)
 			{
@@ -229,6 +263,7 @@ private:
 		}
 
 
+		doc.Clear();
 		return gameobject;
 	}
 

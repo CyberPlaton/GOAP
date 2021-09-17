@@ -1,0 +1,26 @@
+<Gameobject>
+	<Tag>Building</Tag>
+	<Name>Shop</Name>
+	<Components>
+		<Component name="Renderable">
+			<Width>5.0</Width>
+			<Height>5.0</Height>
+			<Color>grey</Color>
+		</Component>
+
+		<Component name="Transform"></Component>
+
+		<Component name ="Ownership">
+			<Gameobject name="Shop_Table" posx="2" posy="2">Table.xml</Gameobject>
+		</Component>
+
+		<Component name="CollisionBox">
+			<Width>5.0</Width>
+			<Height>5.0</Height>
+		</Component>
+
+
+		<Component name ="WalkableBuilding" doorx="2" doory="4"></Component>
+
+	</Components>
+</Gameobject>

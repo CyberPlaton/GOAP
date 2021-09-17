@@ -1,0 +1,27 @@
+<Gameobject>
+	<Tag>Building</Tag>
+	<Name>HouseSmall</Name>
+	<Components>
+		<Component name="Renderable">
+			<Width>5.0</Width>
+			<Height>6.0</Height>
+			<Color>grey</Color>
+		</Component>
+
+		<Component name="Transform"></Component>
+
+		<Component name ="Ownership">
+			<Gameobject name="House_Table" posx="2" posy="2">Table.xml</Gameobject>
+			<Gameobject name="House_Bed" posx="2" posy="4">Table.xml</Gameobject>
+		</Component>
+
+		<Component name="CollisionBox">
+			<Width>5.0</Width>
+			<Height>6.0</Height>
+		</Component>
+
+
+		<Component name ="WalkableBuilding" doorx="4" doory="2"></Component>
+
+	</Components>
+</Gameobject>
