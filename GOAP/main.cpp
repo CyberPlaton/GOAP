@@ -77,10 +77,13 @@ bool App::OnUserUpdate(float fElapsedTime)
 			{
 				if (go->getTag().find("Building") != std::string::npos)
 				{
+					olc::Pixel color;
+					color = _getColorFromString(render->color);
+
 					TransformCmp* transform = go->getComponent<TransformCmp>("Transform");
 
 					// Draw solid building ground
-					tv.FillRect(olc::vf2d(transform->xpos, transform->ypos), olc::vf2d(render->width, render->height), olc::GREY);
+					tv.FillRect(olc::vf2d(transform->xpos, transform->ypos), olc::vf2d(render->width, render->height), color);
 
 					
 					// Draw walkable building
