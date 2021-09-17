@@ -87,9 +87,6 @@
     <ClCompile Include="Components.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="SmartObject.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -182,9 +179,6 @@
     <ClInclude Include="WorldState.h">
       <Filter>Source Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="SmartObject.h">
-      <Filter>Source Files\Components</Filter>
-    </ClInclude>
     <ClInclude Include="OwnershipCmp.h">
       <Filter>Source Files\Components</Filter>
     </ClInclude>
@@ -199,6 +193,48 @@
     </ClInclude>
     <ClInclude Include="AgentStats.h">
       <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="BTUpdateAgentNeeds.h">
+      <Filter>Source Files\BT\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="BTIsAgentSleepy.h">
+      <Filter>Source Files\BT\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="BTCondition.h">
+      <Filter>Source Files\BT</Filter>
+    </ClInclude>
+    <ClInclude Include="BTDecorator.h">
+      <Filter>Source Files\BT</Filter>
+    </ClInclude>
+    <ClInclude Include="BTFallback.h">
+      <Filter>Source Files\BT</Filter>
+    </ClInclude>
+    <ClInclude Include="BTInverter.h">
+      <Filter>Source Files\BT</Filter>
+    </ClInclude>
+    <ClInclude Include="BTRandomSequence.h">
+      <Filter>Source Files\BT</Filter>
+    </ClInclude>
+    <ClInclude Include="BTSequence.h">
+      <Filter>Source Files\BT</Filter>
+    </ClInclude>
+    <ClInclude Include="BTIsAgentHungry.h">
+      <Filter>Source Files\BT\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="BTIsAgentThirsty.h">
+      <Filter>Source Files\BT\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="BTFindAgentBed.h">
+      <Filter>Source Files\BT\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="BTGoToAgentBed.h">
+      <Filter>Source Files\BT\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="BTAction.h">
+      <Filter>Source Files\BT</Filter>
+    </ClInclude>
+    <ClInclude Include="BTAgentSleep.h">
+      <Filter>Source Files\BT\Nodes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

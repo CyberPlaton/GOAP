@@ -4,7 +4,6 @@
 #include "AgentNeeds.h"
 #include "AgentRole.h"
 #include "AgentStats.h"
-#include "SmartObject.h"
 #include "OwnershipCmp.h"
 #include "WorldState.h"
 #include "Inventory.h"
@@ -68,15 +67,7 @@ private:
 
 
 			// Set data based on the component.
-			if (cmp_name.compare("SmartObject") == 0)
-			{
-				gameobject->AddComponent(new SmartObjectCmp("SmartObject"));
-				SmartObjectCmp* smart = gameobject->getComponent<SmartObjectCmp>("SmartObject");
-
-				data = cmp->FirstChildElement("Path");
-				if (!smart->loadDefinition(cmp)) panik = true;
-			}
-			else if (cmp_name.compare("Renderable") == 0)
+			if (cmp_name.compare("Renderable") == 0)
 			{
 				float w, h;
 				std::string color;
@@ -211,7 +202,7 @@ private:
 			}
 			else if (cmp_name.compare("Ownership") == 0)
 			{
-				gameobject->AddComponent(new OwnershipCmp("Ownership", gameobject->tag));
+				gameobject->AddComponent(new OwnershipCmp("Ownership", gameobject->getTag()));
 			}
 			else if (cmp_name.compare("WalkableBuilding") == 0)
 			{

@@ -26,7 +26,6 @@ public:
 		}
 
 		m_Root = 0;
-		m_CurrentlyExecuting = 0;
 
 		m_Name.clear();
 		m_TreeNodes.clear();
@@ -59,11 +58,10 @@ public:
 	}
 
 
+
 private:
 
 	std::vector<BTNode*> m_TreeNodes;
-
-	BTNode* m_CurrentlyExecuting = nullptr;
 
 	BTNode* m_Root = nullptr;
 

@@ -2,16 +2,19 @@
 	<Tag>Furniture</Tag>
 	<Name>Well</Name>
 	<Components>
-		<Component name="SmartObject">
-			<DestroyOnUse>false</DestroyOnUse>
-			<NeedAgentPresence>true</NeedAgentPresence>
-			<Fulfillments>
-				<Need name="Thirst" amount="0.87"></Need>
-			</Fulfillments>
-
-			<AvailableActions>
-				<Action name="Thirst" aName ="ActionDrink"></Action>
-			</AvailableActions>
+		<Component name="Renderable">
+			<Width>1.0</Width>
+			<Height>1.0</Height>
+			<Color>dark_yellow</Color>
 		</Component>
+
+		<Component name="CollisionBox">
+			<Width>1.0</Width>
+			<Height>1.0</Height>
+		</Component>
+
+		<Component name="Transform"></Component>
+
+		<Component name ="Ownership"></Component>
 	</Components>
 </Gameobject>

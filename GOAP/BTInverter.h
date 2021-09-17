@@ -26,7 +26,7 @@ public:
 		return false;
 	}
 
-	void setBlackboard(BTBlackboard*) override
+	void setBlackboard(BTBlackboard* bt) override
 	{
 		// Nothing to do.
 	}

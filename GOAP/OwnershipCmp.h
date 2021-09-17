@@ -50,6 +50,35 @@ public:
 
 
 	/*
+	* Search trough the hierarchy and search for an object that has given name.
+	* For example given an owned object with tag "GO_7_Furniture" and name "Ralf_Bed"
+	* "getOwnedObject("Bed")" returns the Bed gameobject.
+	*/
+	GameObject* getOwnedObject(const GOName& name)
+	{
+		// Search in owned objects.
+		for (auto& tag : owned_objects)
+		{
+			GameObject* go = GameObjectStorage::get()->getGOByTag(tag);
+			if (go->getName().compare(name) == 0) return go;
+
+
+			// Search in objects of owned objects.
+			if (go->hasComponent("Ownership"))
+			{
+				OwnershipCmp* child_owned = go->getComponent<OwnershipCmp>("Ownership");
+
+				go = child_owned->getOwnedObject(name);
+
+				if (go) return go;
+			}
+		}
+
+		return nullptr;
+	}
+
+
+	/*
 	*/
 	GameObject* getRootGameobject()
 	{
@@ -81,6 +110,23 @@ public:
 		owned = true;
 		ownerGameobjectTag = tag;
 	}
+
+	void addGameobject(GameObject* go)
+	{
+		owned_objects.push_back(go->getTag());
+
+		// Set the owner Tag for the owned object as this Gameobjects Tag.
+		go->getComponent<OwnershipCmp>("Ownership")->setOwner(gameobjectTag);
+	}
+
+	void addGameobject(const GOTag& go)
+	{
+		owned_objects.push_back(go);
+
+		// Set the owner Tag for the owned object as this Gameobjects Tag.
+		GameObjectStorage::get()->getGOByTag(go)->getComponent<OwnershipCmp>("Ownership")->setOwner(gameobjectTag);
+	}
+
 
 private:
 	std::string type;

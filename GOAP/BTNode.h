@@ -3,6 +3,7 @@
 #include "BTCommon.h"
 
 class BTBlackboard;
+class BehaviorTree;
 
 enum BTNodeResult
 {

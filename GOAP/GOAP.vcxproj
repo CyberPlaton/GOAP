@@ -108,22 +108,35 @@
     <ClCompile Include="GameWorld.cpp" />
     <ClCompile Include="GameWorldTime.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="SmartObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AgentNeeds.h" />
     <ClInclude Include="AgentRole.h" />
     <ClInclude Include="AgentStats.h" />
     <ClInclude Include="AI.h" />
+    <ClInclude Include="BTAction.h" />
+    <ClInclude Include="BTAgentSleep.h" />
     <ClInclude Include="BTCommon.h" />
+    <ClInclude Include="BTCondition.h" />
+    <ClInclude Include="BTDecorator.h" />
+    <ClInclude Include="BTFallback.h" />
+    <ClInclude Include="BTFindAgentBed.h" />
+    <ClInclude Include="BTGoToAgentBed.h" />
     <ClInclude Include="BTInterface.h" />
     <ClInclude Include="Any.h" />
     <ClInclude Include="BehaviorTree.h" />
     <ClInclude Include="BTBlackboard.h" />
     <ClInclude Include="BTFactory.h" />
+    <ClInclude Include="BTInverter.h" />
+    <ClInclude Include="BTIsAgentHungry.h" />
+    <ClInclude Include="BTIsAgentSleepy.h" />
+    <ClInclude Include="BTIsAgentThirsty.h" />
     <ClInclude Include="BTMoveToRandomPosition.h" />
     <ClInclude Include="BTNode.h" />
     <ClInclude Include="BTNodes.h" />
+    <ClInclude Include="BTRandomSequence.h" />
+    <ClInclude Include="BTSequence.h" />
+    <ClInclude Include="BTUpdateAgentNeeds.h" />
     <ClInclude Include="ColorConsole.h" />
     <ClInclude Include="common\include\imgui-master\examples\imgui_impl_glfw.h" />
     <ClInclude Include="common\include\imgui-master\examples\imgui_impl_opengl3.h" />
@@ -143,7 +156,6 @@
     <ClInclude Include="GameWorldTimer.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="main.h" />
-    <ClInclude Include="SmartObject.h" />
     <ClInclude Include="OwnershipCmp.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="WorldState.h" />

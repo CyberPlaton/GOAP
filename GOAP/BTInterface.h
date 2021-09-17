@@ -6,3 +6,10 @@
 #include "BTFactory.h"
 
 #include "BTMoveToRandomPosition.h"
+#include "BTUpdateAgentNeeds.h"
+#include "BTIsAgentHungry.h"
+#include "BTIsAgentSleepy.h"
+#include "BTIsAgentThirsty.h"
+#include "BTGoToAgentBed.h"
+#include "BTFindAgentBed.h"
+#include "BTAgentSleep.h"

@@ -38,7 +38,7 @@ public:
 	}
 
 
-	BTNodeResult tick() override 
+	BTNodeResult tick() override
 	{
 		for (auto& kid : m_Children)
 		{

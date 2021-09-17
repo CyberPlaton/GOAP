@@ -19,19 +19,8 @@ public:
 		using namespace std;
 		if (!waypoint_assigned)
 		{
-			static bool go_inside_house = false;
-
 			int x = 1 + rand() % 30;
 			int y = 1 + rand() % 30;
-
-
-			if (!go_inside_house)
-			{
-				// Error on 19, 19 --> It is a Wall!
-				x = 19;
-				y = 19;
-				go_inside_house = true;
-			}
 
 
 			cout << color(colors::YELLOW);
@@ -62,43 +51,6 @@ public:
 							// Recursion into this function to recreate a waypoint.
 							return command();
 						}
-
-						/*
-						// Resolve collision with a building
-						if (go->hasComponent("WalkableBuilding"))
-						{
-							cout << color(colors::YELLOW);
-							cout << "Resolving Building collision of Pawn=\""<< pawn->getName() << "\" and Building=\""<< go->getName() << "\" " << white << endl;
-
-
-							if(go->getComponent<CollisionBoxCmp>("CollisionBox")->resolve(go))
-							{
-								// Collision with building wall
-
-								cout << color(colors::RED);
-								cout << "[BTMoveToRandomPosition::command()] Waypoint {" << x << "," << y << "} invalid as colliding with building wall. Searching for new one." << white << endl;
-
-								// Recursion into this function to recreate a waypoint.
-								return command();
-							}
-						}
-						else
-						{
-							// Resolve collision with a non-building solid object
-							CollisionBoxCmp* coll = pawn->getComponent<CollisionBoxCmp>("CollisionBox");
-							if (go->getComponent<CollisionBoxCmp>("CollisionBox")->resolve(x, y, coll->width, coll->height))
-							{
-								// Collision with this.
-
-								cout << color(colors::RED);
-								cout << "[BTMoveToRandomPosition::command()] Waypoint {" << x << "," << y << "} invalid. Searching for new one." << white << endl;
-
-								// Recursion into this function to recreate a waypoint.
-								return command();
-							}
-						}
-						*/
-
 					}
 				}
 			}
@@ -114,7 +66,7 @@ public:
 		}
 
 
-
+		
 		if (_targetReached())
 		{
 			waypoint_assigned = false;
@@ -124,6 +76,7 @@ public:
 		{
 			return BTNodeResult::RUNNING;
 		}
+		
 	}
 
 
@@ -135,7 +88,6 @@ private:
 
 	bool _targetReached()
 	{
-		float dt = (float)GameWorldTime::get()->getTimeSpeed();
-		return pawn->getComponent<NavigatorCmp>("Navigator")->update(dt);
+		return pawn->getComponent<NavigatorCmp>("Navigator")->isDestinationReached();
 	}
 };

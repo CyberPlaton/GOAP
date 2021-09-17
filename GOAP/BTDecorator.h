@@ -25,7 +25,7 @@ public:
 		return false;
 	}
 
-	void setBlackboard(BTBlackboard*) override
+	void setBlackboard(BTBlackboard* bt) override
 	{
 		// Nothing to do.
 	}
@@ -35,7 +35,11 @@ public:
 		return nullptr;
 	}
 
-	virtual BTNodeResult tick() { return INVALID; }
+	virtual BTNodeResult tick()
+	{
+		// TODO
+		return INVALID; 
+	}
 
 
 	BTNode* parent() override

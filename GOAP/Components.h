@@ -276,12 +276,27 @@ public:
 
 
 	/*
+	* Check whether current set destination was reached.
+	*/
+	bool isDestinationReached()
+	{
+		TransformCmp* transform = agent->getComponent<TransformCmp>("Transform");
+		
+		return (transform->xpos == destx && transform->ypos == desty) == true ? true : false;
+	}
+
+
+	/*
 	* Set the next waypoint/moving dest. for a gameobject.
 	*/
 	void setDestination(float x, float y)
 	{
 		destx = x;
 		desty = y;
+		movementPoints.clear(); // Reset the Pathfinder.
+		curr_mp_index = 0;
+		internal_agent_positionx = 0.0f; // Reset the internal agent position counter.
+		internal_agent_positiony = 0.0f;
 	}
 
 	std::pair<int, int> getRandomDestinationAroundAgent(int radius)
@@ -341,34 +356,31 @@ public:
 	{
 		using namespace std;
 
-		if (Component* cmp = agent->getComponent("Transform"); cmp != nullptr)
+		TransformCmp* t = agent->getComponent< TransformCmp >("Transform");
+		if (t)
 		{
-			TransformCmp* t = static_cast<TransformCmp*>(cmp);
-
 			// Is Target reached
 			if (t->xpos == destx && t->ypos == desty)
 			{
+				// Reset internal data and return indication that destination was reached.
 				movementPoints.clear();
 				curr_mp_index = 0;
+				internal_agent_positionx = 0.0f; // Reset the internal agent position counter.
+				internal_agent_positiony = 0.0f;
 				return true;
 			}
 
 
 			if (movementPoints.size() == 0)
 			{
+				// Get a path from current position to given destination.
 				movementPoints = this->_getPathToDest(t->xpos, t->ypos, destx, desty, NavMesh::get()->getGraph());
-
-
-				if (movementPoints.size() > 0)
-				{
-				}
-				else
-				{
-				}
 			}
-			else if (movementPoints.size() > 0)
+			
+			if (movementPoints.size() > 0)
 			{
-				if (_updateWaypointMovement(dt, t) == false) return false;
+				// Internally update the movement of the agent.
+				_updateWaypointMovement(dt, t);
 			}
 
 
@@ -395,9 +407,9 @@ public:
 				t->ypos -= 1;
 				internal_agent_positiony = 0.0f;
 			}
-
-			return false;
 		}
+
+
 
 		return false;
 	}

@@ -40,13 +40,14 @@ bool App::OnUserUpdate(float fElapsedTime)
 
 	AI::get()->executeBehaviorTrees();
 
-
 	// Update all agents.
 	for (auto& go : GameObjectStorage::get()->getStorage())
 	{
-		// Function does something if and only if the GameObject implements
-		// the update function.
-		go->update((float)GameWorldTime::get()->getTimeSpeed());
+		// Update Navigator, for each entity which can move, let it move.
+		if (go->hasComponent("Navigator"))
+		{
+			go->getComponent<NavigatorCmp>("Navigator")->update(GameWorldTime::get()->getTimeSpeed());
+		}
 	}
 
 
@@ -334,7 +335,37 @@ bool App::OnUserCreate()
 	GameObjectCreator creator;
 	GameObject* fred = creator.create("GOAP/Gameobjects/NPC.xml", "Fred", 25, 25);
 	GameObject* tavern = creator.create("GOAP/Gameobjects/Tavern.xml", "Tavern", 10, 5);
+	GameObject* bed = creator.create("GOAP/Gameobjects/Bed.xml", "Bed", 3, 3);
+	GameObject* table = creator.create("GOAP/Gameobjects/Table.xml", "Table", 6, 3);
+	GameObject* well = creator.create("GOAP/Gameobjects/Well.xml", "Well", 9, 3);
 
+
+	fred->getComponent<OwnershipCmp>("Ownership")->addGameobject(bed);
+
+
+	// Blackboard and Tree for Agent Fred.
+	BTBlackboard* blackboard = new BTBlackboard("Fred_Blackboard");
+	BTFactory factory("Fred_Agent_Tree");
+	BehaviorTree* tree = factory.add<BTSequence>("StartingSequence")
+									.add<BTUpdateAgentNeeds>("UpdateNeeds", fred)
+										.end()
+									.add<BTFallback>("NeedsFallback")
+										.add<BTSequence>("AgentSleepLogic")
+											.add<BTIsAgentSleepy>("IsAgentSleepy", fred)
+												.end()
+											.add<BTSequence>("AgentGoSleepSequence")
+												.add<BTFindAgentBed>("FindAgentBed", fred, blackboard)
+													.end()
+												.add<BTGoToAgentBed>("GoToAgentBed", fred, blackboard)
+													.end()
+												.add<BTAgentSleep>("AgentSleep", fred)
+													.end()
+												.end()
+											.end()
+										.add<BTMoveToRandomPosition>("RandomMovement", fred)
+								.build();
+						
+	AI::get()->addBehaviorTree(tree);
 
 
 	NavMesh::get()->bake();

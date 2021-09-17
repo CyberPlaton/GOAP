@@ -1,19 +1,20 @@
 <Gameobject>
-	<Tag>Furniture_Table</Tag>
+	<Tag>Furniture</Tag>
 	<Name>Table</Name>
 	<Components>
-		<Component name="SmartObject">
-			<DestroyOnUse>false</DestroyOnUse>
-			<NeedAgentPresence>true</NeedAgentPresence>
-			<Fulfillments>
-				<Need name="Sleep" amount="0.1"></Need>
-				<Need name="Hunger" amount="0.41"></Need>
-			</Fulfillments>
-
-			<AvailableActions>
-				<Action name="Sleep" aName ="ActionSleep"></Action>
-				<Action name="Hunger" aName ="ActionEat"></Action>
-			</AvailableActions>
+		<Component name="Renderable">
+			<Width>1.0</Width>
+			<Height>1.0</Height>
+			<Color>dark_yellow</Color>
 		</Component>
+
+		<Component name="CollisionBox">
+			<Width>1.0</Width>
+			<Height>1.0</Height>
+		</Component>
+
+		<Component name="Transform"></Component>
+
+		<Component name ="Ownership"></Component>
 	</Components>
 </Gameobject>
