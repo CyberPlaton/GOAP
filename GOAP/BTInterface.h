@@ -13,3 +13,7 @@
 #include "BTGoToAgentBed.h"
 #include "BTFindAgentBed.h"
 #include "BTAgentSleep.h"
+#include "BTFindAgentObject.h"
+#include "BTGoToAgentObject.h"
+#include "BTDiminishAgentNeed.h"
+#include "BTSetCurrentExecutedNode.h"

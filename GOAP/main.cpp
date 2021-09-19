@@ -343,9 +343,11 @@ bool App::OnUserCreate()
 
 
 	// Blackboard and Tree for Agent Fred.
+	BTBlackboard* treeBlackboard = new BTBlackboard("TreeBlackboard");
 	BTBlackboard* blackboard = new BTBlackboard("Fred_Blackboard");
 	BTFactory factory("Fred_Agent_Tree");
-	BehaviorTree* tree = factory.add<BTSequence>("StartingSequence")
+	BehaviorTree* tree = nullptr;
+	tree = factory.add<BTSequence>("StartingSequence")
 									.add<BTUpdateAgentNeeds>("UpdateNeeds", fred)
 										.end()
 									.add<BTFallback>("NeedsFallback")
@@ -353,17 +355,20 @@ bool App::OnUserCreate()
 											.add<BTIsAgentSleepy>("IsAgentSleepy", fred)
 												.end()
 											.add<BTSequence>("AgentGoSleepSequence")
-												.add<BTFindAgentBed>("FindAgentBed", fred, blackboard)
+												.add<BTFindAgentObject>("FindAgentBed", fred, "Bed", BTFindAgentObject::SearchPolicy::SP_OWNERSHIP, blackboard, "Bed")
 													.end()
-												.add<BTGoToAgentBed>("GoToAgentBed", fred, blackboard)
+												.add<BTGoToAgentObject>("GoToAgentBed", fred, blackboard, "Bed")
 													.end()
-												.add<BTAgentSleep>("AgentSleep", fred)
+												.add<BTSetCurrentExecutedNode>("StoreExecutedNode", treeBlackboard)
+													.add<BTDiminishAgentNeed>("AgentSleep", fred, "Sleep", 5.0f)
+														.end()
 													.end()
 												.end()
 											.end()
 										.add<BTMoveToRandomPosition>("RandomMovement", fred)
 								.build();
 						
+	tree->setTreeBlackboard(treeBlackboard);
 	AI::get()->addBehaviorTree(tree);
 
 
@@ -495,46 +500,6 @@ void App::_onImGui()
 			// Show the components of Selected GO.
 			if (ret)
 			{
-				// Show stuff for an agent
-				if (go->hasComponent("AgentNeeds"))
-				{
-					//Agent* npc = static_cast<Agent*>(go);
-
-
-					// Show current action
-					if (ImGui::TreeNode("ActionStack"))
-					{
-						/*
-						Action* action = nullptr;
-
-						if (npc->actionStack.size() > 0)
-						{
-							// We show only the current action, thus top of stack
-							action = npc->actionStack.top();
-
-							if (ImGui::Begin(action->getID().c_str(), &show_agent_action))
-							{
-								// Get action duration etc.
-								double start = action->getStartTime();
-								double end = action->getEndTime();
-								double left = action->getLeftTime();
-
-								// Combine to a string
-								std::string text = "From \"" + std::to_string(start) + "\" To \"" + std::to_string(end) + "\" Left \"" + std::to_string(left) + "\"";
-
-								ImGui::Text("Duration: %s", text.c_str());
-								ImGui::Text("Target: %s", action->getTargetTag().c_str());
-							}
-							ImGui::End();
-						}
-						*/
-
-						ImGui::TreePop();
-					}
-
-				}
-
-
 				/*
 				Agent* npc = static_cast<Agent*>(go);
 				
@@ -634,50 +599,11 @@ void App::_onImGui()
 
 						if (cmp->getType().find("AgentNeeds") != std::string::npos)
 						{
-							/*
-							static std::vector<float> hunger_plot;
-							static std::vector<float> sleep_plot;
-							static std::vector<float> thirst_plot;
+							AgentNeedsCmp* need = go->getComponent<AgentNeedsCmp>("AgentNeeds");
 
-							AgentNeedsCmp* stats = static_cast<AgentNeedsCmp*>(cmp);
-
-							ImGui::Text("Hunger: %.5f", stats->getHunger());
-							hunger_plot.push_back((float)stats->getHunger());
-							ImGui::SameLine();
-							ImGui::PlotLines("Function", &hunger_plot[0], hunger_plot.size());
-							float f = Agent::AGENT_HUNGER_SCORE;
-							ImGui::SliderFloat("BaseScore", &f, 0.0001f, 1.0f, "%.5f", ImGuiSliderFlags_Logarithmic);
-							Agent::AGENT_HUNGER_SCORE = f;
-							f = Agent::AGENT_HUNGER_SCORE_STEEPNESS;
-							ImGui::SliderFloat("Steepness", &f, 0.0001f, 1.0f, "%.5f", ImGuiSliderFlags_Logarithmic);
-							Agent::AGENT_HUNGER_SCORE_STEEPNESS = f;
-
-
-							ImGui::Text("Sleep: %.5f", stats->getSleep());
-							sleep_plot.push_back((float)stats->getSleep());
-							ImGui::SameLine();
-							ImGui::PlotLines("Function", &sleep_plot[0], sleep_plot.size());
-
-
-							ImGui::Text("Thirst: %.5f", stats->getThirst());
-							thirst_plot.push_back((float)stats->getThirst());
-							ImGui::SameLine();
-							ImGui::PlotLines("Function", &thirst_plot[0], thirst_plot.size());
-
-
-							if (hunger_plot.size() > 1000)
-							{
-								hunger_plot.erase(hunger_plot.begin());
-							}
-							if (sleep_plot.size() > 1000)
-							{
-								sleep_plot.erase(sleep_plot.begin());
-							}
-							if (thirst_plot.size() > 1000)
-							{
-								thirst_plot.erase(thirst_plot.begin());
-							}
-							*/
+							ImGui::Text("Sleep: %.3f", need->getNeed("Sleep"));
+							ImGui::Text("Hunger: %.3f", need->getNeed("Hunger"));
+							ImGui::Text("Thirst: %.3f", need->getNeed("Thirst"));
 						}
 
 

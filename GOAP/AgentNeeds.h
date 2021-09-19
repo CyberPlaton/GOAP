@@ -29,7 +29,13 @@ public:
 		float v = getNeed(need);
 		if (v != (float)INT_MAX)
 		{
-			setNeed(need, v + 1);
+			if (v + n < 100.0f && v + n > 0.0f)
+			{
+				setNeed(need, v + n);
+			}
+			else
+			{
+			}
 		}
 	}
 

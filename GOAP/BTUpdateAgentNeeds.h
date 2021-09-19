@@ -26,7 +26,7 @@ public:
 	{
 		using namespace std;
 
-		if (timer->getElapsedGamehours() > 0.30)
+		if (timer->getElapsedGamehours() > 1.0)
 		{
 			cout << color(colors::GREEN);
 			cout << "[BTUpdateAgentNeeds] Updating needs of \""<< pawn->getName() << "\"" << white << endl;
@@ -34,7 +34,7 @@ public:
 			AgentNeedsCmp* needs = pawn->getComponent<AgentNeedsCmp>("AgentNeeds");
 
 			needs->incrementNeed("Hunger", 2.5f);
-			needs->incrementNeed("Sleep", 8.4f);
+			needs->incrementNeed("Sleep", 5.4f);
 			needs->incrementNeed("Thirst", 2.9f);
 
 
@@ -44,8 +44,8 @@ public:
 		}
 		else
 		{
-			cout << color(colors::RED);
-			cout << "[BTUpdateAgentNeeds] Not updating \"" << pawn->getName() << "\"s needs" << white << endl;
+			//cout << color(colors::RED);
+			//cout << "[BTUpdateAgentNeeds] Not updating \"" << pawn->getName() << "\"s needs" << white << endl;
 			return BTNodeResult::RUNNING;
 		}
 	}

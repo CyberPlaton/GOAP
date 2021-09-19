@@ -236,5 +236,17 @@
     <ClInclude Include="BTAgentSleep.h">
       <Filter>Source Files\BT\Nodes</Filter>
     </ClInclude>
+    <ClInclude Include="BTFindAgentObject.h">
+      <Filter>Source Files\BT\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="BTGoToAgentObject.h">
+      <Filter>Source Files\BT\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="BTDiminishAgentNeed.h">
+      <Filter>Source Files\BT\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="BTSetCurrentExecutedNode.h">
+      <Filter>Source Files\BT\Nodes</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -33,7 +33,26 @@ public:
 
 	BTNodeResult update()
 	{
-		return m_Root->tick();
+		BTNode* currExecuted = treeBlackboard->getData<BTNode*>("CurrentExecutedNode");
+		if (currExecuted != nullptr)
+		{
+
+			BTNodeResult result = currExecuted->tick();
+			
+			// Remove node from current executed on success or failure.
+			if (result == BTNodeResult::FAILURE ||
+				result == BTNodeResult::SUCCESS ||
+				result == BTNodeResult::INVALID)
+			{
+				treeBlackboard->set<BTNode*>("CurrentExecutedNode", nullptr, "BTNode");
+			}
+
+			return result;
+		}
+		else
+		{
+			return m_Root->tick();
+		}
 	}
 
 	void setRoot(BTNode* node)
@@ -58,6 +77,9 @@ public:
 	}
 
 
+	void setTreeBlackboard(BTBlackboard* b) { treeBlackboard = b; }
+	BTBlackboard* getTreeBlackboard() { return treeBlackboard; }
+
 
 private:
 
@@ -66,5 +88,7 @@ private:
 	BTNode* m_Root = nullptr;
 
 	std::string m_Name;
+
+	BTBlackboard* treeBlackboard = nullptr;
 
 };

@@ -28,6 +28,7 @@ public:
 	void setBlackboard(BTBlackboard* bt) override
 	{
 		// Nothing to do.
+		return;
 	}
 
 	BTBlackboard* getBlackboard() override
@@ -37,7 +38,7 @@ public:
 
 	virtual BTNodeResult tick()
 	{
-		// TODO
+		// Needs to override in order to have effect.
 		return INVALID; 
 	}
 

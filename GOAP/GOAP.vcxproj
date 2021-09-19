@@ -119,9 +119,12 @@
     <ClInclude Include="BTCommon.h" />
     <ClInclude Include="BTCondition.h" />
     <ClInclude Include="BTDecorator.h" />
+    <ClInclude Include="BTDiminishAgentNeed.h" />
     <ClInclude Include="BTFallback.h" />
     <ClInclude Include="BTFindAgentBed.h" />
+    <ClInclude Include="BTFindAgentObject.h" />
     <ClInclude Include="BTGoToAgentBed.h" />
+    <ClInclude Include="BTGoToAgentObject.h" />
     <ClInclude Include="BTInterface.h" />
     <ClInclude Include="Any.h" />
     <ClInclude Include="BehaviorTree.h" />
@@ -136,6 +139,7 @@
     <ClInclude Include="BTNodes.h" />
     <ClInclude Include="BTRandomSequence.h" />
     <ClInclude Include="BTSequence.h" />
+    <ClInclude Include="BTSetCurrentExecutedNode.h" />
     <ClInclude Include="BTUpdateAgentNeeds.h" />
     <ClInclude Include="ColorConsole.h" />
     <ClInclude Include="common\include\imgui-master\examples\imgui_impl_glfw.h" />
