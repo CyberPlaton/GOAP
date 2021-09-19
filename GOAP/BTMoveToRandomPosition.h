@@ -19,8 +19,8 @@ public:
 		using namespace std;
 		if (!waypoint_assigned)
 		{
-			int x = 1 + rand() % 30;
-			int y = 1 + rand() % 30;
+			int x = 1 + rand() % (DEFAULT_MAPSIZE_X - 2);
+			int y = 1 + rand() % (DEFAULT_MAPSIZE_Y - 2);
 
 
 			cout << color(colors::YELLOW);

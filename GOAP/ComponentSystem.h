@@ -6,6 +6,10 @@
 #include <typeinfo>
 
 
+#define DEFAULT_MAPSIZE_X 32
+#define DEFAULT_MAPSIZE_Y 32
+
+
 class Component;
 using ComponentMap = std::map<std::string, std::vector<Component*>>;
 

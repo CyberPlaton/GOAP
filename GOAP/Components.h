@@ -201,7 +201,7 @@ public:
 	{
 		if (!g_NavMesh)
 		{
-			g_NavMesh = new NavMesh(32, 32);
+			g_NavMesh = new NavMesh(DEFAULT_MAPSIZE_X, DEFAULT_MAPSIZE_Y);
 		}
 
 		return g_NavMesh;

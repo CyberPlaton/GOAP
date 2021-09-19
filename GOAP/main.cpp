@@ -53,7 +53,7 @@ bool App::OnUserUpdate(float fElapsedTime)
 
 	// Application rendering.
 	olc::vi2d topleft = tv.GetTopLeftTile().max({ 0, 0 });
-	olc::vi2d bottomright = tv.GetBottomRightTile().min({32, 32});
+	olc::vi2d bottomright = tv.GetBottomRightTile().min({ DEFAULT_MAPSIZE_X, DEFAULT_MAPSIZE_Y });
 	olc::vi2d tile;
 
 
@@ -326,7 +326,7 @@ bool App::OnUserCreate()
 
 
 
-	tv = olc::TileTransformedView({ ScreenWidth(), ScreenHeight() }, {32, 32});
+	tv = olc::TileTransformedView({ ScreenWidth(), ScreenHeight() }, { DEFAULT_MAPSIZE_X, DEFAULT_MAPSIZE_Y });
 
 	
 	GameWorldTime::get()->setTimeSpeed(0.016);
@@ -606,7 +606,7 @@ void App::_onImGui()
 							v[0] = static_cast<TransformCmp*>(cmp)->xpos;
 							v[1] = static_cast<TransformCmp*>(cmp)->ypos;
 
-							if (ImGui::SliderInt2("Position", v, -32, 32))
+							if (ImGui::SliderInt2("Position", v, -DEFAULT_MAPSIZE_X, DEFAULT_MAPSIZE_X))
 							{
 								static_cast<TransformCmp*>(cmp)->xpos = v[0];
 								static_cast<TransformCmp*>(cmp)->ypos = v[1];

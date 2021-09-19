@@ -11,8 +11,8 @@
 		<Component name="Transform"></Component>
 
 		<Component name ="Ownership">
-			<Gameobject name="House_Table" posx="2" posy="2">Table.xml</Gameobject>
-			<Gameobject name="House_Bed" posx="2" posy="4">Table.xml</Gameobject>
+			<Gameobject name="Table_1" posx="2" posy="2">Table.xml</Gameobject>
+			<Gameobject name="Bed_1" posx="2" posy="4">Bed.xml</Gameobject>
 		</Component>
 
 		<Component name="CollisionBox">

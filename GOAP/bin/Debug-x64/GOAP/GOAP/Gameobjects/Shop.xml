@@ -11,7 +11,7 @@
 		<Component name="Transform"></Component>
 
 		<Component name ="Ownership">
-			<Gameobject name="Shop_Table" posx="2" posy="2">Table.xml</Gameobject>
+			<Gameobject name="Table_1" posx="2" posy="2">Table.xml</Gameobject>
 		</Component>
 
 		<Component name="CollisionBox">
