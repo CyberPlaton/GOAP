@@ -31,6 +31,13 @@ public:
 		{
 			// Default out to failure.
 		}
+		else if (blackboard->getData<GameObject*>("Bed") != nullptr)
+		{
+			cout << color(colors::GREEN);
+			cout << "[BTFindAgentBed] Agent \"" << pawn->getName() << "\" already has access to a bed" << white << endl;
+
+			return BTNodeResult::SUCCESS;
+		}
 		else if (bed = owned->getOwnedObject("Bed"); bed != nullptr)
 		{
 			cout << color(colors::GREEN);
